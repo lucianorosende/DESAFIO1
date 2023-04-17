@@ -1,18 +1,18 @@
-import { v4 as uuidv4 } from "uuid";
-
-type Products = {
+interface IProducts {
     title: string;
     description: string;
     price: number;
     thumbnail: string;
     code: string;
     stock: number;
-    id: string;
-};
+    id: number;
+}
+
+type Product = IProducts | undefined;
 
 class ProductManager {
-    readonly products: Array<Products> = [];
-    getProducts(): Array<Products> {
+    readonly products: Array<Product> = [];
+    getProducts(): Array<Product> {
         return this.products;
     }
     addProduct(
@@ -22,26 +22,27 @@ class ProductManager {
         thumbnail: string,
         code: string,
         stock: number
-    ): string {
-        const newUUID = uuidv4();
+    ): boolean {
+        let result = true;
         const productObj = {
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock,
-            id: newUUID,
+            title: title,
+            description: description,
+            price: price,
+            thumbnail: thumbnail,
+            code: code,
+            stock: stock,
+            id: this.products.length + 1,
         };
 
-        if (!this.products.find((obj) => obj.title === title)) {
-            this.products.push(productObj);
+        if (this.products.find((obj) => obj?.title === title)) {
+            result = false;
         }
-        return "product already exists";
+        this.products.push(productObj);
+        return result;
     }
-    getProductByStock(stock: number): string | object {
-        const findId = this.products.find((obj) => obj.stock === stock);
-        return findId ?? "Product not found";
+    getProductById(id: number): Product {
+        const findId = this.products.find((obj) => obj?.id === id);
+        return findId;
     }
 }
 
@@ -49,15 +50,26 @@ const newProduct = new ProductManager();
 newProduct.addProduct("asdd1", "asd", 1, "https://www.youtube.com/", "asd", 5);
 newProduct.addProduct("asdd2", "asd", 1, "https://www.youtube.com/", "asd", 6);
 newProduct.addProduct("asdd3", "asd", 1, "https://www.youtube.com/", "asd", 7);
-console.log(newProduct.getProducts());
-console.log(
+newProduct.addProduct("asdd4", "asd", 1, "https://www.youtube.com/", "asd", 7);
+newProduct.addProduct("asdd5", "asd", 1, "https://www.youtube.com/", "asd", 7);
+if (
     newProduct.addProduct(
-        "asdd1",
+        "asdd8",
         "asd",
         1,
         "https://www.youtube.com/",
         "asd",
         8
     )
-);
-console.log(newProduct.getProductByStock(9));
+) {
+    console.log("Product added successfully");
+} else {
+    console.log("Product Already Exists");
+}
+console.log(newProduct.getProducts());
+let checkProduct = newProduct.getProductById(7);
+if (checkProduct === undefined) {
+    console.log("Product not found");
+} else {
+    console.log(checkProduct);
+}
