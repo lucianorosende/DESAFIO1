@@ -49,12 +49,9 @@ class ProductManager {
 const newProduct = new ProductManager();
 newProduct.addProduct("asdd1", "asd", 1, "https://www.youtube.com/", "asd", 5);
 newProduct.addProduct("asdd2", "asd", 1, "https://www.youtube.com/", "asd", 6);
-newProduct.addProduct("asdd3", "asd", 1, "https://www.youtube.com/", "asd", 7);
-newProduct.addProduct("asdd4", "asd", 1, "https://www.youtube.com/", "asd", 7);
-newProduct.addProduct("asdd5", "asd", 1, "https://www.youtube.com/", "asd", 7);
 if (
     newProduct.addProduct(
-        "asdd8",
+        "asdd3",
         "asd",
         1,
         "https://www.youtube.com/",
