@@ -1,12 +1,5 @@
-interface IProducts {
-    title: string;
-    description: string;
-    price: number;
-    thumbnail: string;
-    code: string;
-    stock: number;
-    id?: number;
-}
+import { IProducts } from "../interfaces/IProducts";
+import { productAddition, checkProduct } from "../functions";
 
 type Product = IProducts | undefined;
 
@@ -37,48 +30,6 @@ class ProductManager {
     }
 }
 
-const newProduct = new ProductManager();
-const productAddition = (): void => {
-    newProduct.addProduct({
-        title: "asdd1",
-        description: "asd",
-        price: 1,
-        thumbnail: "https://www.youtube.com/",
-        code: "asd",
-        stock: 5,
-    });
-    newProduct.addProduct({
-        title: "asdd2",
-        description: "asd",
-        price: 1,
-        thumbnail: "https://www.youtube.com/",
-        code: "asd",
-        stock: 5,
-    });
-    if (
-        newProduct.addProduct({
-            title: "asdd3",
-            description: "asd",
-            price: 1,
-            thumbnail: "https://www.youtube.com/",
-            code: "asd",
-            stock: 5,
-        })
-    ) {
-        console.log("Product added successfully");
-    } else {
-        console.log("Product Already Exists");
-    }
-    console.log(newProduct.getProducts());
-};
-const checkProduct = (): void => {
-    let checker = newProduct.getProductById(5);
-    if (checker === undefined) {
-        console.log("Product not found");
-    } else {
-        console.log("we found this product: ", checker);
-    }
-};
-
+export const newProduct = new ProductManager();
 productAddition();
 checkProduct();
