@@ -1,7 +1,7 @@
 import { newProduct } from "../src";
 
-export const checkProduct = (): void => {
-    let checker = newProduct.getProductById(5);
+export const checkProduct = async (): Promise<void> => {
+    let checker = await newProduct.getProductById(1);
     if (checker === undefined) {
         console.log("Product not found");
     } else {
