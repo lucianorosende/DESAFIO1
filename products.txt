@@ -9,7 +9,7 @@
     "id": 1
   },
   {
-    "title": "asdd2",
+    "title": "testUpdate",
     "description": "asd",
     "price": 1,
     "thumbnail": "https://www.youtube.com/",
