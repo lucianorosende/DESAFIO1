@@ -39,17 +39,16 @@ class ProductManager {
         return result;
     }
     async getProductById(id: number): Promise<Product> {
-        let res;
+        let res: Array<Product> = [];
         try {
             res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         } catch (e: any) {
             console.log(e);
         }
-        const findId = res.find((obj: Product) => obj?.id === id);
+        const findId: Product = res.find((obj: Product) => obj?.id === id);
         return findId;
     }
-    async updateProduct(id: number, field: Product): Promise<Product> {
-        let file;
+    async updateProduct(id: number, field: Product): Promise<void> {
         let products = await this.getProducts();
         const newArr = products.map((obj) => {
             if (obj?.id === id) {
@@ -70,11 +69,9 @@ class ProductManager {
                 this.path,
                 JSON.stringify(newArr, null, 2)
             );
-            file = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         } catch (e: any) {
             console.log(e);
         }
-        return file;
     }
 }
 
