@@ -42,5 +42,5 @@ export const productAddition = async (): Promise<void> => {
             console.log("product already exists");
         }
     }
-    console.log("available products", await newProduct.getProducts());
+    console.log("AVAILABLE PRODUCTS", await newProduct.getProducts());
 };

@@ -1,21 +1,12 @@
 [
   {
-    "title": "testUpdate",
+    "title": "asdd1",
     "description": "asd",
     "price": 1,
     "thumbnail": "https://www.youtube.com/",
     "code": "asd",
     "stock": 5,
     "id": 0
-  },
-  {
-    "title": "asdd2",
-    "description": "asd",
-    "price": 1,
-    "thumbnail": "https://www.youtube.com/",
-    "code": "asd",
-    "stock": 5,
-    "id": 1
   },
   {
     "title": "asdd3",

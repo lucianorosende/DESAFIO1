@@ -45,10 +45,11 @@ class ProductManager {
         } catch (e: any) {
             console.log(e);
         }
-        const findId: Product = res.find((obj: Product) => obj?.id === id);
+        const findId = res.find((obj) => obj?.id === id);
         return findId;
     }
-    async updateProduct(id: number, field: Product): Promise<void> {
+    async updateProduct(id: number, field: Product): Promise<Product[]> {
+        let readFile: Array<Product> = [];
         let products = await this.getProducts();
         const newArr = products.map((obj) => {
             if (obj?.id === id) {
@@ -69,9 +70,33 @@ class ProductManager {
                 this.path,
                 JSON.stringify(newArr, null, 2)
             );
+            readFile = JSON.parse(
+                await fs.promises.readFile(this.path, "utf-8")
+            );
         } catch (e: any) {
             console.log(e);
         }
+
+        return readFile;
+    }
+    async deleteProduct(id: number): Promise<Product[]> {
+        let readFile: Array<Product> = [];
+        try {
+            readFile = JSON.parse(
+                await fs.promises.readFile(this.path, "utf-8")
+            );
+            let arrayFilter = readFile.filter((p) => p?.id !== id);
+            await fs.promises.writeFile(
+                this.path,
+                JSON.stringify(arrayFilter, null, 2)
+            );
+            readFile = JSON.parse(
+                await fs.promises.readFile(this.path, "utf-8")
+            );
+        } catch (e: any) {
+            console.log(e);
+        }
+        return readFile;
     }
 }
 
