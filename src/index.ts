@@ -5,8 +5,8 @@ import fs from "fs";
 type Product = IProducts | undefined;
 
 class ProductManager {
-    products: Array<Product>;
-    path: string;
+    private products: Array<Product>;
+    private path: string;
     constructor(path: string, products: Array<Product>) {
         this.path = path;
         this.products = products;
