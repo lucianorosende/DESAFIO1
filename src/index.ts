@@ -11,6 +11,9 @@ class ProductManager {
         this.path = path;
         this.products = products;
     }
+    getPath(): string {
+        return this.path;
+    }
     async getProducts(): Promise<Product[]> {
         let res: Array<Product> = [];
         try {
@@ -22,7 +25,12 @@ class ProductManager {
     }
     async addProduct(prod: IProducts): Promise<boolean> {
         let result: boolean = true;
-        prod.id = this.products.length;
+        if (this.products.length === 0) {
+            prod.id = 1;
+        } else {
+            let newId = this.products[this.products.length - 1]?.id ?? 0;
+            prod.id = newId + 1;
+        }
         if (this.products.find((obj) => obj?.title === prod.title)) {
             result = false;
         } else {

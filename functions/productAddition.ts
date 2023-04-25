@@ -2,7 +2,7 @@ import { newProduct } from "../src";
 import fs from "fs";
 
 export const productAddition = async (): Promise<void> => {
-    if (!fs.existsSync(newProduct.path)) {
+    if (!fs.existsSync(newProduct.getPath())) {
         await newProduct.addProduct({
             title: "asdd1",
             description: "asd",
