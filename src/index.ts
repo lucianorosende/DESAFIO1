@@ -109,4 +109,4 @@ class ProductManager {
 }
 
 export const newProduct = new ProductManager("products.txt", []);
-awaitFunctions();
+// awaitFunctions();
