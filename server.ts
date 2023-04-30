@@ -1,17 +1,17 @@
 import { newProduct } from "./src";
-import Express from "express";
+import Express, { Request, Response } from "express";
 
 const app = Express();
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 
-const PORT = 8080;
+const PORT: number = 8080;
 
 app.listen(PORT, () => {
     console.log(`server up on ${PORT}`);
 });
 
-app.get("/products/", async (req: any, res: any) => {
+app.get("/products/", async (req: any, res: Response) => {
     let readProducts = await newProduct.getProducts();
     let limit = parseInt(req.query.limit);
     let newArr = readProducts.slice(0, limit);
@@ -24,7 +24,7 @@ app.get("/products/", async (req: any, res: any) => {
     }
 });
 
-app.get("/products/:pid", async (req: any, res: any) => {
+app.get("/products/:pid", async (req: any, res: Response) => {
     let getProductsID = await newProduct.getProductById(
         parseInt(req.params.pid)
     );
