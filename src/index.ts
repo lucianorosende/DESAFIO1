@@ -1,4 +1,4 @@
-import { IProducts } from "../interfaces/IProducts";
+import { IProducts } from "../interfaces";
 import { awaitFunctions } from "../functions";
 import fs from "fs";
 
