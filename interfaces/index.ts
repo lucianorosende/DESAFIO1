@@ -1,2 +1,2 @@
+export * from "./IProductFunctions";
 export * from "./IProducts";
-export * from "./IRequests";

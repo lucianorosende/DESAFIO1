@@ -1,20 +1,19 @@
-import { IProducts } from "../interfaces";
+import { IProducts, IProductFunctions } from "../interfaces";
+import { Product } from "../types";
 import { awaitFunctions } from "../functions";
 import fs from "fs";
 
-type Product = IProducts | undefined;
-
-class ProductManager {
+class ProductManager implements IProductFunctions {
     private products: Array<Product>;
     private path: string;
     constructor(path: string, products: Array<Product>) {
         this.path = path;
         this.products = products;
     }
-    getPath(): string {
+    getPath() {
         return this.path;
     }
-    async getProducts(): Promise<Product[]> {
+    async getProducts() {
         let res: Array<Product> = [];
         try {
             res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
@@ -23,7 +22,7 @@ class ProductManager {
         }
         return res;
     }
-    async addProduct(prod: IProducts): Promise<boolean> {
+    async addProduct(prod: IProducts) {
         let result: boolean = true;
         if (this.products.length === 0) {
             prod.id = 1;
@@ -46,7 +45,7 @@ class ProductManager {
         }
         return result;
     }
-    async getProductById(id: number): Promise<Product> {
+    async getProductById(id: number) {
         let res: Array<Product> = [];
         try {
             res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
@@ -56,7 +55,7 @@ class ProductManager {
         const findId = res.find((obj) => obj?.id === id);
         return findId;
     }
-    async updateProduct(id: number, field: Product): Promise<Product[]> {
+    async updateProduct(id: number, field: Product) {
         let readFile: Array<Product> = [];
         let products = await this.getProducts();
         const newArr = products.map((obj) => {
@@ -87,7 +86,7 @@ class ProductManager {
 
         return readFile;
     }
-    async deleteProduct(id: number): Promise<Product[]> {
+    async deleteProduct(id: number) {
         let readFile: Array<Product> = [];
         try {
             readFile = JSON.parse(

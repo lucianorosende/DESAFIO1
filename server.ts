@@ -5,7 +5,7 @@ import {
     ResponseBody,
     RequestBody,
     RequestQuery,
-} from "./interfaces";
+} from "./types";
 
 const app = Express();
 app.use(Express.urlencoded({ extended: true }));
@@ -29,7 +29,7 @@ app.get(
         res: Response
     ) => {
         let readProducts = await newProduct.getProducts();
-        let limit = Number(req.query.limit);
+        let limit = parseInt(req.query.limit);
         let newArr = readProducts.slice(0, limit);
         if (limit < readProducts.length) {
             res.status(200).json({ newArr });
