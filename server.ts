@@ -42,9 +42,7 @@ app.get(
 );
 
 app.get("/products/:pid", async (req: Request, res: Response) => {
-    let getProductsID = await newProduct.getProductById(
-        parseInt(req.params.pid)
-    );
+    let getProductsID = await newProduct.getProductById(Number(req.params.pid));
 
     if (!getProductsID) {
         res.status(404).json({ 404: "Product not found" });
