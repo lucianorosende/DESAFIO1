@@ -21,7 +21,7 @@ app.get(
     "/products/",
     async (
         req: Request<
-            RequestParams,
+            RequestParams<unknown>,
             ResponseBody,
             RequestBody,
             RequestQuery<string>
@@ -41,14 +41,27 @@ app.get(
     }
 );
 
-app.get("/products/:pid", async (req: Request, res: Response) => {
-    let getProductsID = await newProduct.getProductById(Number(req.params.pid));
+app.get(
+    "/products/:pid",
+    async (
+        req: Request<
+            RequestParams<string>,
+            ResponseBody,
+            RequestBody,
+            RequestQuery<unknown>
+        >,
+        res: Response
+    ) => {
+        let getProductsID = await newProduct.getProductById(
+            Number(req.params.pid)
+        );
 
-    if (!getProductsID) {
-        res.status(404).json({ 404: "Product not found" });
-    } else {
-        res.status(200).json({ getProductsID });
+        if (!getProductsID) {
+            res.status(404).json({ 404: "Product not found" });
+        } else {
+            res.status(200).json({ getProductsID });
+        }
     }
-});
+);
 
 app.on("error", (err) => console.log("server error: " + err));

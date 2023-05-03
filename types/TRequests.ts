@@ -1,4 +1,6 @@
-export type RequestParams = {};
+export type RequestParams<T> = {
+    [key: string]: T;
+};
 
 export type ResponseBody = {};
 
