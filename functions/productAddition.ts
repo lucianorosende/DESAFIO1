@@ -1,4 +1,4 @@
-import { newProduct } from "../src";
+import { newProduct } from "../src/ProductManager";
 import fs from "fs";
 
 export const productAddition = async (): Promise<void> => {

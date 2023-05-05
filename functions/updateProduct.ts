@@ -1,4 +1,4 @@
-import { newProduct } from "../src";
+import { newProduct } from "../src/ProductManager";
 
 export const updateProduct = async (): Promise<void> => {
     console.log(
