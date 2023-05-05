@@ -1,5 +1,5 @@
 import { Product } from "../types";
-import { IProducts } from "./";
+import { IProducts } from ".";
 
 export interface IProductFunctions {
     getPath(): string;

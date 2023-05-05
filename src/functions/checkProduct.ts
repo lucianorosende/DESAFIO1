@@ -1,4 +1,4 @@
-import { newProduct } from "../src/ProductManager";
+import { newProduct } from "../classes/ProductManager";
 
 export const checkProduct = async (): Promise<void> => {
     let checker = await newProduct.getProductById(1);

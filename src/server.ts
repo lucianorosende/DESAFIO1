@@ -1,4 +1,4 @@
-import { newProduct } from "./ProductManager";
+import { newProduct } from "./classes/ProductManager";
 import Express, { Request, Response } from "express";
 
 const app = Express();
