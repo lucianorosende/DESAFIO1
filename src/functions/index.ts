@@ -1,3 +1,4 @@
+export * from "./asyncHandler";
 export * from "./awaitFunctions";
 export * from "./checkProduct";
 export * from "./deleteProduct";

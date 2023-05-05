@@ -1,5 +1,6 @@
 import { newProduct } from "./classes/ProductManager";
 import Express, { Request, Response } from "express";
+import { asyncHandler } from "./functions";
 
 const app = Express();
 app.use(Express.urlencoded({ extended: true }));
@@ -11,9 +12,10 @@ app.listen(PORT, () => {
     console.log(`server up on ${PORT}`);
 });
 
-app.get("/products/", async (req: Request, res: Response) => {
-    const { limit } = req.query;
-    try {
+app.get(
+    "/products/",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { limit } = req.query;
         let readProducts = await newProduct.getProducts();
         let numLimit = Number(limit);
         let newArr = readProducts.slice(0, numLimit);
@@ -36,19 +38,13 @@ app.get("/products/", async (req: Request, res: Response) => {
                 data: readProducts,
             });
         }
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            status: "error",
-            msg: "Server internal error",
-            data: {},
-        });
-    }
-});
+    })
+);
 
-app.get("/products/:pid", async (req: Request, res: Response) => {
-    const { pid } = req.params;
-    try {
+app.get(
+    "/products/:pid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { pid } = req.params;
         let getProductsID = await newProduct.getProductById(Number(pid));
         if (!getProductsID) {
             res.status(404).json({
@@ -63,15 +59,8 @@ app.get("/products/:pid", async (req: Request, res: Response) => {
                 data: getProductsID,
             });
         }
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            status: "error",
-            msg: "Server internal error",
-            data: {},
-        });
-    }
-});
+    })
+);
 
 app.on("error", (err) => console.log("server error: " + err));
 
