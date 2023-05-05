@@ -15,11 +15,7 @@ class ProductManager implements IProductFunctions {
     }
     async getProducts() {
         let res: Array<Product> = [];
-        try {
-            res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        } catch (e: any) {
-            console.log(e);
-        }
+        res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         return res;
     }
     async addProduct(prod: IProducts) {
@@ -34,24 +30,16 @@ class ProductManager implements IProductFunctions {
             result = false;
         } else {
             this.products.push(prod);
-            try {
-                await fs.promises.writeFile(
-                    this.path,
-                    JSON.stringify(this.products, null, 2)
-                );
-            } catch (e: any) {
-                console.log(e);
-            }
+            await fs.promises.writeFile(
+                this.path,
+                JSON.stringify(this.products, null, 2)
+            );
         }
         return result;
     }
     async getProductById(id: number) {
         let res: Array<Product> = [];
-        try {
-            res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        } catch (e: any) {
-            console.log(e);
-        }
+        res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         const findId = res.find((obj) => obj?.id === id);
         return findId;
     }
@@ -72,37 +60,19 @@ class ProductManager implements IProductFunctions {
             }
             return obj;
         });
-        try {
-            await fs.promises.writeFile(
-                this.path,
-                JSON.stringify(newArr, null, 2)
-            );
-            readFile = JSON.parse(
-                await fs.promises.readFile(this.path, "utf-8")
-            );
-        } catch (e: any) {
-            console.log(e);
-        }
-
+        await fs.promises.writeFile(this.path, JSON.stringify(newArr, null, 2));
+        readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         return readFile;
     }
     async deleteProduct(id: number) {
         let readFile: Array<Product> = [];
-        try {
-            readFile = JSON.parse(
-                await fs.promises.readFile(this.path, "utf-8")
-            );
-            let arrayFilter = readFile.filter((p) => p?.id !== id);
-            await fs.promises.writeFile(
-                this.path,
-                JSON.stringify(arrayFilter, null, 2)
-            );
-            readFile = JSON.parse(
-                await fs.promises.readFile(this.path, "utf-8")
-            );
-        } catch (e: any) {
-            console.log(e);
-        }
+        readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+        let arrayFilter = readFile.filter((p) => p?.id !== id);
+        await fs.promises.writeFile(
+            this.path,
+            JSON.stringify(arrayFilter, null, 2)
+        );
+        readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         return readFile;
     }
 }
