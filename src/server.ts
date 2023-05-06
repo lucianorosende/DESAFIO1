@@ -1,6 +1,7 @@
 import { newProduct } from "./classes/ProductManager";
 import Express, { Request, Response } from "express";
 import { asyncHandler } from "./functions";
+import { Product } from "./types";
 
 const app = Express();
 app.use(Express.urlencoded({ extended: true }));
@@ -16,9 +17,9 @@ app.get(
     "/products/",
     asyncHandler(async (req: Request, res: Response) => {
         const { limit } = req.query;
-        let readProducts = await newProduct.getProducts();
-        let numLimit = Number(limit);
-        let newArr = readProducts.slice(0, numLimit);
+        let readProducts: Product[] = await newProduct.getProducts();
+        let numLimit: number = Number(limit);
+        let newArr: Product[] = readProducts.slice(0, numLimit);
         if (numLimit <= readProducts.length) {
             res.status(200).json({
                 status: "success",
@@ -45,7 +46,9 @@ app.get(
     "/products/:pid",
     asyncHandler(async (req: Request, res: Response) => {
         const { pid } = req.params;
-        let getProductsID = await newProduct.getProductById(Number(pid));
+        let getProductsID: Product = await newProduct.getProductById(
+            Number(pid)
+        );
         if (!getProductsID) {
             res.status(404).json({
                 status: "error",

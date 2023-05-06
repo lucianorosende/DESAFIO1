@@ -4,9 +4,9 @@ import { awaitFunctions } from "../functions";
 import fs from "fs";
 
 class ProductManager implements IProductFunctions {
-    private products: Array<Product>;
+    private products: Product[];
     private path: string;
-    constructor(path: string, products: Array<Product>) {
+    constructor(path: string, products: Product[]) {
         this.path = path;
         this.products = products;
     }
@@ -14,7 +14,7 @@ class ProductManager implements IProductFunctions {
         return this.path;
     }
     async getProducts() {
-        let res: Array<Product> = [];
+        let res: Product[] = [];
         res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         return res;
     }
@@ -23,7 +23,8 @@ class ProductManager implements IProductFunctions {
         if (this.products.length === 0) {
             prod.id = 1;
         } else {
-            let newId = this.products[this.products.length - 1]?.id ?? 0;
+            let newId: number =
+                this.products[this.products.length - 1]?.id ?? 0;
             prod.id = newId + 1;
         }
         if (this.products.find((obj) => obj?.title === prod.title)) {
@@ -38,14 +39,15 @@ class ProductManager implements IProductFunctions {
         return result;
     }
     async getProductById(id: number) {
-        let res: Array<Product> = [];
+        let res: Product[] = [];
         res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        const findId = res.find((obj) => obj?.id === id);
+        const findId: Product = res.find((obj) => obj?.id === id);
         return findId;
     }
     async updateProduct(id: number, field: Product) {
-        let readFile: Array<Product> = [];
-        let products = await this.getProducts();
+        let readFile: Product[] = [];
+        let products: Product[] = await this.getProducts();
+        // todo: check type??
         const newArr = products.map((obj) => {
             if (obj?.id === id) {
                 return {
@@ -65,9 +67,9 @@ class ProductManager implements IProductFunctions {
         return readFile;
     }
     async deleteProduct(id: number) {
-        let readFile: Array<Product> = [];
+        let readFile: Product[] = [];
         readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        let arrayFilter = readFile.filter((p) => p?.id !== id);
+        let arrayFilter: Product[] = readFile.filter((p) => p?.id !== id);
         await fs.promises.writeFile(
             this.path,
             JSON.stringify(arrayFilter, null, 2)
