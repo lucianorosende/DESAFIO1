@@ -1,72 +1,26 @@
-import { newProduct } from "./classes/ProductManager";
+import { productRouter } from "./routes";
 import Express, { Request, Response } from "express";
-import { asyncHandler } from "./functions";
-import { Product } from "./types";
 
+// Initializing Express -------------------------------------------------------------------------------------------------------------
 const app = Express();
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
-
 const PORT: number = 8080;
 
 app.listen(PORT, () => {
     console.log(`server up on ${PORT}`);
 });
 
-app.get(
-    "/products/",
-    asyncHandler(async (req: Request, res: Response) => {
-        const { limit } = req.query;
-        let readProducts: Product[] = await newProduct.getProducts();
-        let numLimit: number = Number(limit);
-        let newArr: Product[] = readProducts.slice(0, numLimit);
-        if (numLimit <= readProducts.length) {
-            res.status(200).json({
-                status: "success",
-                msg: `This is the list of products with the limit of ${numLimit}`,
-                data: newArr,
-            });
-        } else if (numLimit > readProducts.length) {
-            res.status(400).json({
-                status: "error",
-                msg: "limit exceeded",
-                data: {},
-            });
-        } else {
-            res.status(200).json({
-                status: "success",
-                msg: "List of products",
-                data: readProducts,
-            });
-        }
-    })
-);
+// Initializing Routes --------------------------------------------------------------------------------------------------------------
+app.use("/api/products", productRouter);
 
-app.get(
-    "/products/:pid",
-    asyncHandler(async (req: Request, res: Response) => {
-        const { pid } = req.params;
-        let getProductsID: Product = await newProduct.getProductById(
-            Number(pid)
-        );
-        if (!getProductsID) {
-            res.status(404).json({
-                status: "error",
-                msg: "404 product not found",
-                data: {},
-            });
-        } else {
-            res.status(200).json({
-                status: "success",
-                msg: `This is the product with id: ${pid}`,
-                data: getProductsID,
-            });
-        }
-    })
-);
-
+// Handling Errors ------------------------------------------------------------------------------------------------------------------
 app.on("error", (err) => console.log("server error: " + err));
 
 app.get("*", (req: Request, res: Response) => {
+    res.status(404).json({ status: "error", msg: "route not found", data: {} });
+});
+
+app.post("*", (req: Request, res: Response) => {
     res.status(404).json({ status: "error", msg: "route not found", data: {} });
 });

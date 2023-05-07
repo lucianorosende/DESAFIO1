@@ -1,6 +1,5 @@
 import { IProducts, IProductFunctions } from "../interfaces";
 import { Product } from "../types";
-import { awaitFunctions } from "../functions";
 import fs from "fs";
 
 class ProductManager implements IProductFunctions {
@@ -18,8 +17,15 @@ class ProductManager implements IProductFunctions {
         res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         return res;
     }
+    async getProductById(id: number) {
+        let res: Product[] = [];
+        res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+        const findId: Product = res.find((obj) => obj?.id === id);
+        return findId;
+    }
     async addProduct(prod: IProducts) {
         let result: boolean = true;
+        prod.status = true;
         if (this.products.length === 0) {
             prod.id = 1;
         } else {
@@ -38,11 +44,20 @@ class ProductManager implements IProductFunctions {
         }
         return result;
     }
-    async getProductById(id: number) {
-        let res: Product[] = [];
-        res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        const findId: Product = res.find((obj) => obj?.id === id);
-        return findId;
+    checkIfProductIsCorrect(prod: IProducts) {
+        let result: boolean = true;
+        if (
+            !prod.title ||
+            !prod.description ||
+            !prod.price ||
+            !prod.code ||
+            !prod.stock ||
+            !prod.status ||
+            !prod.category
+        ) {
+            result = false;
+        }
+        return result;
     }
     async updateProduct(id: number, field: Product) {
         let readFile: Product[] = [];
@@ -54,9 +69,11 @@ class ProductManager implements IProductFunctions {
                     title: field?.title,
                     description: field?.description,
                     price: field?.price,
-                    thumbnail: field?.thumbnail,
+                    thumbnails: field?.thumbnails,
                     code: field?.code,
                     stock: field?.stock,
+                    status: field?.status,
+                    category: field?.category,
                     id: id,
                 };
             }
@@ -79,5 +96,4 @@ class ProductManager implements IProductFunctions {
     }
 }
 
-export const newProduct = new ProductManager("products.txt", []);
-// awaitFunctions();
+export const newProduct = new ProductManager("src/JSON/products.json", []);
