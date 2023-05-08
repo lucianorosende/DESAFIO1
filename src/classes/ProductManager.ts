@@ -1,6 +1,6 @@
 import { IProducts, IProductFunctions } from "../interfaces";
 import { Product } from "../types";
-import fs from "fs";
+import fs, { read } from "fs";
 
 class ProductManager implements IProductFunctions {
     private products: Product[];
@@ -25,21 +25,21 @@ class ProductManager implements IProductFunctions {
     }
     async addProduct(prod: IProducts) {
         let result: boolean = true;
+        let readData = await this.getProducts();
         prod.status = true;
-        if (this.products.length === 0) {
+        if (readData.length === 0) {
             prod.id = 1;
         } else {
-            let newId: number =
-                this.products[this.products.length - 1]?.id ?? 0;
+            let newId: number = readData[readData.length - 1]?.id ?? 0;
             prod.id = newId + 1;
         }
-        if (this.products.find((obj) => obj?.title === prod.title)) {
+        if (readData.find((obj) => obj?.title === prod.title)) {
             result = false;
         } else {
-            this.products.push(prod);
+            readData.push(prod);
             await fs.promises.writeFile(
                 this.path,
-                JSON.stringify(this.products, null, 2)
+                JSON.stringify(readData, null, 2)
             );
         }
         return result;

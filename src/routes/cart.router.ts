@@ -29,7 +29,7 @@ cartRouter.get(
 cartRouter.post(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
-        const addCart = await newCart.addCart(req.body);
+        const addCart = await newCart.addCart();
         const getCart = await newCart.getCart();
         res.status(200).json({
             status: "success",

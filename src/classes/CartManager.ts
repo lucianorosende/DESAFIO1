@@ -24,7 +24,8 @@ class CartManager implements ICartFunctions {
         return findId;
     }
 
-    async addCart(cart: ICart): Promise<void> {
+    async addCart(): Promise<void> {
+        let cart: ICart = { products: [] };
         if (this.cart.length === 0) {
             cart.id = 1;
         } else {
