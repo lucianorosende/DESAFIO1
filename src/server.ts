@@ -1,4 +1,4 @@
-import { productRouter } from "./routes";
+import { productRouter, cartRouter } from "./routes";
 import Express, { Request, Response } from "express";
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -13,6 +13,7 @@ app.listen(PORT, () => {
 
 // Initializing Routes --------------------------------------------------------------------------------------------------------------
 app.use("/api/products", productRouter);
+app.use("/api/carts", cartRouter);
 
 // Handling Errors ------------------------------------------------------------------------------------------------------------------
 app.on("error", (err) => console.log("server error: " + err));

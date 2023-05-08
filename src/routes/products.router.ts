@@ -85,3 +85,49 @@ productRouter.post(
         }
     })
 );
+
+productRouter.put(
+    "/:pid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { pid } = req.params;
+        const updateData = await newProduct.updateProduct(
+            Number(pid),
+            req.body
+        );
+        if (updateData) {
+            res.status(200).json({
+                status: "success",
+                msg: "data updated successfully",
+                data: updateData,
+            });
+        } else {
+            res.status(400).json({
+                status: "error",
+                msg: "product not found",
+                data: {},
+            });
+        }
+    })
+);
+
+productRouter.delete(
+    "/:pid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { pid } = req.params;
+        const deleteData = await newProduct.deleteProduct(Number(pid));
+        const getData = await newProduct.getProducts();
+        if (deleteData) {
+            res.status(200).json({
+                status: "success",
+                msg: "product deleted successfully",
+                data: getData,
+            });
+        } else {
+            res.status(400).json({
+                status: "error",
+                msg: "product not found",
+                data: {},
+            });
+        }
+    })
+);

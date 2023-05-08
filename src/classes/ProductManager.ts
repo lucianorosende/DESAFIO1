@@ -60,7 +60,6 @@ class ProductManager implements IProductFunctions {
         return result;
     }
     async updateProduct(id: number, field: Product) {
-        let readFile: Product[] = [];
         let products: Product[] = await this.getProducts();
         // todo: check type??
         const newArr = products.map((obj) => {
@@ -80,19 +79,25 @@ class ProductManager implements IProductFunctions {
             return obj;
         });
         await fs.promises.writeFile(this.path, JSON.stringify(newArr, null, 2));
-        readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        return readFile;
+        return await this.getProductById(id);
     }
     async deleteProduct(id: number) {
+        let result: boolean = true;
         let readFile: Product[] = [];
+        const findData = await newProduct.getProductById(id);
         readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
         let arrayFilter: Product[] = readFile.filter((p) => p?.id !== id);
+
         await fs.promises.writeFile(
             this.path,
             JSON.stringify(arrayFilter, null, 2)
         );
-        readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
-        return readFile;
+        if (findData !== undefined) {
+            return result;
+        } else {
+            result = false;
+        }
+        return result;
     }
 }
 

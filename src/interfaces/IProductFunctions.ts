@@ -7,6 +7,6 @@ export interface IProductFunctions {
     getProductById(id: number): Promise<Product>;
     addProduct(prod: IProducts): Promise<boolean>;
     checkIfProductIsCorrect(prod: IProducts): boolean;
-    updateProduct(id: number, field: Product): Promise<Product[]>;
-    deleteProduct(id: number): Promise<Product[]>;
+    updateProduct(id: number, field: Product): Promise<Product>;
+    deleteProduct(id: number): Promise<boolean>;
 }
