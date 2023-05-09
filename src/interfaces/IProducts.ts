@@ -7,5 +7,6 @@ export interface IProducts {
     stock: number;
     status: boolean;
     category: string;
+    quantity: number;
     id?: number;
 }

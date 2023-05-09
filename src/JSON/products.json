@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "title": "1111",
+    "description": "asd",
+    "price": 1,
+    "thumbnails": [
+      "https://www.youtube.com/",
+      "test1",
+      "test2"
+    ],
+    "code": "asd",
+    "stock": 5,
+    "status": true,
+    "category": "shoes",
+    "id": 1
+  },
+  {
+    "title": "11111",
+    "description": "asd",
+    "price": 1,
+    "thumbnails": [
+      "https://www.youtube.com/",
+      "test1",
+      "test2"
+    ],
+    "code": "asd",
+    "stock": 5,
+    "status": true,
+    "category": "shoes",
+    "id": 2
+  },
+  {
+    "title": "111",
+    "description": "asd",
+    "price": 1,
+    "thumbnails": [
+      "https://www.youtube.com/",
+      "test1",
+      "test2"
+    ],
+    "code": "asd",
+    "stock": 5,
+    "status": true,
+    "category": "shoes",
+    "id": 3
+  }
+]

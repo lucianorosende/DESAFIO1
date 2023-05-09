@@ -37,3 +37,27 @@ cartRouter.post(
         });
     })
 );
+
+cartRouter.post(
+    "/:cid/product/:pid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid, pid } = req.params;
+        const addProductInCart = await newCart.addProductInCart(
+            Number(cid),
+            Number(pid)
+        );
+        if (addProductInCart) {
+            res.status(200).json({
+                status: "success",
+                msg: "Product added successfully into cart",
+                data: addProductInCart,
+            });
+        } else {
+            res.status(404).json({
+                status: "error",
+                msg: "Product was not added successfully",
+                data: {},
+            });
+        }
+    })
+);
