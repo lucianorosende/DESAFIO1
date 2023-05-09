@@ -30,11 +30,10 @@ cartRouter.post(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
         const addCart = await newCart.addCart();
-        const getCart = await newCart.getCart();
         res.status(200).json({
             status: "success",
             msg: "Cart added successfully",
-            data: getCart,
+            data: addCart,
         });
     })
 );

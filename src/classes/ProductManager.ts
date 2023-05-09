@@ -1,25 +1,25 @@
 import { IProducts, IProductFunctions } from "../interfaces";
 import { Product } from "../types";
-import fs, { read } from "fs";
+import fs from "fs";
 
 class ProductManager implements IProductFunctions {
-    private products: Product[];
-    private path: string;
+    #products: Product[];
+    #path: string;
     constructor(path: string, products: Product[]) {
-        this.path = path;
-        this.products = products;
+        this.#path = path;
+        this.#products = products;
     }
     getPath() {
-        return this.path;
+        return this.#path;
     }
     async getProducts() {
         let res: Product[] = [];
-        res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+        res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         return res;
     }
     async getProductById(id: number) {
         let res: Product[] = [];
-        res = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+        res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         const findId: Product = res.find((obj) => obj?.id === id);
         return findId;
     }
@@ -38,7 +38,7 @@ class ProductManager implements IProductFunctions {
         } else {
             readData.push(prod);
             await fs.promises.writeFile(
-                this.path,
+                this.#path,
                 JSON.stringify(readData, null, 2)
             );
         }
@@ -78,18 +78,21 @@ class ProductManager implements IProductFunctions {
             }
             return obj;
         });
-        await fs.promises.writeFile(this.path, JSON.stringify(newArr, null, 2));
+        await fs.promises.writeFile(
+            this.#path,
+            JSON.stringify(newArr, null, 2)
+        );
         return await this.getProductById(id);
     }
     async deleteProduct(id: number) {
         let result: boolean = true;
         let readFile: Product[] = [];
         const findData = await newProduct.getProductById(id);
-        readFile = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+        readFile = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         let arrayFilter: Product[] = readFile.filter((p) => p?.id !== id);
 
         await fs.promises.writeFile(
-            this.path,
+            this.#path,
             JSON.stringify(arrayFilter, null, 2)
         );
         if (findData !== undefined) {
