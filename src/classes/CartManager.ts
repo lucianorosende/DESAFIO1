@@ -1,4 +1,4 @@
-import { Cart, Product } from "../types";
+import { Cart } from "../types";
 import { ICart } from "../interfaces";
 import fs from "fs";
 import { ICartFunctions } from "../interfaces";
@@ -6,10 +6,9 @@ import { newProduct } from ".";
 
 class CartManager implements ICartFunctions {
     #path: string;
-    #cart: Cart[];
-    constructor(path: string, cart: Cart[]) {
+
+    constructor(path: string) {
         this.#path = path;
-        this.#cart = cart;
     }
 
     async getCarts() {
@@ -26,26 +25,27 @@ class CartManager implements ICartFunctions {
     }
 
     async addCart() {
+        let res: Cart[] = [];
+        res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         let cart: ICart = { products: [] };
-        if (this.#cart.length === 0) {
+        if (res.length === 0) {
             cart.id = 1;
         } else {
-            let newId: number = this.#cart[this.#cart.length - 1]?.id ?? 0;
+            let newId: number = res[res.length - 1]?.id ?? 0;
             cart.id = newId + 1;
         }
-        this.#cart.push(cart);
-        await fs.promises.writeFile(
-            this.#path,
-            JSON.stringify(this.#cart, null, 2)
-        );
-        return this.#cart;
+        res.push(cart);
+        await fs.promises.writeFile(this.#path, JSON.stringify(res, null, 2));
+        return res;
     }
 
     async addProductInCart(cID: number, pID: number) {
+        let res: Cart[] = [];
+        res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         let result = true;
         const getCart = await this.getCartById(cID);
         const getProduct = await newProduct.getProductById(pID);
-        let index: number = this.#cart.findIndex((obj) => obj?.id === cID);
+        let index: number = res.findIndex((obj) => obj?.id === cID);
         let newProd: { id?: number; quantity: number } = {
             id: getProduct?.id,
             quantity: 1,
@@ -66,19 +66,18 @@ class CartManager implements ICartFunctions {
                     quantity: value,
                 };
                 getCart!.products[indexProduct] = updateProd;
-                this.#cart[index] = getCart;
+                res[index] = getCart;
                 await fs.promises.writeFile(
                     this.#path,
-                    JSON.stringify(this.#cart, null, 2)
+                    JSON.stringify(res, null, 2)
                 );
             }
-            // console.log(this.#cart);
         } else {
             getCart?.products.push(newProd);
-            this.#cart[index] = getCart;
+            res[index] = getCart;
             await fs.promises.writeFile(
                 this.#path,
-                JSON.stringify(this.#cart, null, 2)
+                JSON.stringify(res, null, 2)
             );
         }
 
@@ -86,4 +85,4 @@ class CartManager implements ICartFunctions {
     }
 }
 
-export const newCart = new CartManager("src/JSON/cart.json", []);
+export const newCart = new CartManager("src/JSON/cart.json");

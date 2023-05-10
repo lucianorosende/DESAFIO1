@@ -3,11 +3,9 @@ import { Product } from "../types";
 import fs from "fs";
 
 class ProductManager implements IProductFunctions {
-    #products: Product[];
     #path: string;
-    constructor(path: string, products: Product[]) {
+    constructor(path: string) {
         this.#path = path;
-        this.#products = products;
     }
     getPath() {
         return this.#path;
@@ -104,4 +102,4 @@ class ProductManager implements IProductFunctions {
     }
 }
 
-export const newProduct = new ProductManager("src/JSON/products.json", []);
+export const newProduct = new ProductManager("src/JSON/products.json");
