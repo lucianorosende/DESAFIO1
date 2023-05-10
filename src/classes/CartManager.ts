@@ -45,8 +45,8 @@ class CartManager implements ICartFunctions {
         let result = true;
         const getCart = await this.getCartById(cID);
         const getProduct = await newProduct.getProductById(pID);
-        let index = this.#cart.findIndex((obj) => obj?.id === cID);
-        let newProd: any = {
+        let index: number = this.#cart.findIndex((obj) => obj?.id === cID);
+        let newProd: { id?: number; quantity: number } = {
             id: getProduct?.id,
             quantity: 1,
         };
@@ -54,24 +54,35 @@ class CartManager implements ICartFunctions {
             return false;
         }
 
-        const newArr = getCart?.products.map((obj) => {
-            if (obj?.id === cID) {
-                return {
+        if (getCart?.products.find((product) => product?.id === pID)) {
+            const indexProduct = getCart?.products.findIndex(
+                (item) => item?.id === pID
+            );
+            if (indexProduct !== -1) {
+                let value = Number(getCart?.products[indexProduct]?.quantity);
+                value++;
+                let updateProd = {
                     id: getProduct?.id,
-                    quantity: newProd.quantity++,
+                    quantity: value,
                 };
+                getCart!.products[indexProduct] = updateProd;
+                this.#cart[index] = getCart;
+                await fs.promises.writeFile(
+                    this.#path,
+                    JSON.stringify(this.#cart, null, 2)
+                );
             }
-            return obj;
-        });
+            // console.log(this.#cart);
+        } else {
+            getCart?.products.push(newProd);
+            this.#cart[index] = getCart;
+            await fs.promises.writeFile(
+                this.#path,
+                JSON.stringify(this.#cart, null, 2)
+            );
+        }
 
-        getCart?.products.push(newProd);
-        this.#cart[index] = getCart;
-        await fs.promises.writeFile(
-            this.#path,
-            JSON.stringify(this.#cart, null, 2)
-        );
-
-        return true;
+        return getCart;
     }
 }
 
