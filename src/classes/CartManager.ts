@@ -65,7 +65,7 @@ class CartManager implements ICartFunctions {
                     id: getProduct?.id,
                     quantity: value,
                 };
-                getCart!.products[indexProduct] = updateProd;
+                getCart.products[indexProduct] = updateProd;
                 res[index] = getCart;
                 await fs.promises.writeFile(
                     this.#path,
