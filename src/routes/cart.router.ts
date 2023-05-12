@@ -46,7 +46,7 @@ cartRouter.post(
             Number(cid),
             Number(pid)
         );
-        if (addProductInCart) {
+        if (addProductInCart !== undefined) {
             res.status(200).json({
                 status: "success",
                 msg: "Product added successfully into cart",

@@ -51,7 +51,7 @@ class CartManager implements ICartFunctions {
             quantity: 1,
         };
         if (!getProduct || !getCart) {
-            return false;
+            return undefined;
         }
 
         if (getCart?.products.find((product) => product?.id === pID)) {
