@@ -1,3 +1,3 @@
 import { ICart } from "../interfaces";
 
-export type Cart = ICart | undefined;
+export type TCart = ICart | undefined;

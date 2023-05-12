@@ -1,10 +1,10 @@
-import { Cart } from "../types";
+import { TCart } from "../types";
 import { ICart } from "../interfaces";
 import fs from "fs";
-import { ICartFunctions } from "../interfaces";
+import { ICartFunction } from "../interfaces";
 import { newProduct } from ".";
 
-class CartManager implements ICartFunctions {
+class CartManager implements ICartFunction {
     #path: string;
 
     constructor(path: string) {
@@ -12,20 +12,20 @@ class CartManager implements ICartFunctions {
     }
 
     async getCarts() {
-        let res: Cart[] = [];
+        let res: TCart[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         return res;
     }
 
     async getCartById(id: number) {
-        let res: Cart[] = [];
+        let res: TCart[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
-        const findId: Cart = res.find((obj) => obj?.id === id);
+        const findId: TCart = res.find((obj) => obj?.id === id);
         return findId;
     }
 
     async addCart() {
-        let res: Cart[] = [];
+        let res: TCart[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         let cart: ICart = { products: [] };
         if (res.length === 0) {
@@ -40,7 +40,7 @@ class CartManager implements ICartFunctions {
     }
 
     async addProductInCart(cID: number, pID: number) {
-        let res: Cart[] = [];
+        let res: TCart[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         let result = true;
         const getCart = await this.getCartById(cID);

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, RequestHandler } from "express";
-import { AsyncRequestHandler } from "../types";
+import { TAsyncRequestHandler } from "../types";
 
-export function asyncHandler(fn: AsyncRequestHandler): RequestHandler {
+export function asyncHandler(fn: TAsyncRequestHandler): RequestHandler {
     return async (
         req: Request,
         res: Response,

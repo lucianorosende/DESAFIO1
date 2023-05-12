@@ -1,7 +1,7 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler } from "../functions";
 import { newProduct } from "../classes/";
-import { Product } from "../types";
+import { TProduct } from "../types";
 
 export const productRouter = Express.Router();
 
@@ -9,9 +9,9 @@ productRouter.get(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
         const { limit } = req.query;
-        let readProducts: Product[] = await newProduct.getProducts();
+        let readProducts: TProduct[] = await newProduct.getProducts();
         let numLimit: number = Number(limit);
-        let newArr: Product[] = readProducts.slice(0, numLimit);
+        let newArr: TProduct[] = readProducts.slice(0, numLimit);
         if (numLimit <= readProducts.length) {
             res.status(200).json({
                 status: "success",
@@ -38,7 +38,7 @@ productRouter.get(
     "/:pid",
     asyncHandler(async (req: Request, res: Response) => {
         const { pid } = req.params;
-        let getProductsID: Product = await newProduct.getProductById(
+        let getProductsID: TProduct = await newProduct.getProductById(
             Number(pid)
         );
         if (getProductsID) {

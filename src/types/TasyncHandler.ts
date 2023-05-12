@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-export type AsyncRequestHandler = (
+export type TAsyncRequestHandler = (
     req: Request,
     res: Response,
     next: NextFunction

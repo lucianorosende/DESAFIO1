@@ -1,6 +1,6 @@
-import { ICartProducts } from "./ICartProducts";
+import { ICartProduct } from "./ICartProduct";
 
 export interface ICart {
     id?: number;
-    products: ICartProducts[];
+    products: ICartProduct[];
 }

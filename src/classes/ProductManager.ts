@@ -1,8 +1,8 @@
-import { IProducts, IProductFunctions } from "../interfaces";
-import { Product } from "../types";
+import { IProduct, IProductFunction } from "../interfaces";
+import { TProduct } from "../types";
 import fs from "fs";
 
-class ProductManager implements IProductFunctions {
+class ProductManager implements IProductFunction {
     #path: string;
     constructor(path: string) {
         this.#path = path;
@@ -11,17 +11,17 @@ class ProductManager implements IProductFunctions {
         return this.#path;
     }
     async getProducts() {
-        let res: Product[] = [];
+        let res: TProduct[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         return res;
     }
     async getProductById(id: number) {
-        let res: Product[] = [];
+        let res: TProduct[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
-        const findId: Product = res.find((obj) => obj?.id === id);
+        const findId: TProduct = res.find((obj) => obj?.id === id);
         return findId;
     }
-    async addProduct(prod: IProducts) {
+    async addProduct(prod: IProduct) {
         let result: boolean = true;
         let readData = await this.getProducts();
         prod.status = true;
@@ -42,7 +42,7 @@ class ProductManager implements IProductFunctions {
         }
         return result;
     }
-    checkIfProductIsCorrect(prod: IProducts) {
+    checkIfProductIsCorrect(prod: IProduct) {
         let result: boolean = true;
         if (
             !prod.title ||
@@ -57,8 +57,8 @@ class ProductManager implements IProductFunctions {
         }
         return result;
     }
-    async updateProduct(id: number, field: Product) {
-        let products: Product[] = await this.getProducts();
+    async updateProduct(id: number, field: TProduct) {
+        let products: TProduct[] = await this.getProducts();
         // todo: check type??
         const newArr = products.map((obj) => {
             if (obj?.id === id) {
@@ -84,10 +84,10 @@ class ProductManager implements IProductFunctions {
     }
     async deleteProduct(id: number) {
         let result: boolean = true;
-        let readFile: Product[] = [];
+        let readFile: TProduct[] = [];
         const findData = await newProduct.getProductById(id);
         readFile = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
-        let arrayFilter: Product[] = readFile.filter((p) => p?.id !== id);
+        let arrayFilter: TProduct[] = readFile.filter((p) => p?.id !== id);
 
         await fs.promises.writeFile(
             this.#path,

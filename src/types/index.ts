@@ -1,3 +1,3 @@
 export * from "./TCart";
-export * from "./TProducts";
+export * from "./TProduct";
 export * from "./TasyncHandler";

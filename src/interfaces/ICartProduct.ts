@@ -1,4 +1,4 @@
-export interface ICartProducts {
+export interface ICartProduct {
     id?: number;
     quantity: number;
 }
