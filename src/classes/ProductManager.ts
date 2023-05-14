@@ -42,7 +42,7 @@ class ProductManager implements IProductFunction {
         }
         return result;
     }
-    async validateCodeRepetition(code: string): Promise<boolean> {
+    async validateCodeRepetition(code: string) {
         let result: boolean = false;
         let prods = await this.getProducts();
         const product = prods.find((product) => product?.code == code);

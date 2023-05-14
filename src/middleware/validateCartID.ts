@@ -6,7 +6,7 @@ export const validateCartID = async (
     next: NextFunction
 ): Promise<void> => {
     const { cid } = req.params;
-    let id = cid;
+    let id: string = cid;
     if (!id || isNaN(Number(id))) {
         res.status(400).json({
             status: "error",
