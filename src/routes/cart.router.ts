@@ -1,11 +1,13 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler } from "../functions";
 import { newCart } from "../classes";
+import { validateCartID, validateProductID } from "../middleware";
 
 export const cartRouter = Express.Router();
 
 cartRouter.get(
     "/:cid",
+    validateCartID,
     asyncHandler(async (req: Request, res: Response) => {
         const { cid } = req.params;
         let getCartID = await newCart.getCartById(Number(cid));
@@ -40,6 +42,8 @@ cartRouter.post(
 
 cartRouter.post(
     "/:cid/product/:pid",
+    validateCartID,
+    validateProductID,
     asyncHandler(async (req: Request, res: Response) => {
         const { cid, pid } = req.params;
         const addProductInCart = await newCart.addProductInCart(

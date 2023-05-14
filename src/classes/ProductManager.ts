@@ -42,18 +42,13 @@ class ProductManager implements IProductFunction {
         }
         return result;
     }
-    checkIfProductIsCorrect(prod: IProduct) {
-        let result: boolean = true;
-        if (
-            !prod.title ||
-            !prod.description ||
-            !prod.price ||
-            !prod.code ||
-            !prod.stock ||
-            !prod.status ||
-            !prod.category
-        ) {
-            result = false;
+    async validateCodeRepetition(code: string): Promise<boolean> {
+        let result: boolean = false;
+        let prods = await this.getProducts();
+        const product = prods.find((product) => product?.code == code);
+        if (product) {
+            result = true;
+            return result;
         }
         return result;
     }

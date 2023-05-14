@@ -30,7 +30,7 @@
     "id": 2
   },
   {
-    "title": "111test",
+    "title": "1",
     "description": "asd",
     "price": 1,
     "thumbnails": [
@@ -58,5 +58,20 @@
     "status": true,
     "category": "shoes",
     "id": 4
+  },
+  {
+    "title": "1111111",
+    "description": "asd",
+    "price": 1,
+    "thumbnails": [
+      "https://www.youtube.com/",
+      "test1",
+      "test2"
+    ],
+    "code": "asd",
+    "stock": 5,
+    "status": true,
+    "category": "shoes",
+    "id": 5
   }
 ]

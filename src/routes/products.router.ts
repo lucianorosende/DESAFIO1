@@ -2,6 +2,11 @@ import Express, { Request, Response } from "express";
 import { asyncHandler } from "../functions";
 import { newProduct } from "../classes/";
 import { TProduct } from "../types";
+import {
+    validateCodeRepetition,
+    validateProduct,
+    validateProductID,
+} from "../middleware";
 
 export const productRouter = Express.Router();
 
@@ -36,6 +41,7 @@ productRouter.get(
 
 productRouter.get(
     "/:pid",
+    validateProductID,
     asyncHandler(async (req: Request, res: Response) => {
         const { pid } = req.params;
         let getProductsID: TProduct = await newProduct.getProductById(
@@ -59,22 +65,15 @@ productRouter.get(
 
 productRouter.post(
     "/",
+    validateProduct,
+    validateCodeRepetition,
     asyncHandler(async (req: Request, res: Response) => {
         const addData: boolean = await newProduct.addProduct(req.body);
-        const checkProduct: boolean = newProduct.checkIfProductIsCorrect(
-            req.body
-        );
         if (addData) {
             res.status(200).json({
                 status: "success",
                 msg: `You added a new product!`,
                 data: req.body,
-            });
-        } else if (!checkProduct) {
-            res.status(400).json({
-                status: "error",
-                msg: "Need to add all fields to the product!",
-                data: {},
             });
         } else {
             res.status(400).json({
@@ -88,6 +87,8 @@ productRouter.post(
 
 productRouter.put(
     "/:pid",
+    validateProduct,
+    validateProductID,
     asyncHandler(async (req: Request, res: Response) => {
         const { pid } = req.params;
         const updateData = await newProduct.updateProduct(
@@ -112,6 +113,7 @@ productRouter.put(
 
 productRouter.delete(
     "/:pid",
+    validateProductID,
     asyncHandler(async (req: Request, res: Response) => {
         const { pid } = req.params;
         const deleteData = await newProduct.deleteProduct(Number(pid));
