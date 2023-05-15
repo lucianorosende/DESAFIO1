@@ -73,5 +73,20 @@
     "status": true,
     "category": "shoes",
     "id": 5
+  },
+  {
+    "title": "11111111",
+    "description": "asd",
+    "price": 1,
+    "thumbnails": [
+      "https://www.youtube.com/",
+      "test1",
+      "test2"
+    ],
+    "code": "asdd",
+    "stock": 5,
+    "status": true,
+    "category": "shoes",
+    "id": 6
   }
 ]
