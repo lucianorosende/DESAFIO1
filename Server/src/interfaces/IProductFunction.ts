@@ -9,4 +9,5 @@ export interface IProductFunction {
     validateCodeRepetition(code: string): Promise<boolean>;
     updateProduct(id: number, field: IProduct): Promise<TProduct>;
     deleteProduct(id: number): Promise<boolean>;
+    deleteAllProducts(): Promise<void>;
 }

@@ -61,7 +61,7 @@ class ProductManager implements IProductFunction {
                     title: field?.title,
                     description: field?.description,
                     price: field?.price,
-                    thumbnails: field?.thumbnails,
+                    thumbnails: field?.thumbnail,
                     code: field?.code,
                     stock: field?.stock,
                     status: field?.status,
@@ -94,6 +94,9 @@ class ProductManager implements IProductFunction {
             result = false;
         }
         return result;
+    }
+    async deleteAllProducts() {
+        await fs.promises.writeFile(this.#path, JSON.stringify([], null, 2));
     }
 }
 
