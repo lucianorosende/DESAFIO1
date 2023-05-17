@@ -1,6 +1,6 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler } from "../functions";
-import { newProduct } from "../classes/";
+import { newProduct } from "../classes";
 import { TProduct } from "../types";
 import {
     validateCodeRepetition,
