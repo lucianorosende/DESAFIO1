@@ -30,11 +30,16 @@ sockets.on(
             <td>${product.stock}</td>
             <td>${product.category}</td>
             <td>${product.id}</td>
-            <td><button>x</button></td>
+            <td><button id="${product.id}" onClick="deleteProduct()">x</button></td>
         </tr>`;
         }))
 );
 
 const deleteProduct = () => {
+    let id = event.target.id;
+    sockets.emit("deleteOneProduct", Number(id));
+};
+
+const eliminateAll = () => {
     sockets.emit("deleteProducts", "delete");
 };

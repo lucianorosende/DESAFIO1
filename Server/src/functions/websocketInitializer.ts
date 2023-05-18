@@ -13,13 +13,19 @@ export const webSocketInitializer = () => {
     socketServer.on("connection", async (socket) => {
         console.log("Un cliente se ha conectado: " + socket.id);
         socket.on("deploy", async (data) => {
-            console.log(data);
             if (data === "deploy") {
                 socket.emit("products", await newProduct.getProducts());
             }
         });
         socket.on("newProduct", async (data) => {
             await newProduct.addProduct(data);
+            socketServer.sockets.emit(
+                "products",
+                await newProduct.getProducts()
+            );
+        });
+        socket.on("deleteOneProduct", async (data) => {
+            await newProduct.deleteProduct(data);
             socketServer.sockets.emit(
                 "products",
                 await newProduct.getProducts()
