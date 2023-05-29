@@ -1,9 +1,9 @@
 import Express from "express";
-import { routeErrors } from "./functions/routeErrors";
 import {
     routeInitializer,
     publicAndHbs,
     webSocketInitializer,
+    routeErrors,
 } from "./functions";
 import cors from "cors";
 

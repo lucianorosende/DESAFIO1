@@ -1,4 +1,5 @@
 import { NextFunction, Response, Request } from "express";
+import { httpStatus } from "../utils";
 export const validateProduct = (
     req: Request,
     res: Response,
@@ -18,7 +19,7 @@ export const validateProduct = (
         keysBody.includes(key)
     );
     if (!isValidRequest) {
-        res.status(400).json({
+        res.status(httpStatus.Error).json({
             status: "error",
             msg: "Need to add all fields to the product!",
             data: {},
