@@ -1,5 +1,5 @@
 import Express, { Request, Response } from "express";
-import { asyncHandler } from "../functions";
+import { asyncHandler, httpStatus } from "../utils";
 import { newProduct } from "../classes";
 import { TProduct } from "../types";
 import {
@@ -7,7 +7,6 @@ import {
     validateProduct,
     validateProductID,
 } from "../middleware";
-import { httpStatus } from "../utils";
 
 export const productRouter = Express.Router();
 

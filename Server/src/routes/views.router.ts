@@ -1,6 +1,6 @@
 import Express from "express";
 import { newProduct } from "../classes";
-import { asyncHandler } from "../functions";
+import { asyncHandler } from "../utils";
 
 export const viewsRouter = Express.Router();
 

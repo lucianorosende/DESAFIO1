@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, RequestHandler } from "express";
 import { TAsyncRequestHandler } from "../types";
-import { httpStatus } from "../utils";
+import { httpStatus } from ".";
 
 export function asyncHandler(fn: TAsyncRequestHandler): RequestHandler {
     return async (

@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { newProduct } from "../classes";
-import { asyncHandler } from "../functions";
-import { httpStatus } from "../utils";
+import { asyncHandler, httpStatus } from "../utils";
 export const validateCodeRepetition = asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const { code } = req.body;

@@ -4,7 +4,7 @@ import {
     publicAndHbs,
     webSocketInitializer,
     routeErrors,
-} from "./functions";
+} from "./utils";
 import cors from "cors";
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
