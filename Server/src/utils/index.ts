@@ -1,4 +1,5 @@
 export * from "./asyncHandler";
+export * from "./connectToMongoDB";
 export * from "./httpStatus";
 export * from "./index";
 export * from "./publicAndHbs";
