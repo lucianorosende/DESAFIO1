@@ -7,13 +7,15 @@ import {
     connectToMongoDB,
 } from "./utils";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
 export const app = Express();
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use(cors());
-export const PORT: number = 8080;
+export const PORT = process.env.PORT || 8080;
 
 // Initializing public and hbs Engine -----------------------------------------------------------------------------------------------
 publicAndHbs();

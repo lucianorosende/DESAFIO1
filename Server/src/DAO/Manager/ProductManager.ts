@@ -1,5 +1,5 @@
-import { IProduct, IProductFunction } from "../interfaces";
-import { TProduct } from "../types";
+import { IProduct, IProductFunction } from "../../interfaces";
+import { TProduct } from "../../types";
 import fs from "fs";
 
 class ProductManager implements IProductFunction {
@@ -61,7 +61,7 @@ class ProductManager implements IProductFunction {
                     title: field?.title,
                     description: field?.description,
                     price: field?.price,
-                    thumbnails: field?.thumbnail,
+                    thumbnails: field?.thumbnails,
                     code: field?.code,
                     stock: field?.stock,
                     status: field?.status,

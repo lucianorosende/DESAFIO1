@@ -1,7 +1,7 @@
-import { TCart } from "../types";
-import { ICart } from "../interfaces";
+import { TCart } from "../../types";
+import { ICart } from "../../interfaces";
 import fs from "fs";
-import { ICartFunction } from "../interfaces";
+import { ICartFunction } from "../../interfaces";
 import { newProduct } from ".";
 
 class CartManager implements ICartFunction {

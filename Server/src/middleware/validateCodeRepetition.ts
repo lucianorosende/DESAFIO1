@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { newProduct } from "../classes";
+import { newProduct } from "../DAO/Manager";
 import { asyncHandler, httpStatus } from "../utils";
 export const validateCodeRepetition = asyncHandler(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {

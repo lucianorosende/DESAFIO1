@@ -1,6 +1,6 @@
 import { httpServer } from "../server";
 import { Server } from "socket.io";
-import { newProduct } from "../classes";
+import { newProduct } from "../DAO/Manager";
 
 export const webSocketInitializer = () => {
     const socketServer = new Server(httpServer, {

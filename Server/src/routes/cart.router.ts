@@ -1,6 +1,6 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler, httpStatus } from "../utils";
-import { newCart } from "../classes";
+import { newCart } from "../DAO/Manager";
 import { validateCartID, validateProductID } from "../middleware";
 
 export const cartRouter = Express.Router();

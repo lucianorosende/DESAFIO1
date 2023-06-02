@@ -1,5 +1,5 @@
 import Express from "express";
-import { newProduct } from "../classes";
+import { newProduct } from "../DAO/Manager";
 import { asyncHandler } from "../utils";
 
 export const viewsRouter = Express.Router();
