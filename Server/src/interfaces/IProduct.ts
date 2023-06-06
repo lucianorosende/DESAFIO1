@@ -8,5 +8,5 @@ export interface IProduct {
     status: boolean;
     category: string;
     quantity: number;
-    id?: number;
+    pID?: number;
 }

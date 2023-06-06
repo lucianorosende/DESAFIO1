@@ -47,7 +47,7 @@ class CartManager implements ICartFunction {
         const getProduct = await newProduct.getProductById(pID);
         let index: number = res.findIndex((obj) => obj?.id === cID);
         let newProd: { id?: number; quantity: number } = {
-            id: getProduct?.id,
+            id: getProduct?.pID,
             quantity: 1,
         };
         if (!getProduct || !getCart) {
@@ -62,7 +62,7 @@ class CartManager implements ICartFunction {
                 let value = Number(getCart?.products[indexProduct]?.quantity);
                 value++;
                 let updateProd = {
-                    id: getProduct?.id,
+                    id: getProduct?.pID,
                     quantity: value,
                 };
                 getCart.products[indexProduct] = updateProd;

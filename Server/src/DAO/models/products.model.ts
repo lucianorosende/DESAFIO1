@@ -15,7 +15,7 @@ const productSchema: Schema = new Schema({
         type: Number,
         required: true,
     },
-    thumbnail: {
+    thumbnails: {
         type: [String],
         required: true,
     },
@@ -33,6 +33,10 @@ const productSchema: Schema = new Schema({
     },
     category: {
         type: String,
+        required: true,
+    },
+    pID: {
+        type: Number,
         required: true,
     },
 });

@@ -18,7 +18,7 @@ class ProductManager implements IProductFunction {
     async getProductById(id: number) {
         let res: TProduct[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
-        const findId: TProduct = res.find((obj) => obj?.id === id);
+        const findId: TProduct = res.find((obj) => obj?.pID === id);
         return findId;
     }
     async addProduct(prod: IProduct) {
@@ -26,10 +26,10 @@ class ProductManager implements IProductFunction {
         let readData = await this.getProducts();
         prod.status = true;
         if (readData.length === 0) {
-            prod.id = 1;
+            prod.pID = 1;
         } else {
-            let newId: number = readData[readData.length - 1]?.id ?? 0;
-            prod.id = newId + 1;
+            let newId: number = readData[readData.length - 1]?.pID ?? 0;
+            prod.pID = newId + 1;
         }
         if (readData.find((obj) => obj?.title === prod.title)) {
             result = false;
@@ -56,7 +56,7 @@ class ProductManager implements IProductFunction {
         let products: TProduct[] = await this.getProducts();
         // todo: check type??
         const newArr = products.map((obj) => {
-            if (obj?.id === id) {
+            if (obj?.pID === id) {
                 return {
                     title: field?.title,
                     description: field?.description,
@@ -82,7 +82,7 @@ class ProductManager implements IProductFunction {
         let readFile: TProduct[] = [];
         const findData = await newProduct.getProductById(id);
         readFile = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
-        let arrayFilter: TProduct[] = readFile.filter((p) => p?.id !== id);
+        let arrayFilter: TProduct[] = readFile.filter((p) => p?.pID !== id);
 
         await fs.promises.writeFile(
             this.#path,
