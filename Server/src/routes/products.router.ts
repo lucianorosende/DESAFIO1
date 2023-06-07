@@ -70,7 +70,7 @@ productRouter.get(
         //     });
         // }
         const { pid } = req.params;
-        let getProductsID = await Service.getProductById(pid);
+        let getProductsID = await Service.getProductById(Number(pid));
         res.status(httpStatus.Ok).json({
             status: "success",
             msg: `This is the product with id: ${pid}`,
@@ -161,7 +161,7 @@ productRouter.delete(
         //     });
         // }
         const { pid } = req.params;
-        const deleteData = await Service.deleteProductById(pid);
+        const deleteData = await Service.deleteProductById(Number(pid));
         res.status(httpStatus.Ok).json({
             status: "success",
             msg: "product deleted successfully",

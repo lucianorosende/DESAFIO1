@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
 import { IProduct } from "../../interfaces";
 
 const productSchema: Schema = new Schema({
@@ -41,4 +41,7 @@ const productSchema: Schema = new Schema({
     },
 });
 
-export const ProductModel = mongoose.model<IProduct>("Products", productSchema);
+export const ProductModel: Model<IProduct> = mongoose.model<IProduct>(
+    "Products",
+    productSchema
+);

@@ -1,17 +1,17 @@
-import { IProductFunction } from "../../interfaces";
+import { IProductFunction, IProduct } from "../../interfaces";
 import { TProduct } from "../../types";
 import { ProductModel } from "../models";
 
-export class ProductService {
+export class ProductService implements IProductFunction {
     async getProducts() {
         let res = await ProductModel.find({});
         return res;
     }
-    async getProductById(pid: any) {
-        let res = await ProductModel.find({ pID: pid });
+    async getProductById(id: number) {
+        let res = await ProductModel.find({ pID: id });
         return res;
     }
-    async addProduct(prod: any) {
+    async addProduct(prod: IProduct) {
         let readData = await this.getProducts();
         if (readData.length === 0) {
             prod.pID = 1;
@@ -23,14 +23,16 @@ export class ProductService {
         let res = await ProductModel.create(prod);
         return res;
     }
-    async updateProduct(id: any, prod: any) {
+    async updateProduct(id: number, prod: IProduct) {
         const userUpdate = await ProductModel.updateOne({ pID: id }, prod);
         return userUpdate;
     }
-    async deleteProductById(id: any) {
-        await ProductModel.deleteOne({ pID: id });
+    async deleteProductById(id: number) {
+        let del = await ProductModel.deleteOne({ pID: id });
+        return del;
     }
     async deleteAllProducts() {
-        await ProductModel.deleteMany();
+        let del = await ProductModel.deleteMany();
+        return del;
     }
 }
