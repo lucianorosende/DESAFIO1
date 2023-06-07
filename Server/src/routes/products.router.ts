@@ -8,6 +8,7 @@ import {
     validateProductID,
 } from "../middleware";
 import { ProductService } from "../DAO/services/";
+import { ProductModel } from "../DAO/models";
 
 export const productRouter = Express.Router();
 const Service = new ProductService();
@@ -38,12 +39,18 @@ productRouter.get(
         //         data: readProducts,
         //     });
         // }
-
-        const readProducts = await Service.getProducts();
+        const { category, stock, limit, pages, sort } = req.query;
+        const readProductsQueries = await Service.getProductsQueries(
+            category,
+            stock,
+            limit,
+            pages,
+            sort
+        );
         res.status(httpStatus.Ok).json({
             status: "success",
             msg: "List of products",
-            data: readProducts,
+            data: readProductsQueries,
         });
     })
 );

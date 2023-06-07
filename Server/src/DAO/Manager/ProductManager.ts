@@ -2,7 +2,7 @@ import { IProduct, IProductFunction } from "../../interfaces";
 import { TProduct } from "../../types";
 import fs from "fs";
 
-class ProductManager implements IProductFunction {
+class ProductManager {
     #path: string;
     constructor(path: string) {
         this.#path = path;
