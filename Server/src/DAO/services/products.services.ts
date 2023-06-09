@@ -1,6 +1,4 @@
-import { AnyArray } from "mongoose";
-import { IProductFunction, IProduct } from "../../interfaces";
-import { TProduct } from "../../types";
+import { IProductFunction, IProduct, IProductPages } from "../../interfaces";
 import { ProductModel } from "../models";
 
 export class ProductService implements IProductFunction {
@@ -9,32 +7,25 @@ export class ProductService implements IProductFunction {
         return res;
     }
     async getProductsQueries(
-        category: any,
-        stock: any,
-        limit: any,
-        pages: any,
-        sort: any
+        category: string,
+        stock: number,
+        limit: string,
+        pages: string,
+        sort: string
     ) {
-        let defaultLimit = 10;
-        let defaultPages = 1;
-        let options;
-        if (category === undefined && stock === undefined) {
-            options = {};
-        }
-        if (category) {
-            options = {
-                category: category,
-            };
-        }
-        if (stock) {
-            options = {
-                stock: stock,
-            };
-        }
-        if (category && stock) {
-            options = { $or: [{ category: category }, { stock: stock }] };
-        }
+        let defaultLimit: number = 10;
+        let defaultPages: number = 1;
+        let options: unknown;
 
+        category === undefined && stock === undefined ? (options = {}) : null;
+        // isNaN(stock) ? (options = {stock: stock}) : null; || BUG FIX
+        category ? (options = { category: category }) : null;
+        stock ? (options = { stock: stock }) : null;
+        category && stock
+            ? (options = { $or: [{ category: category }, { stock: stock }] })
+            : null;
+
+        // type?
         // @ts-ignore
         let resPaginate = await ProductModel.paginate(options, {
             page: pages ?? defaultPages,
@@ -43,23 +34,9 @@ export class ProductService implements IProductFunction {
                 price: sort,
             },
         });
-        let { docs } = resPaginate;
-        let newData = docs.map((doc: any) => {
-            return {
-                title: doc.title,
-                description: doc.description,
-                price: doc.price,
-                thumbnails: doc.thumbnails,
-                code: doc.code,
-                stock: doc.stock,
-                status: doc.status,
-                category: doc.category,
-                pID: doc.pID,
-            };
-        });
-        let objPaginated = {
+        let objPaginated: IProductPages = {
             status: "success",
-            payload: newData,
+            payload: await this.getProducts(),
             totalPages: resPaginate.totalPages,
             prevPage: resPaginate.prevPage,
             nextPage: resPaginate.nextPage,
@@ -75,14 +52,11 @@ export class ProductService implements IProductFunction {
         if (resPaginate.hasNextPage === false) {
             objPaginated.nextLink = null;
         }
+        if (objPaginated.payload.length === 0) {
+            objPaginated.status = "error";
+        }
 
         return objPaginated;
-
-        // if (limit && pages) {
-        //     console.log("test");
-        // } else {
-        //     console.log("doesnt work");
-        // }
     }
     async getProductById(id: number) {
         let res = await ProductModel.find({ pID: id });
@@ -96,12 +70,14 @@ export class ProductService implements IProductFunction {
             let newId: number = readData[readData.length - 1]?.pID ?? 0;
             prod.pID = newId + 1;
         }
-
         let res = await ProductModel.create(prod);
         return res;
     }
     async updateProduct(id: number, prod: IProduct) {
-        const userUpdate = await ProductModel.updateOne({ pID: id }, prod);
+        const userUpdate = await ProductModel.updateOne(
+            { pID: id },
+            { $set: prod }
+        );
         return userUpdate;
     }
     async deleteProductById(id: number) {
