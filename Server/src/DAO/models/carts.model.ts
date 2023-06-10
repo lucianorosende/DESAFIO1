@@ -4,11 +4,11 @@ import { ICart } from "../../interfaces";
 const cartSchema: Schema = new Schema({
     products: [
         {
-            id: Number,
+            pID: Number,
             quantity: Number,
         },
     ],
-    id: Number,
+    cID: Number,
 });
 
 export const CartModel = mongoose.model<ICart>("carts", cartSchema);

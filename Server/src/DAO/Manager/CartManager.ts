@@ -1,10 +1,9 @@
 import { TCart } from "../../types";
 import { ICart } from "../../interfaces";
 import fs from "fs";
-import { ICartFunction } from "../../interfaces";
 import { newProduct } from ".";
 
-class CartManager implements ICartFunction {
+class CartManager {
     #path: string;
 
     constructor(path: string) {
@@ -20,7 +19,7 @@ class CartManager implements ICartFunction {
     async getCartById(id: number) {
         let res: TCart[] = [];
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
-        const findId: TCart = res.find((obj) => obj?.id === id);
+        const findId: TCart = res.find((obj) => obj?.cID === id);
         return findId;
     }
 
@@ -29,10 +28,10 @@ class CartManager implements ICartFunction {
         res = JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
         let cart: ICart = { products: [] };
         if (res.length === 0) {
-            cart.id = 1;
+            cart.cID = 1;
         } else {
-            let newId: number = res[res.length - 1]?.id ?? 0;
-            cart.id = newId + 1;
+            let newId: number = res[res.length - 1]?.cID ?? 0;
+            cart.cID = newId + 1;
         }
         res.push(cart);
         await fs.promises.writeFile(this.#path, JSON.stringify(res, null, 2));
@@ -45,7 +44,7 @@ class CartManager implements ICartFunction {
         let result = true;
         const getCart = await this.getCartById(cID);
         const getProduct = await newProduct.getProductById(pID);
-        let index: number = res.findIndex((obj) => obj?.id === cID);
+        let index: number = res.findIndex((obj) => obj?.cID === cID);
         let newProd: { id?: number; quantity: number } = {
             id: getProduct?.pID,
             quantity: 1,

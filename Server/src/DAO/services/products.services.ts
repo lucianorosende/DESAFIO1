@@ -18,25 +18,42 @@ export class ProductService implements IProductFunction {
         let options: unknown;
 
         category === undefined && stock === undefined ? (options = {}) : null;
-        // isNaN(stock) ? (options = {stock: stock}) : null; || BUG FIX
+        // BUG FIX -- How to make stock not work when it's not a number?
+        // isNaN(stock) ? (options = {stock: stock}) : null;
         category ? (options = { category: category }) : null;
         stock ? (options = { stock: stock }) : null;
         category && stock
             ? (options = { $or: [{ category: category }, { stock: stock }] })
             : null;
 
-        // type?
+        // Make interface for resPaginate
         // @ts-ignore
         let resPaginate = await ProductModel.paginate(options, {
             page: pages ?? defaultPages,
             limit: limit ?? defaultLimit,
             sort: {
                 price: sort,
+                pID: sort,
             },
+        });
+        console.log(resPaginate);
+        let { docs } = resPaginate;
+        let newData: IProduct[] = docs.map((doc: IProduct) => {
+            return {
+                title: doc.title,
+                description: doc.description,
+                price: doc.price,
+                thumbnails: doc.thumbnails,
+                code: doc.code,
+                stock: doc.stock,
+                status: doc.status,
+                category: doc.category,
+                pID: doc.pID,
+            };
         });
         let objPaginated: IProductPages = {
             status: "success",
-            payload: await this.getProducts(),
+            payload: newData,
             totalPages: resPaginate.totalPages,
             prevPage: resPaginate.prevPage,
             nextPage: resPaginate.nextPage,

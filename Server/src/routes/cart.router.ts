@@ -2,27 +2,49 @@ import Express, { Request, Response } from "express";
 import { asyncHandler, httpStatus } from "../utils";
 import { newCart } from "../DAO/Manager";
 import { validateCartID, validateProductID } from "../middleware";
+import { CartService } from "../DAO/services/carts.services";
+
+let Service = new CartService();
 
 export const cartRouter = Express.Router();
 
 cartRouter.get(
-    "/:cid",
-    validateCartID,
+    "/",
     asyncHandler(async (req: Request, res: Response) => {
-        const { cid } = req.params;
-        let getCartID = await newCart.getCartById(Number(cid));
-
-        if (getCartID) {
-            res.status(httpStatus.Ok).json({
-                status: "success",
-                msg: `This is the cart with id: ${cid}`,
-                data: getCartID.products,
+        const getCarts = await Service.getCarts();
+        if (getCarts.length === 0) {
+            res.status(httpStatus.Error).json({
+                status: "error",
+                msg: "No Products available",
+                data: getCarts,
             });
         } else {
+            res.status(httpStatus.Ok).json({
+                status: "success",
+                msg: "List of products",
+                data: getCarts,
+            });
+        }
+    })
+);
+
+cartRouter.get(
+    "/:cid",
+    validateProductID,
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid } = req.params;
+        let getProductsID = await Service.getCartById(Number(cid));
+        if (getProductsID.length === 0) {
             res.status(httpStatus.NotFound).json({
                 status: "error",
-                msg: "httpStatus.NotFound cart not found",
-                data: {},
+                msg: `We didn't find a product for your id`,
+                data: getProductsID,
+            });
+        } else {
+            res.status(httpStatus.Ok).json({
+                status: "success",
+                msg: `This is the product with id: ${cid}`,
+                data: getProductsID,
             });
         }
     })
@@ -31,7 +53,7 @@ cartRouter.get(
 cartRouter.post(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
-        const addCart = await newCart.addCart();
+        const addCart = await Service.addCart();
         res.status(httpStatus.Ok).json({
             status: "success",
             msg: "Cart added successfully",
@@ -63,5 +85,17 @@ cartRouter.post(
                 data: {},
             });
         }
+    })
+);
+
+cartRouter.delete(
+    "/",
+    asyncHandler(async (req: Request, res: Response) => {
+        const deleteData = await Service.deleteAllCarts();
+        res.status(httpStatus.Ok).json({
+            status: "success",
+            msg: "products deleted successfully",
+            data: [],
+        });
     })
 );

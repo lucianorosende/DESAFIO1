@@ -1,4 +1,4 @@
-import { IProduct } from ".";
+import { IProduct } from "./IProduct";
 
 export interface IProductPages {
     status: string;
