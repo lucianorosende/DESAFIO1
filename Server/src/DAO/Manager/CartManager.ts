@@ -53,9 +53,9 @@ class CartManager {
             return undefined;
         }
 
-        if (getCart?.products.find((product) => product?.id === pID)) {
+        if (getCart?.products.find((product) => product?.pID === pID)) {
             const indexProduct = getCart?.products.findIndex(
-                (item) => item?.id === pID
+                (item) => item?.pID === pID
             );
             if (indexProduct !== -1) {
                 let value = Number(getCart?.products[indexProduct]?.quantity);

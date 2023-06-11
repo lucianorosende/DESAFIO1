@@ -1,4 +1,4 @@
 export interface ICartProduct {
-    id?: number;
+    pID?: number;
     quantity: number;
 }

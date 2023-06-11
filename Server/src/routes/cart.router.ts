@@ -15,13 +15,13 @@ cartRouter.get(
         if (getCarts.length === 0) {
             res.status(httpStatus.Error).json({
                 status: "error",
-                msg: "No Products available",
+                msg: "No Carts available",
                 data: getCarts,
             });
         } else {
             res.status(httpStatus.Ok).json({
                 status: "success",
-                msg: "List of products",
+                msg: "List of Carts",
                 data: getCarts,
             });
         }
@@ -30,20 +30,20 @@ cartRouter.get(
 
 cartRouter.get(
     "/:cid",
-    validateProductID,
+    validateCartID,
     asyncHandler(async (req: Request, res: Response) => {
         const { cid } = req.params;
         let getProductsID = await Service.getCartById(Number(cid));
         if (getProductsID.length === 0) {
             res.status(httpStatus.NotFound).json({
                 status: "error",
-                msg: `We didn't find a product for your id`,
+                msg: `We didn't find a Cart for your id`,
                 data: getProductsID,
             });
         } else {
             res.status(httpStatus.Ok).json({
                 status: "success",
-                msg: `This is the product with id: ${cid}`,
+                msg: `This is the Cart with id: ${cid}`,
                 data: getProductsID,
             });
         }
@@ -68,7 +68,7 @@ cartRouter.post(
     validateProductID,
     asyncHandler(async (req: Request, res: Response) => {
         const { cid, pid } = req.params;
-        const addProductInCart = await newCart.addProductInCart(
+        const addProductInCart = await Service.addProductInCart(
             Number(cid),
             Number(pid)
         );
@@ -88,13 +88,75 @@ cartRouter.post(
     })
 );
 
+cartRouter.put(
+    "/:cid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid } = req.params;
+        const updateCart = await Service.updateProductsFromCart(
+            Number(cid),
+            req.body
+        );
+        res.status(httpStatus.Ok).json({
+            status: "success",
+            msg: "products updated successfully",
+            data: updateCart,
+        });
+    })
+);
+
+cartRouter.put(
+    "/:cid/products/:pid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid, pid } = req.params;
+        const updateCart = await Service.UpdateQuantityProduct(
+            Number(cid),
+            Number(pid),
+            req.body
+        );
+        res.status(httpStatus.Ok).json({
+            status: "success",
+            msg: "products updated successfully",
+            data: updateCart,
+        });
+    })
+);
+
+cartRouter.delete(
+    "/:cid/products/:pid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid, pid } = req.params;
+        const deleteProducts = Service.deleteProductFromCart(
+            Number(cid),
+            Number(pid)
+        );
+        res.status(httpStatus.Ok).json({
+            status: "success",
+            msg: "products deleted successfully",
+            data: [],
+        });
+    })
+);
+
+cartRouter.delete(
+    "/:cid",
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid, pid } = req.params;
+        const deleteData = await Service.deleteAllProductsFromCart(Number(cid));
+        res.status(httpStatus.Ok).json({
+            status: "success",
+            msg: "Carts deleted successfully",
+            data: deleteData,
+        });
+    })
+);
+
 cartRouter.delete(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
         const deleteData = await Service.deleteAllCarts();
         res.status(httpStatus.Ok).json({
             status: "success",
-            msg: "products deleted successfully",
+            msg: "Carts deleted successfully",
             data: [],
         });
     })
