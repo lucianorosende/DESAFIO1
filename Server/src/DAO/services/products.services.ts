@@ -36,7 +36,6 @@ export class ProductService implements IProductFunction {
                 pID: sort,
             },
         });
-        console.log(resPaginate);
         let { docs } = resPaginate;
         let newData: IProduct[] = docs.map((doc: IProduct) => {
             return {

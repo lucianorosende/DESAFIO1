@@ -50,6 +50,28 @@ cartRouter.get(
     })
 );
 
+cartRouter.get(
+    "/:cid/populate",
+    validateCartID,
+    asyncHandler(async (req: Request, res: Response) => {
+        const { cid } = req.params;
+        let getProductsID = await Service.getCartByIdAndPopulate(Number(cid));
+        if (getProductsID.length === 0) {
+            res.status(httpStatus.NotFound).json({
+                status: "error",
+                msg: `We didn't find a Cart for your id`,
+                data: getProductsID,
+            });
+        } else {
+            res.status(httpStatus.Ok).json({
+                status: "success",
+                msg: `This is the Cart with id: ${cid}`,
+                data: getProductsID,
+            });
+        }
+    })
+);
+
 cartRouter.post(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
@@ -125,14 +147,14 @@ cartRouter.delete(
     "/:cid/products/:pid",
     asyncHandler(async (req: Request, res: Response) => {
         const { cid, pid } = req.params;
-        const deleteProducts = Service.deleteProductFromCart(
+        const deleteProducts = await Service.deleteProductFromCart(
             Number(cid),
             Number(pid)
         );
         res.status(httpStatus.Ok).json({
             status: "success",
             msg: "products deleted successfully",
-            data: [],
+            data: deleteProducts,
         });
     })
 );

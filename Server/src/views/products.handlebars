@@ -1,0 +1,93 @@
+<h1>View Products</h1>
+<hr />
+<body>
+    <div class="arrow-container">
+        {{#if pagination.prevPage}}
+            <button class="arrow arrow-right"><a
+                    href="?pages={{pagination.prevPage}}"
+                >←</a></button>
+        {{/if}}
+
+        <span>{{pagination.page}}</span>
+        {{#if pagination.nextPage}}
+            <button class="arrow arrow-right"><a
+                    href="?pages={{pagination.nextPage}}"
+                >→</a></button>
+        {{/if}}
+
+    </div>
+
+    <div class="card-container">
+        {{#each prod}}
+            <div class="card">
+                <h2 class="card-title">{{title}}</h2>
+                <p class="card-description">{{description}}</p>
+                <p class="card-price">${{price}}</p>
+                <p class="card-info">
+                    <strong>Product Code:{{code}}</strong>
+                    <br />
+                    <strong>Stock:{{stock}}</strong>
+                    <br />
+                    <strong>Category:{{category}}</strong>
+                    <br />
+                    <strong>ID:{{pID}}</strong>
+
+                </p>
+                <button class="add-to-cart-button">Add to Cart</button>
+            </div>
+        {{/each}}
+    </div>
+</body>
+{{!-- <table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Thumbnails</th>
+            <th>Code</th>
+            <th>Stock</th>
+            <th>Category</th>
+            <th>ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each prod}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{description}}</td>
+                <td>{{price}}</td>
+                <td>{{thumbnails}}</td>
+                <td>{{code}}</td>
+                <td>{{stock}}</td>
+                <td>{{category}}</td>
+                <td>{{pID}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table> --}}
+status:
+{{pagination.status}}
+totalpages:
+{{pagination.totalPages}}
+prevpage
+{{pagination.prevPage}}
+nextpage
+{{pagination.nextPage}}
+page
+{{pagination.page}}
+hasprevpage
+{{pagination.hasPrevPage}}
+hasnextpage
+{{pagination.hasNextPage}}
+prevlink
+{{pagination.prevLink}}
+nextlink
+{{pagination.nextLink}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>

@@ -4,8 +4,12 @@ import { ICart } from "../../interfaces";
 const cartSchema: Schema = new Schema({
     products: [
         {
-            pID: Number,
             quantity: Number,
+            pID: Number,
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Products",
+            },
         },
     ],
     cID: Number,

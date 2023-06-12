@@ -14,7 +14,7 @@ export interface IProductFunction {
     ): Promise<IProductPages>;
     getProductById(id: number): Promise<TProduct[]>;
     addProduct(prod: IProduct): Promise<IProduct>;
-    updateProduct(id: number, field: IProduct): Promise<any>;
+    updateProduct(id: number, field: IProduct): Promise<UpdateWriteOpResult>;
     deleteProductById(id: number): Promise<DeleteResult>;
     deleteAllProducts(): Promise<DeleteResult>;
 }
