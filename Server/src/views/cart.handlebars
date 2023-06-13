@@ -1,0 +1,15 @@
+<h1>Shopping Cart</h1>
+
+<div class="cart-container">
+    {{#each cart}}
+        <div class="product">
+            <img alt="Product Image" />
+            <div class="product-info">
+                <h3 class="product-title">{{title}}</h3>
+                <p class="product-description">{{description}}</p>
+                <p class="product-price">${{price}} - {{pID}}</p>
+            </div>
+        </div>
+    {{/each}}
+    <a href="#" class="checkout-btn">Checkout</a>
+</div>
