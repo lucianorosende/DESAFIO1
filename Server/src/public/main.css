@@ -46,6 +46,7 @@ body {
 
 .form-group input[type="text"],
 .form-group input[type="email"],
+.form-group input[type="password"],
 .form-group textarea {
     width: 100%;
     padding: 10px;
@@ -210,16 +211,16 @@ h1 {
 }
 
 .checkout-btn {
-    display: block;
-    width: 100%;
+    display: inline-block;
     background-color: #007bff;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 4px;
     font-size: 16px;
-    text-decoration: none;
-    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .checkout-btn:hover {

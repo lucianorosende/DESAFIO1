@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Login</h2>
+    <form action="/api/sessions/register" method="POST">
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input type="text" id="FirstName" name="FirstName" required />
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last Name</label>
+            <input type="text" id="LastName" name="LastName" required />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="Email" id="Email" name="Email" required />
+        </div>
+        <div class="form-group">
+            <label for="Age">Age</label>
+            <input type="text" id="Age" name="Age" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-group">
+            <a href="/api/sessions/login" class="add-to-cart-button">Go back to
+                Login</a>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Sign in" class="checkout-btn" />
+        </div>
+    </form>
+</div>

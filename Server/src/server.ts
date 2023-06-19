@@ -5,9 +5,11 @@ import {
     webSocketInitializer,
     routeErrors,
     connectToMongoDB,
+    MongoStoreSessions,
 } from "./utils";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -15,6 +17,7 @@ export const app = Express();
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use(cors());
+app.use(cookieParser());
 export const PORT = process.env.PORT || 8080;
 
 // Initializing public and hbs Engine -----------------------------------------------------------------------------------------------
@@ -25,14 +28,17 @@ export const httpServer = app.listen(PORT, () => {
     console.log(`Example app listening on http://localhost:${PORT}`);
 });
 
+// Saving Sessions ------------------------------------------------------------------------------------------------------------------
+MongoStoreSessions();
+
 // Initializing webSockets ----------------------------------------------------------------------------------------------------------
 webSocketInitializer();
 
 // Initializing Routes --------------------------------------------------------------------------------------------------------------
 routeInitializer();
 
-// Handling Errors ------------------------------------------------------------------------------------------------------------------
-routeErrors();
-
 // Connecting Database --------------------------------------------------------------------------------------------------------------
 connectToMongoDB();
+
+// Handling Errors ------------------------------------------------------------------------------------------------------------------
+routeErrors();
