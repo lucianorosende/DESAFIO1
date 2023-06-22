@@ -33,6 +33,10 @@ const UserSchema: Schema = new Schema({
         type: Boolean,
         required: true,
     },
+    role: {
+        type: String,
+        required: true,
+    },
 });
 UserSchema.plugin(mongoosePaginate);
 export const UserModel: Model<IUser> = mongoose.model<IUser>(

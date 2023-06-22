@@ -9,6 +9,7 @@ declare module "express-session" {
         firstName?: string;
         lastName?: string;
         isAdmin?: boolean;
+        role?: string;
     }
 }
 
@@ -52,9 +53,13 @@ sessionRouter.get("/profile", (req: Request, res: Response) => {
 sessionRouter.post(
     "/register",
     asyncHandler(async (req: Request, res: Response) => {
-        const CreateUser = await Service.createUser(req.body);
         (req.session as SessionData).email = req.body.Email;
         (req.session as SessionData).isAdmin = false;
+        (req.session as SessionData).role = "user";
+        const CreateUser = await Service.createUser(
+            req.body,
+            req.session as SessionData
+        );
         return res.redirect("/api/sessions/login");
     })
 );

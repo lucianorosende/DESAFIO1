@@ -1,7 +1,8 @@
 import { UserModel } from "../models/users.model";
 
 export class UserService {
-    async createUser(user: any) {
+    async createUser(user: any, reqSession: any) {
+        console.log(reqSession.role);
         const { FirstName, LastName, Email, Age, password } = user;
         // if (!FirstName || !LastName || !Email || !Age || !password) {
         // }
@@ -12,6 +13,7 @@ export class UserService {
             Age: Age,
             password: password,
             isAdmin: false,
+            role: reqSession.role,
         });
     }
     async checkUser(user: any) {
