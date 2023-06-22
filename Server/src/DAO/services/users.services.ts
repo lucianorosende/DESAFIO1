@@ -14,4 +14,9 @@ export class UserService {
             isAdmin: false,
         });
     }
+    async checkUser(user: any) {
+        const { email, password } = user;
+        const userReturn = await UserModel.findOne({ email: email });
+        return userReturn;
+    }
 }
