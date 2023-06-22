@@ -69,7 +69,7 @@ sessionRouter.post(
             (req.session as SessionData).firstName = CheckUser.firstName;
             (req.session as SessionData).lastName = CheckUser.lastName;
             (req.session as SessionData).isAdmin = CheckUser.isAdmin;
-            return res.redirect("/api/sessions/profile");
+            return res.redirect("/views/products");
         }
     })
 );

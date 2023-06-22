@@ -1,6 +1,7 @@
 import Express from "express";
 import { asyncHandler } from "../utils";
 import { ProductService, CartService } from "../DAO/services";
+import { SessionData } from "express-session";
 
 const ServiceProducts = new ProductService();
 const ServiceCarts = new CartService();
@@ -32,6 +33,7 @@ viewsRouter.get(
         res.render("products", {
             prod: getProds.payload,
             pagination: paginateData,
+            user: (req.session as SessionData).firstName,
         });
     })
 );
