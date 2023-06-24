@@ -1,7 +1,7 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler } from "../utils";
 import { UserService } from "../DAO/services";
-import session, { SessionData } from "express-session";
+import session, { Session, SessionData } from "express-session";
 
 declare module "express-session" {
     export interface SessionData {
@@ -10,12 +10,6 @@ declare module "express-session" {
         lastName?: string;
         isAdmin?: boolean;
         role?: string;
-    }
-}
-
-declare module "express" {
-    interface Request {
-        session?: session.Session & Partial<SessionData>;
     }
 }
 
@@ -28,7 +22,7 @@ sessionRouter.get("/login", (req: Request, res: Response) => {
     return res.render("login", {});
 });
 sessionRouter.get("/logout", (req: Request, res: Response) => {
-    (req.session as any).destroy((err: any) => {
+    (req.session as Session).destroy((err: Error | null) => {
         if (err) {
             return console.log(err);
         }
@@ -53,7 +47,7 @@ sessionRouter.get("/profile", (req: Request, res: Response) => {
 sessionRouter.post(
     "/register",
     asyncHandler(async (req: Request, res: Response) => {
-        (req.session as SessionData).email = req.body.Email;
+        (req.session as SessionData).email = req.body.email;
         (req.session as SessionData).isAdmin = false;
         (req.session as SessionData).role = "user";
         const CreateUser = await Service.createUser(

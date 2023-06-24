@@ -1,22 +1,24 @@
 import { UserModel } from "../models/users.model";
+import { SessionData } from "express-session";
+import { IUser } from "../../interfaces";
 
 export class UserService {
-    async createUser(user: any, reqSession: any) {
+    async createUser(user: IUser, reqSession: SessionData) {
         console.log(reqSession.role);
-        const { FirstName, LastName, Email, Age, password } = user;
+        const { firstName, lastName, email, Age, password } = user;
         // if (!FirstName || !LastName || !Email || !Age || !password) {
         // }
         await UserModel.create({
-            firstName: FirstName,
-            lastName: LastName,
-            email: Email,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
             Age: Age,
             password: password,
             isAdmin: false,
             role: reqSession.role,
         });
     }
-    async checkUser(user: any) {
+    async checkUser(user: IUser) {
         const { email, password } = user;
         const userReturn = await UserModel.findOne({ email: email });
         return userReturn;
