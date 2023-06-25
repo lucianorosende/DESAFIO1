@@ -1,4 +1,5 @@
+export * from "./index";
 export * from "./validateCartID";
-export * from "./validateCodeRepetition";
 export * from "./validateProduct";
 export * from "./validateProductID";
+export * from "./validateUser";

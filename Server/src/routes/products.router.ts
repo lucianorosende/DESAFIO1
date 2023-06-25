@@ -1,10 +1,6 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler, httpStatus } from "../utils";
-import {
-    validateCodeRepetition,
-    validateProduct,
-    validateProductID,
-} from "../middleware";
+import { validateProductID } from "../middleware";
 import { ProductService } from "../DAO/services/";
 
 export const productRouter = Express.Router();

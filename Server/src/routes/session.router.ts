@@ -1,6 +1,7 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler } from "../utils";
 import { UserService } from "../DAO/services";
+import { validateUser } from "../middleware";
 import session, { Session, SessionData } from "express-session";
 
 declare module "express-session" {
@@ -34,7 +35,7 @@ sessionRouter.get("/register", (req: Request, res: Response) => {
     return res.render("register", {});
 });
 
-sessionRouter.get("/profile", (req: Request, res: Response) => {
+sessionRouter.get("/profile", validateUser, (req: Request, res: Response) => {
     const user = {
         email: (req.session as SessionData).email,
         isAdmin: (req.session as SessionData).isAdmin,

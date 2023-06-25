@@ -2,6 +2,7 @@ import Express from "express";
 import { asyncHandler } from "../utils";
 import { ProductService, CartService } from "../DAO/services";
 import { SessionData } from "express-session";
+import { validateUser } from "../middleware";
 
 const ServiceProducts = new ProductService();
 const ServiceCarts = new CartService();
@@ -10,6 +11,7 @@ export const viewsRouter = Express.Router();
 
 viewsRouter.get(
     "/products",
+    validateUser,
     asyncHandler(async (req, res) => {
         const { category, stock, limit, pages, sort } = req.query;
         let getProds = await ServiceProducts.getProductsQueries(

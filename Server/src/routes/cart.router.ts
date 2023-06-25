@@ -1,6 +1,5 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler, httpStatus } from "../utils";
-import { newCart } from "../DAO/Manager";
 import { validateCartID, validateProductID } from "../middleware";
 import { CartService } from "../DAO/services/carts.services";
 

@@ -1,6 +1,5 @@
 import { httpServer } from "../server";
 import { Server } from "socket.io";
-import { newProduct } from "../DAO/Manager";
 
 export const webSocketInitializer = () => {
     const socketServer = new Server(httpServer, {
@@ -14,29 +13,29 @@ export const webSocketInitializer = () => {
         console.log("Un cliente se ha conectado: " + socket.id);
         socket.on("deploy", async (data) => {
             if (data === "deploy") {
-                socket.emit("products", await newProduct.getProducts());
+                // socket.emit("products", await newProduct.getProducts());
             }
         });
         socket.on("newProduct", async (data) => {
-            await newProduct.addProduct(data);
+            // await newProduct.addProduct(data);
             socketServer.sockets.emit(
-                "products",
-                await newProduct.getProducts()
+                "products"
+                // await newProduct.getProducts()
             );
         });
         socket.on("deleteOneProduct", async (data) => {
-            await newProduct.deleteProduct(data);
+            // await newProduct.deleteProduct(data);
             socketServer.sockets.emit(
-                "products",
-                await newProduct.getProducts()
+                "products"
+                // await newProduct.getProducts()
             );
         });
         socket.on("deleteProducts", async (data) => {
             if (data === "delete") {
-                await newProduct.deleteAllProducts();
+                // await newProduct.deleteAllProducts();
                 socketServer.sockets.emit(
-                    "products",
-                    await newProduct.getProducts()
+                    "products"
+                    // await newProduct.getProducts()
                 );
             }
         });
