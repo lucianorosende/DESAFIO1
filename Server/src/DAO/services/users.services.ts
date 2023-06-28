@@ -1,10 +1,10 @@
 import { UserModel } from "../models/users.model";
 import { SessionData } from "express-session";
 import { IUser } from "../../interfaces";
+import { createHash } from "../../utils";
 
 export class UserService {
     async createUser(user: IUser, reqSession: SessionData) {
-        console.log(reqSession.role);
         const { firstName, lastName, email, Age, password } = user;
         // if (!FirstName || !LastName || !Email || !Age || !password) {
         // }
@@ -13,7 +13,7 @@ export class UserService {
             lastName: lastName,
             email: email,
             Age: Age,
-            password: password,
+            password: createHash(password),
             isAdmin: false,
             role: reqSession.role,
         });

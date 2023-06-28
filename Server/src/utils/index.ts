@@ -1,5 +1,6 @@
 export * from "./MongoStoreSessions";
 export * from "./asyncHandler";
+export * from "./bcrypt";
 export * from "./connectToMongoDB";
 export * from "./httpStatus";
 export * from "./index";

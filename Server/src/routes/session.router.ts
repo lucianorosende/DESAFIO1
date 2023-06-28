@@ -1,5 +1,5 @@
 import Express, { Request, Response } from "express";
-import { asyncHandler } from "../utils";
+import { asyncHandler, isValidPassword } from "../utils";
 import { UserService } from "../DAO/services";
 import { validateUser } from "../middleware";
 import session, { Session, SessionData } from "express-session";
@@ -19,7 +19,6 @@ const Service = new UserService();
 export const sessionRouter = Express.Router();
 
 sessionRouter.get("/login", (req: Request, res: Response) => {
-    console.log(req.session);
     return res.render("login", {});
 });
 sessionRouter.get("/logout", (req: Request, res: Response) => {
@@ -63,8 +62,10 @@ sessionRouter.post(
     "/login",
     asyncHandler(async (req: Request, res: Response) => {
         const CheckUser = await Service.checkUser(req.body);
-        console.log(CheckUser);
-        if (CheckUser && CheckUser.password == req.body.password) {
+        if (
+            CheckUser &&
+            isValidPassword(req.body.password, CheckUser.password)
+        ) {
             (req.session as SessionData).email = CheckUser.email;
             (req.session as SessionData).firstName = CheckUser.firstName;
             (req.session as SessionData).lastName = CheckUser.lastName;
