@@ -35,7 +35,7 @@ viewsRouter.get(
         res.render("products", {
             prod: getProds.payload,
             pagination: paginateData,
-            user: (req.session as SessionData).firstName,
+            user: (req.session as any).user.firstName,
         });
     })
 );

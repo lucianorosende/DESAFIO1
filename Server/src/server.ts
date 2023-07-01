@@ -6,7 +6,9 @@ import {
     routeErrors,
     connectToMongoDB,
     MongoStoreSessions,
+    initializePassport,
 } from "./utils";
+import passport from "passport";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -30,6 +32,11 @@ export const httpServer = app.listen(PORT, () => {
 
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
 MongoStoreSessions();
+
+// Initializing Passport ------------------------------------------------------------------------------------------------------------
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Initializing webSockets ----------------------------------------------------------------------------------------------------------
 webSocketInitializer();

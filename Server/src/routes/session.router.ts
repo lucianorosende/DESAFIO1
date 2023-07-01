@@ -3,6 +3,7 @@ import { asyncHandler, isValidPassword } from "../utils";
 import { UserService } from "../DAO/services";
 import { validateUser } from "../middleware";
 import session, { Session, SessionData } from "express-session";
+import passport from "passport";
 
 declare module "express-session" {
     export interface SessionData {
@@ -46,31 +47,45 @@ sessionRouter.get("/profile", validateUser, (req: Request, res: Response) => {
 
 sessionRouter.post(
     "/register",
+    passport.authenticate("register", {
+        failureRedirect: "/auth/failregister",
+    }),
     asyncHandler(async (req: Request, res: Response) => {
-        (req.session as SessionData).email = req.body.email;
-        (req.session as SessionData).isAdmin = false;
-        (req.session as SessionData).role = "user";
-        const CreateUser = await Service.createUser(
-            req.body,
-            req.session as SessionData
-        );
+        if (!req.user) {
+            res.json({ error: "something went wrong" });
+        }
+        (req.session as any).user = req.user;
+        // (req.session as SessionData).email = req.body.email;
+        // (req.session as SessionData).isAdmin = false;
+        // (req.session as SessionData).role = "user";
+        // const CreateUser = await Service.createUser(
+        //     req.body,
+        //     req.session as SessionData
+        // );
         return res.redirect("/api/sessions/login");
     })
 );
 
 sessionRouter.post(
     "/login",
+    passport.authenticate("login", {
+        failureRedirect: "/auth/faillogin",
+    }),
     asyncHandler(async (req: Request, res: Response) => {
-        const CheckUser = await Service.checkUser(req.body);
-        if (
-            CheckUser &&
-            isValidPassword(req.body.password, CheckUser.password)
-        ) {
-            (req.session as SessionData).email = CheckUser.email;
-            (req.session as SessionData).firstName = CheckUser.firstName;
-            (req.session as SessionData).lastName = CheckUser.lastName;
-            (req.session as SessionData).isAdmin = CheckUser.isAdmin;
-            return res.redirect("/views/products");
+        if (!req.user) {
+            res.json({ error: "user not found" });
         }
+        (req.session as any).user = req.user;
+        return res.redirect("/views/products");
+        // const CheckUser = await Service.checkUser(req.body);
+        // if (
+        //     CheckUser &&
+        //     isValidPassword(req.body.password, CheckUser.password)
+        // ) {
+        //     (req.session as SessionData).email = CheckUser.email;
+        //     (req.session as SessionData).firstName = CheckUser.firstName;
+        //     (req.session as SessionData).lastName = CheckUser.lastName;
+        //     (req.session as SessionData).isAdmin = CheckUser.isAdmin;
+        // }
     })
 );
