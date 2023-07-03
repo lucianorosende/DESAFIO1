@@ -1,11 +1,11 @@
 import { UserModel } from "../DAO/models";
 import passport from "passport";
 import local from "passport-local";
-import { createHash, isValidPassword } from "./bcrypt";
+import { createHash, isValidPassword } from "../utils/bcrypt";
 
 const LocalStrategy = local.Strategy;
 
-export function initializePassport() {
+export function passportConfig() {
     passport.use(
         "login",
         new LocalStrategy(

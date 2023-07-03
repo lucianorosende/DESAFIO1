@@ -1,13 +1,13 @@
 import Express from "express";
 import {
-    routeInitializer,
-    publicAndHbs,
-    webSocketInitializer,
+    MongoDB,
+    MongoSessions,
+    passportConfig,
     routeErrors,
-    connectToMongoDB,
-    MongoStoreSessions,
-    initializePassport,
-} from "./utils";
+    routes,
+    publicAndHbs,
+    webSockets,
+} from "./config";
 import passport from "passport";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -31,21 +31,21 @@ export const httpServer = app.listen(PORT, () => {
 });
 
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
-MongoStoreSessions();
+MongoSessions();
 
 // Initializing Passport ------------------------------------------------------------------------------------------------------------
-initializePassport();
+passportConfig();
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Initializing webSockets ----------------------------------------------------------------------------------------------------------
-webSocketInitializer();
+webSockets();
 
 // Initializing Routes --------------------------------------------------------------------------------------------------------------
-routeInitializer();
+routes();
 
 // Connecting Database --------------------------------------------------------------------------------------------------------------
-connectToMongoDB();
+MongoDB();
 
 // Handling Errors ------------------------------------------------------------------------------------------------------------------
 routeErrors();

@@ -4,7 +4,7 @@ import MongoStore from "connect-mongo";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const MongoStoreSessions = () => {
+export const MongoSessions = () => {
     const sessionOptions = {
         store: MongoStore.create({
             mongoUrl: process.env.MONGO_URL,

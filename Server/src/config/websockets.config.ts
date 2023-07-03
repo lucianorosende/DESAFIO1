@@ -1,7 +1,7 @@
 import { httpServer } from "../server";
 import { Server } from "socket.io";
 
-export const webSocketInitializer = () => {
+export const webSockets = () => {
     const socketServer = new Server(httpServer, {
         cors: {
             origin: "http://localhost:5173",

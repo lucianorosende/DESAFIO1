@@ -6,7 +6,7 @@ import {
     sessionRouter,
 } from "../routes";
 
-export const routeInitializer = (): void => {
+export const routes = (): void => {
     app.use("/api/products", productRouter);
     app.use("/api/carts", cartRouter);
     app.use("/views", viewsRouter);

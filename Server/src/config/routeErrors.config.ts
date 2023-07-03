@@ -1,6 +1,6 @@
 import { app } from "../server";
 import { Request, Response } from "express";
-import { httpStatus } from ".";
+import { httpStatus } from "../utils";
 
 export const routeErrors = (): void => {
     app.on("error", (err) => console.log("server error: " + err));
