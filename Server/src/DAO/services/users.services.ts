@@ -2,6 +2,7 @@ import { UserModel } from "../models/users.model";
 import { SessionData } from "express-session";
 import { IUser } from "../../interfaces";
 import { createHash } from "../../utils";
+import GitHubStrategy from "passport-github2";
 
 export class UserService {
     async createUser(user: IUser, reqSession: SessionData) {

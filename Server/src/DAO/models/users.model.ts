@@ -27,7 +27,6 @@ const UserSchema: Schema = new Schema({
     },
     Age: {
         type: Number,
-        required: true,
     },
     isAdmin: {
         type: Boolean,

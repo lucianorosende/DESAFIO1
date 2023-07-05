@@ -2,10 +2,73 @@ import { UserModel } from "../DAO/models";
 import passport from "passport";
 import local from "passport-local";
 import { createHash, isValidPassword } from "../utils/bcrypt";
+import { Strategy as GitHubStrategy } from "passport-github2";
 
 const LocalStrategy = local.Strategy;
 
 export function passportConfig() {
+    passport.use(
+        "github",
+        new GitHubStrategy(
+            {
+                clientID: process.env.GITHUB_CLIENT_ID!,
+                clientSecret: process.env.GITHUB_CLIENTSECRET!,
+                callbackURL: process.env.GITHUB_CALLBACK_URL!,
+            },
+            async (accesToken: any, _: any, profile: any, done: any) => {
+                try {
+                    const res = await fetch(
+                        "https://api.github.com/user/emails",
+                        {
+                            headers: {
+                                Accept: "application/vnd.github+json",
+                                Authorization: "Bearer " + accesToken,
+                                "X-Github-Api-Version": "2022-11-28",
+                            },
+                        }
+                    );
+                    const emails = await res.json();
+                    console.log(emails);
+                    const emailDetail = emails.find(
+                        (email: any) => email.verified == true
+                    );
+                    if (!emailDetail) {
+                        return done(
+                            new Error("cannot get a valid email for this user")
+                        );
+                    }
+                    profile.email = emailDetail.email;
+                    let user = await UserModel.findOne({
+                        email: profile.email,
+                    });
+                    if (!user) {
+                        const newUser = {
+                            email: profile.email,
+                            firstName:
+                                profile._json.name ||
+                                profile._json.login ||
+                                "noname",
+                            lastName: "nolast",
+                            isAdmin: false,
+                            password: "nopass",
+                            role: profile._json.type,
+                        };
+                        let userCreated = await UserModel.create(newUser);
+                        console.log("User Registration succesful");
+                        return done(null, userCreated);
+                    } else {
+                        console.log("User already exists");
+                        return done(null, user);
+                    }
+                } catch (e) {
+                    console.log("Error in auth github");
+                    console.log(e);
+                    return done(e);
+                }
+            }
+        )
+    );
+
     passport.use(
         "login",
         new LocalStrategy(

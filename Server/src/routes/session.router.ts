@@ -32,6 +32,21 @@ sessionRouter.get("/register", (req: Request, res: Response) => {
     return res.render("register", {});
 });
 
+sessionRouter.get(
+    "/github",
+    passport.authenticate("github", { scope: ["user:email"] })
+);
+
+sessionRouter.get(
+    "/githubcallback",
+    passport.authenticate("github", { failureRedirect: "/login" }),
+    (req, res) => {
+        req.session.user = req.user;
+        // Successful authentication, redirect home.
+        res.redirect("/views/products");
+    }
+);
+
 sessionRouter.get("/faillogin", (req: Request, res: Response) => {
     return res.json({ error: "failed to login" });
 });
