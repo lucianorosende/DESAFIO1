@@ -42,7 +42,7 @@ sessionRouter.get(
     passport.authenticate("github", { failureRedirect: "/login" }),
     (req, res) => {
         req.session.user = req.user;
-        // Successful authentication, redirect home.
+        // Successful authentication, redirect products
         res.redirect("/views/products");
     }
 );
