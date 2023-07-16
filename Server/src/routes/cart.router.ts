@@ -1,5 +1,5 @@
 import Express, { Request, Response } from "express";
-import { asyncHandler, httpStatus } from "../utils";
+import { asyncHandler, httpStatus, customRequest } from "../utils";
 import { validateCartID, validateProductID } from "../middleware";
 import { CartService } from "../DAO/services/carts.services";
 
@@ -12,17 +12,21 @@ cartRouter.get(
     asyncHandler(async (req: Request, res: Response) => {
         const getCarts = await Service.getCarts();
         if (getCarts.length === 0) {
-            res.status(httpStatus.Error).json({
-                status: "error",
-                msg: "No Carts available",
-                data: getCarts,
-            });
+            customRequest(
+                res,
+                httpStatus.Error,
+                "error",
+                "No Carts available",
+                getCarts
+            );
         } else {
-            res.status(httpStatus.Ok).json({
-                status: "success",
-                msg: "List of Carts",
-                data: getCarts,
-            });
+            customRequest(
+                res,
+                httpStatus.Error,
+                "success",
+                "List of Carts",
+                getCarts
+            );
         }
     })
 );
@@ -34,17 +38,21 @@ cartRouter.get(
         const { cid } = req.params;
         let getProductsID = await Service.getCartById(Number(cid));
         if (getProductsID.length === 0) {
-            res.status(httpStatus.NotFound).json({
-                status: "error",
-                msg: `We didn't find a Cart for your id`,
-                data: getProductsID,
-            });
+            customRequest(
+                res,
+                httpStatus.NotFound,
+                "error",
+                `We didn't find a Cart for your id`,
+                getProductsID
+            );
         } else {
-            res.status(httpStatus.Ok).json({
-                status: "success",
-                msg: `This is the Cart with id: ${cid}`,
-                data: getProductsID,
-            });
+            customRequest(
+                res,
+                httpStatus.Ok,
+                "success",
+                `This is the Cart with id: ${cid}`,
+                getProductsID
+            );
         }
     })
 );
@@ -56,17 +64,21 @@ cartRouter.get(
         const { cid } = req.params;
         let getProductsID = await Service.getCartByIdAndPopulate(Number(cid));
         if (getProductsID.length === 0) {
-            res.status(httpStatus.NotFound).json({
-                status: "error",
-                msg: `We didn't find a Cart for your id`,
-                data: getProductsID,
-            });
+            customRequest(
+                res,
+                httpStatus.NotFound,
+                "error",
+                `We didn't find a Cart for your id`,
+                getProductsID
+            );
         } else {
-            res.status(httpStatus.Ok).json({
-                status: "success",
-                msg: `This is the Cart with id: ${cid}`,
-                data: getProductsID,
-            });
+            customRequest(
+                res,
+                httpStatus.Ok,
+                "success",
+                `This is the Cart with id: ${cid}`,
+                getProductsID
+            );
         }
     })
 );
@@ -75,11 +87,13 @@ cartRouter.post(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
         const addCart = await Service.addCart();
-        res.status(httpStatus.Ok).json({
-            status: "success",
-            msg: "Cart added successfully",
-            data: addCart,
-        });
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "Cart added successfully",
+            addCart
+        );
     })
 );
 
@@ -94,17 +108,21 @@ cartRouter.post(
             Number(pid)
         );
         if (addProductInCart !== undefined) {
-            res.status(httpStatus.Ok).json({
-                status: "success",
-                msg: "Product added successfully into cart",
-                data: addProductInCart,
-            });
+            customRequest(
+                res,
+                httpStatus.Ok,
+                "success",
+                "Product added successfully into cart",
+                addProductInCart
+            );
         } else {
-            res.status(httpStatus.NotFound).json({
-                status: "error",
-                msg: "Product was not added successfully",
-                data: {},
-            });
+            customRequest(
+                res,
+                httpStatus.NotFound,
+                "error",
+                "Product was not added successfully",
+                {}
+            );
         }
     })
 );
@@ -117,11 +135,13 @@ cartRouter.put(
             Number(cid),
             req.body
         );
-        res.status(httpStatus.Ok).json({
-            status: "success",
-            msg: "products updated successfully",
-            data: updateCart,
-        });
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "products updated successfully",
+            {}
+        );
     })
 );
 
@@ -134,11 +154,13 @@ cartRouter.put(
             Number(pid),
             req.body
         );
-        res.status(httpStatus.Ok).json({
-            status: "success",
-            msg: "products updated successfully",
-            data: updateCart,
-        });
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "products updated successfully",
+            updateCart
+        );
     })
 );
 
@@ -150,11 +172,13 @@ cartRouter.delete(
             Number(cid),
             Number(pid)
         );
-        res.status(httpStatus.Ok).json({
-            status: "success",
-            msg: "products deleted successfully",
-            data: deleteProducts,
-        });
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "products updated successfully",
+            deleteProducts
+        );
     })
 );
 
@@ -163,11 +187,13 @@ cartRouter.delete(
     asyncHandler(async (req: Request, res: Response) => {
         const { cid, pid } = req.params;
         const deleteData = await Service.deleteAllProductsFromCart(Number(cid));
-        res.status(httpStatus.Ok).json({
-            status: "success",
-            msg: "Carts deleted successfully",
-            data: deleteData,
-        });
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "Carts deleted successfully",
+            deleteData
+        );
     })
 );
 
@@ -175,10 +201,12 @@ cartRouter.delete(
     "/",
     asyncHandler(async (req: Request, res: Response) => {
         const deleteData = await Service.deleteAllCarts();
-        res.status(httpStatus.Ok).json({
-            status: "success",
-            msg: "Carts deleted successfully",
-            data: [],
-        });
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "Carts deleted successfully",
+            []
+        );
     })
 );

@@ -91,13 +91,3 @@ sessionRouter.post(
         return res.redirect("/views/products");
     })
 );
-
-// sessionRouter.get("/profile", validateUser, (req: Request, res: Response) => {
-//     const user = {
-//         email: (req.session as SessionData).email,
-//         isAdmin: (req.session as SessionData).isAdmin,
-//         firstName: (req.session as SessionData).firstName,
-//         lastName: (req.session as SessionData).lastName,
-//     };
-//     return res.render("profile", { user: user });
-// });
