@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ICart } from "../../interfaces";
+import { ICart } from "../interfaces";
 
 const cartSchema: Schema = new Schema({
     products: [
@@ -15,4 +15,4 @@ const cartSchema: Schema = new Schema({
     cID: Number,
 });
 
-export const CartModel = mongoose.model<ICart>("carts", cartSchema);
+export const CartMongooseModel = mongoose.model<ICart>("carts", cartSchema);

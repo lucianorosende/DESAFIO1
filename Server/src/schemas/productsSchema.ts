@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from "mongoose";
-import { IProduct } from "../../interfaces";
+import { IProduct } from "../interfaces";
 import mongoosePaginate from "mongoose-paginate-v2";
 
 const productSchema: Schema = new Schema({
@@ -42,7 +42,7 @@ const productSchema: Schema = new Schema({
     },
 });
 productSchema.plugin(mongoosePaginate);
-export const ProductModel: Model<IProduct> = mongoose.model<IProduct>(
+export const ProductMongooseModel: Model<IProduct> = mongoose.model<IProduct>(
     "Products",
     productSchema
 );

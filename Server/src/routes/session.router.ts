@@ -1,9 +1,9 @@
 import Express, { Request, Response } from "express";
 import { asyncHandler, isValidPassword } from "../utils";
-import { UserService } from "../DAO/services";
-import { validateUser } from "../middleware";
+import { validateUser } from "../middlewares";
 import session, { Session, SessionData } from "express-session";
 import passport from "passport";
+import { SessionsController } from "../controllers/session.controller";
 
 declare module "express-session" {
     export interface SessionData {
@@ -20,17 +20,17 @@ declare module "express-session" {
     }
 }
 
-const Service = new UserService();
-
 export const sessionRouter = Express.Router();
 
-sessionRouter.get("/login", (req: Request, res: Response) => {
-    return res.render("login", {});
-});
+sessionRouter.get("/login", SessionsController.renderLogin);
 
-sessionRouter.get("/register", (req: Request, res: Response) => {
-    return res.render("register", {});
-});
+sessionRouter.get("/register", SessionsController.renderRegister);
+
+sessionRouter.get("/faillogin", SessionsController.renderFailLogin);
+
+sessionRouter.get("/failregister", SessionsController.renderFailRegister);
+
+sessionRouter.get("/logout", SessionsController.destroySession);
 
 sessionRouter.get(
     "/github",
@@ -40,42 +40,15 @@ sessionRouter.get(
 sessionRouter.get(
     "/githubcallback",
     passport.authenticate("github", { failureRedirect: "/login" }),
-    (req, res) => {
-        req.session.user = req.user;
-        // Successful authentication, redirect products
-        res.redirect("/views/products");
-    }
+    SessionsController.githubCB
 );
-
-sessionRouter.get("/faillogin", (req: Request, res: Response) => {
-    return res.json({ error: "failed to login" });
-});
-
-sessionRouter.get("/failregister", (req: Request, res: Response) => {
-    return res.json({ error: "failed to register" });
-});
-
-sessionRouter.get("/logout", (req: Request, res: Response) => {
-    (req.session as Session).destroy((err: Error | null) => {
-        if (err) {
-            return console.log(err);
-        }
-        return res.redirect("/api/sessions/login");
-    });
-});
 
 sessionRouter.post(
     "/register",
     passport.authenticate("register", {
         failureRedirect: "/api/sessions/failregister",
     }),
-    asyncHandler(async (req: Request, res: Response) => {
-        if (!req.user) {
-            res.json({ error: "something went wrong" });
-        }
-        (req.session as SessionData).user = req.user;
-        return res.redirect("/api/sessions/login");
-    })
+    asyncHandler(SessionsController.register)
 );
 
 sessionRouter.post(
@@ -83,11 +56,5 @@ sessionRouter.post(
     passport.authenticate("login", {
         failureRedirect: "/api/sessions/faillogin",
     }),
-    asyncHandler(async (req: Request, res: Response) => {
-        if (!req.user) {
-            res.json({ error: "user not found" });
-        }
-        (req.session as SessionData).user = req.user;
-        return res.redirect("/views/products");
-    })
+    asyncHandler(SessionsController.login)
 );

@@ -1,8 +1,10 @@
-import { UserModel } from "../DAO/models";
+import { UserMongooseModel } from "../models";
 import passport from "passport";
 import local from "passport-local";
 import { createHash, isValidPassword } from "../utils/bcrypt";
 import { Strategy as GitHubStrategy } from "passport-github2";
+import { SessionData } from "express-session";
+import { UsersService } from "../services";
 
 const LocalStrategy = local.Strategy;
 
@@ -17,30 +19,12 @@ export function passportConfig() {
             },
             async (accesToken: any, _: any, profile: any, done: any) => {
                 try {
-                    const res = await fetch(
-                        "https://api.github.com/user/emails",
-                        {
-                            headers: {
-                                Accept: "application/vnd.github+json",
-                                Authorization: "Bearer " + accesToken,
-                                "X-Github-Api-Version": "2022-11-28",
-                            },
-                        }
+                    let ghData = await UsersService.fetchGHdata(
+                        accesToken,
+                        done,
+                        profile
                     );
-                    const emails = await res.json();
-                    console.log(emails);
-                    const emailDetail = emails.find(
-                        (email: any) => email.verified == true
-                    );
-                    if (!emailDetail) {
-                        return done(
-                            new Error("cannot get a valid email for this user")
-                        );
-                    }
-                    profile.email = emailDetail.email;
-                    let user = await UserModel.findOne({
-                        email: profile.email,
-                    });
+                    let user = await UsersService.findUserByEmail(ghData);
                     if (!user) {
                         const newUser = {
                             email: profile.email,
@@ -52,8 +36,11 @@ export function passportConfig() {
                             isAdmin: false,
                             password: "nopass",
                             role: profile._json.type,
+                            Age: 0,
                         };
-                        let userCreated = await UserModel.create(newUser);
+                        let userCreated = await UsersService.createUser(
+                            newUser
+                        );
                         console.log("User Registration succesful");
                         return done(null, userCreated);
                     } else {
@@ -75,7 +62,7 @@ export function passportConfig() {
             { usernameField: "email" },
             async (username, password, done) => {
                 try {
-                    const user = await UserModel.findOne({ email: username });
+                    let user = await UsersService.findUserByEmail(username);
                     if (!user) {
                         console.log("user not found with email " + username);
                         return done(null, false);
@@ -98,26 +85,14 @@ export function passportConfig() {
             { passReqToCallback: true, usernameField: "email" },
             async (req, username, password, done) => {
                 try {
-                    const { firstName, lastName, email, Age, password } =
-                        req.body;
-                    let user = await UserModel.findOne({ email: username });
-                    console.log(user);
+                    let user = await UsersService.findUserByEmail(username);
                     if (user) {
                         console.log("user already registered");
                         return done(null, false);
                     }
-                    const newUser = {
-                        email,
-                        firstName,
-                        lastName,
-                        Age,
-                        password: createHash(password),
-                        isAdmin: false,
-                        role: "user",
-                    };
-                    let createUser = await UserModel.create(newUser);
+                    const newUser = await UsersService.createUser(req.body);
                     console.log("User created");
-                    return done(null, createUser);
+                    return done(null, newUser);
                 } catch (e) {
                     console.log(e);
                 }
@@ -130,7 +105,7 @@ export function passportConfig() {
     });
 
     passport.deserializeUser(async (id, done) => {
-        let user = await UserModel.findById(id);
+        let user = await UsersService.findUserById(id);
         done(null, user);
     });
 }

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
-import { IUser } from "../../interfaces";
+import { IUser } from "../interfaces";
 
 const UserSchema: Schema = new Schema({
     firstName: {
@@ -38,7 +38,7 @@ const UserSchema: Schema = new Schema({
     },
 });
 UserSchema.plugin(mongoosePaginate);
-export const UserModel: Model<IUser> = mongoose.model<IUser>(
+export const UserMongooseModel: Model<IUser> = mongoose.model<IUser>(
     "users",
     UserSchema
 );
