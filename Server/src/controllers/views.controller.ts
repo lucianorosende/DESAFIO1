@@ -6,7 +6,6 @@ class ViewController {
     async renderProducts(req: Request, res: Response) {
         let getProds = await ProductsService.getProductsQueries(req.query);
         let paginateData = await ViewsService.productData(getProds);
-        console.log(req.session);
         res.render("products", {
             prod: getProds.payload,
             pagination: paginateData,
@@ -16,7 +15,6 @@ class ViewController {
     async renderCart(req: Request, res: Response) {
         let getCart = await CartsService.getCartByIdAndPopulate(req.params);
         let cartData = await ViewsService.cartData(getCart);
-        console.log(cartData);
         res.render("cart", {
             cart: cartData,
         });
