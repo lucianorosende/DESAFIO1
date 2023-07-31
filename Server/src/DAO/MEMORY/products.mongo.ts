@@ -1,6 +1,6 @@
 import { IProduct } from "../../interfaces";
 
-// ALL MEMORY PERSISTENCY IS JUST FOR DEMONSTRATION
+// ALL MEMORY PERSISTENCY IS JUST FOR DEMONSTRATION - THIS DOESNT WORK
 class ProductModel {
     private data: any[]
     constructor() {

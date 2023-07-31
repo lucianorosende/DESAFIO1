@@ -2,7 +2,7 @@ import { ICart } from "../../interfaces";
 import { CartMongooseModel } from "../MONGO/models";
 import { TCart } from "../../types";
 
-// ALL MEMORY PERSISTENCY IS JUST FOR DEMONSTRATION
+// ALL MEMORY PERSISTENCY IS JUST FOR DEMONSTRATION - THIS DOESNT WORK
 class CartModel {
     private data: any[]
     constructor() {

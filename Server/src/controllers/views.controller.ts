@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { SessionData } from "express-session";
-import { ProductsService, ViewsService, CartsService } from "../services";
+import { ProductsService, ViewsService, CartsService, UsersService } from "../services";
+import { UserDTO } from "../DAO/DTO/UserDTO";
 
 class ViewController {
     async renderProducts(req: Request, res: Response) {
@@ -18,6 +19,12 @@ class ViewController {
         res.render("cart", {
             cart: cartData,
         });
+    }
+    async renderCurrent(req: Request, res: Response) {
+        let currentDTO = UserDTO(req.session)
+        res.render("profile", {
+            user: currentDTO
+        })
     }
 }
 

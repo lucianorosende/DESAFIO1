@@ -13,3 +13,5 @@ viewsRouter.get(
 );
 
 viewsRouter.get("/carts/:cid", asyncHandler(ViewsController.renderCart));
+
+viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent))

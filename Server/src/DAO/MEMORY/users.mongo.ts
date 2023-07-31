@@ -1,7 +1,7 @@
 import { IUser } from "../../interfaces";
 import { createHash } from "../../utils";
 
-// ALL MEMORY PERSISTENCY IS JUST FOR DEMONSTRATION
+// ALL MEMORY PERSISTENCY IS JUST FOR DEMONSTRATION - THIS DOESNT WORK
 class UserModel {
     private data: any[]
     constructor() {
