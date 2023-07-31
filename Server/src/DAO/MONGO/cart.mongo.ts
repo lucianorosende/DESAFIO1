@@ -1,6 +1,6 @@
-import { ICart } from "../interfaces";
-import { CartMongooseModel } from "../schemas";
-import { TCart } from "../types";
+import { ICart } from "../../interfaces";
+import { CartMongooseModel } from "./models";
+import { TCart } from "../../types";
 
 class CartModel {
     async getAll() {

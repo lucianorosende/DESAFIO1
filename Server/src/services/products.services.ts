@@ -1,5 +1,5 @@
 import { IProductFunction, IProduct, IProductPages } from "../interfaces";
-import { ProductsModel } from "../models";
+import { ProductsModel } from "../DAO/MONGO";
 
 class ProductService implements IProductFunction {
     async getProducts() {

@@ -1,4 +1,3 @@
-import { UserMongooseModel } from "../models";
 import passport from "passport";
 import local from "passport-local";
 import { createHash, isValidPassword } from "../utils/bcrypt";

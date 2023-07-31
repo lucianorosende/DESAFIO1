@@ -1,5 +1,5 @@
-import { IProduct } from "../interfaces";
-import { ProductMongooseModel } from "../schemas";
+import { IProduct } from "../../interfaces";
+import { ProductMongooseModel } from "./models";
 
 class ProductModel {
     async getAll() {

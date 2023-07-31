@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from "mongoose";
-import { IProduct } from "../interfaces";
+import { IProduct } from "../../../interfaces";
 import mongoosePaginate from "mongoose-paginate-v2";
 
 const productSchema: Schema = new Schema({

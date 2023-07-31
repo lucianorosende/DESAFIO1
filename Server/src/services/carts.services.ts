@@ -1,8 +1,6 @@
 import { ICartFunction, ICartProduct, ICart, IProduct } from "../interfaces";
-import { CartMongooseModel } from "../schemas";
 import { TCart } from "../types";
-import { ProductsService } from ".";
-import { CartsModel, ProductsModel } from "../models";
+import { CartsModel, ProductsModel } from "../DAO/MONGO";
 
 class CartService implements ICartFunction {
     async getAll() {

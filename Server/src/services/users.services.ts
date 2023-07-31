@@ -1,9 +1,9 @@
-import { UserMongooseModel } from "../models";
+import { UserMongooseModel } from "../DAO/MONGO";
 import { SessionData } from "express-session";
 import { IUser } from "../interfaces";
 import { createHash } from "../utils";
 import GitHubStrategy from "passport-github2";
-import { UsersModel } from "../models/users.model";
+import { UsersModel } from "../DAO/MONGO/users.mongo";
 
 class UserService {
     async createUser(user: IUser) {

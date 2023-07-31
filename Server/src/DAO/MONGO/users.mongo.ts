@@ -1,6 +1,5 @@
-import { IUser } from "../interfaces";
-import { UserMongooseModel } from "../schemas/usersSchema";
-import { createHash } from "../utils";
+import { IUser } from "../../interfaces";
+import { UserMongooseModel } from "./models";
 
 class UserModel {
     async getById(id: any) {
