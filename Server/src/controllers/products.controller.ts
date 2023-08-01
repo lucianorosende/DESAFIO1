@@ -43,6 +43,7 @@ class ProductController {
               );
     }
     async create(req: Request, res: Response) {
+        console.log("body", req.body);
         const addData = await ProductsService.addProduct(req.body);
         customRequest(
             res,

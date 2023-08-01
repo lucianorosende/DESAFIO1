@@ -8,4 +8,5 @@ export interface IUser {
     Age: number;
     isAdmin: boolean;
     role: string;
+    cart: any;
 }

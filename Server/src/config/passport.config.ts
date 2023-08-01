@@ -36,6 +36,7 @@ export function passportConfig() {
                             password: "nopass",
                             role: profile._json.type,
                             Age: 0,
+                            cart: "test",
                         };
                         let userCreated = await UsersService.createUser(
                             newUser

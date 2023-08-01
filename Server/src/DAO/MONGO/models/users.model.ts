@@ -36,6 +36,10 @@ const UserSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    cart: {
+        type: Object,
+        required: true,
+    },
 });
 UserSchema.plugin(mongoosePaginate);
 export const UserMongooseModel: Model<IUser> = mongoose.model<IUser>(

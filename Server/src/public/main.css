@@ -266,3 +266,53 @@ ul {
 li {
     margin-bottom: 10px;
 }
+
+.chat-box {
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message {
+    margin: 5px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.user-message {
+    background-color: #dcf8c6;
+    align-self: flex-start;
+}
+
+.other-message {
+    background-color: #f0f0f0;
+    align-self: flex-end;
+}
+
+.message-text {
+    font-size: 14px;
+}
+
+.input-area {
+    display: flex;
+    margin-top: 10px;
+}
+
+.input-text {
+    flex: 1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.send-button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}

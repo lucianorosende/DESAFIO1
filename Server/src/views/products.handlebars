@@ -3,9 +3,13 @@
 <a href="/api/sessions/logout"><button
         class="add-to-cart-button"
     >Logout</button></a>
-    <a href="/views/current"><button
-        class="add-to-cart-button"
-    >Profile</button></a>
+<a href="/views/current"><button class="add-to-cart-button">Profile</button></a>
+{{#if cID}}
+    <a href="/views/carts/{{cID}}"><button
+            class="add-to-cart-button"
+        >Cart</button></a>
+{{/if}}
+<a href="/views/messages"><button class="add-to-cart-button">Messages</button></a>
 <hr />
 <body>
     <div class="arrow-container">
@@ -25,53 +29,40 @@
     </div>
 
     <div class="card-container">
-        {{#each prod}}
-            <div class="card">
-                <h2 class="card-title">{{title}}</h2>
-                <p class="card-description">{{description}}</p>
-                <p class="card-price">${{price}}</p>
-                <p class="card-info">
-                    <strong>Product Code:{{code}}</strong>
-                    <br />
-                    <strong>Stock:{{stock}}</strong>
-                    <br />
-                    <strong>Category:{{category}}</strong>
-                    <br />
-                    <strong>ID:{{pID}}</strong>
+            {{#each prod}}
+                <div class="card">
+                    <h2 class="card-title">{{title}}</h2>
+                    <p class="card-description">{{description}}</p>
+                    <p class="card-price">${{price}}</p>
+                    <p class="card-info">
+                        <strong>Product Code:{{code}}</strong>
+                        <br />
+                        <strong>Stock:{{stock}}</strong>
+                        <br />
+                        <strong>Category:{{category}}</strong>
+                        <br />
+                        <strong>ID:{{pID}}</strong>
 
-                </p>
-                <button class="add-to-cart-button">Add to Cart</button>
-            </div>
-        {{/each}}
+                    </p>
+                    {{#if ../admin}}
+                    <button
+                        class="add-to-cart-button"
+                    >You're Admin</button>
+                    {{else}}
+                    <button
+                        class="add-to-cart-button"
+                        onclick="handleClick({{pID}}, {{../cID}})"
+                    >Add to Cart</button>
+                    {{/if}}
+                </div>
+            {{/each}}
+
+            
+
+            {{#if admin}}
+            IF YOU'RE ADMIN YOU'LL BE AVAILABLE TO DO OPERATIONS WITH THE PRODUCTS
+            {{/if}}
     </div>
 </body>
-{{!-- <table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Thumbnails</th>
-            <th>Code</th>
-            <th>Stock</th>
-            <th>Category</th>
-            <th>ID</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each prod}}
-            <tr>
-                <td>{{title}}</td>
-                <td>{{description}}</td>
-                <td>{{price}}</td>
-                <td>{{thumbnails}}</td>
-                <td>{{code}}</td>
-                <td>{{stock}}</td>
-                <td>{{category}}</td>
-                <td>{{pID}}</td>
-            </tr>
-        {{/each}}
-    </tbody>
-</table> --}}
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

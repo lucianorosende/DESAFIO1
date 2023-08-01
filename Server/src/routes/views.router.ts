@@ -14,4 +14,6 @@ viewsRouter.get(
 
 viewsRouter.get("/carts/:cid", asyncHandler(ViewsController.renderCart));
 
-viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent))
+viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent));
+
+viewsRouter.get("/messages", asyncHandler(ViewsController.renderMessages));
