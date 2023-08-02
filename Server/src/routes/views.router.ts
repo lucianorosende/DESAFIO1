@@ -1,7 +1,7 @@
 import Express from "express";
 import { asyncHandler } from "../utils";
 import { ProductsService, CartsService } from "../services";
-import { validateUser } from "../middlewares";
+import { validateUser, validateAdmin } from "../middlewares";
 import { ViewsController } from "../controllers";
 
 export const viewsRouter = Express.Router();
@@ -14,6 +14,10 @@ viewsRouter.get(
 
 viewsRouter.get("/carts/:cid", asyncHandler(ViewsController.renderCart));
 
-viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent));
+viewsRouter.get(
+    "/current",
+    validateAdmin,
+    asyncHandler(ViewsController.renderCurrent)
+);
 
 viewsRouter.get("/messages", asyncHandler(ViewsController.renderMessages));

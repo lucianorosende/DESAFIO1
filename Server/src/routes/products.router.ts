@@ -1,6 +1,6 @@
 import Express from "express";
 import { asyncHandler } from "../utils";
-import { validateProductID } from "../middlewares";
+import { validateProductID, validateAdmin } from "../middlewares";
 import { ProductsController } from "../controllers";
 
 export const productRouter = Express.Router();
@@ -11,7 +11,7 @@ productRouter.get(
     validateProductID,
     asyncHandler(ProductsController.getById)
 );
-productRouter.post("/", asyncHandler(ProductsController.create));
+productRouter.post("/", validateAdmin, asyncHandler(ProductsController.create));
 
 productRouter.put(
     "/:pid",

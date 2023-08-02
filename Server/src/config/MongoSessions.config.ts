@@ -11,8 +11,8 @@ export const MongoSessions = () => {
             ttl: 7200,
         }),
         secret: "SECRET-CODE",
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
     };
     app.use(session(sessionOptions));
 };

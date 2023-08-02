@@ -6,16 +6,23 @@
         <div class="message-text">Hello! I'm doing great, thanks.</div>
     </div>
 </div>
-<div class="input-area">
-    <input
-        type="text"
-        class="input-text"
-        id="messageInput"
-        placeholder="Type your message..."
-    />
-    <button class="send-button" onclick="sendMessage()">Send</button>
-</div>
-<a href="/views/products"><button
-        type="submit"
-        class="add-to-cart-button"
-    >Home</button></a>
+{{#if admin}}
+    <a href="/views/products"><button
+            type="submit"
+            class="add-to-cart-button"
+        >You can't send messages</button></a>
+{{else}}
+    <div class="input-area">
+        <input
+            type="text"
+            class="input-text"
+            id="messageInput"
+            placeholder="Type your message..."
+        />
+        <button class="send-button" onclick="sendMessage()">Send</button>
+    </div>
+    <a href="/views/products"><button
+            type="submit"
+            class="add-to-cart-button"
+        >Home</button></a>
+{{/if}}
