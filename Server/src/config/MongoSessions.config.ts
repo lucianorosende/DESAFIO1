@@ -12,7 +12,7 @@ export const MongoSessions = () => {
         }),
         secret: "SECRET-CODE",
         resave: false,
-        saveUninitialized: false,
+        saveUninitialized: true,
     };
     app.use(session(sessionOptions));
 };
