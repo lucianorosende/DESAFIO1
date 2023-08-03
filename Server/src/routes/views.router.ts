@@ -14,10 +14,18 @@ viewsRouter.get(
 
 viewsRouter.get("/carts/:cid", asyncHandler(ViewsController.renderCart));
 
-viewsRouter.get(
-    "/current",
-    validateAdmin,
-    asyncHandler(ViewsController.renderCurrent)
-);
+viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent));
 
 viewsRouter.get("/messages", asyncHandler(ViewsController.renderMessages));
+
+viewsRouter.get(
+    "/createProduct",
+    validateAdmin,
+    asyncHandler(ViewsController.renderCreateProduct)
+);
+
+viewsRouter.get(
+    "/updateProduct/:pid",
+    validateAdmin,
+    asyncHandler(ViewsController.renderUpdateProduct)
+);

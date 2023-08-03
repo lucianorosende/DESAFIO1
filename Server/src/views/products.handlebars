@@ -25,9 +25,13 @@
                     href="?pages={{pagination.nextPage}}"
                 >→</a></button>
         {{/if}}
-
     </div>
-
+    {{#if admin}}
+    <div>
+        <a href="/views/createProduct"><button
+        class="add-to-cart-button"
+        >Create Product</button></a></div>
+        {{/if}}
     <div class="card-container">
             {{#each prod}}
                 <div class="card">
@@ -46,8 +50,12 @@
                     </p>
                     {{#if ../admin}}
                     <button
-                        class="add-to-cart-button"
-                    >You're Admin</button>
+                        class="update"
+                    ><a href="/views/updateProduct/{{pID}}">Update</a></button>
+                    <button
+                        class="delete"
+                        onclick="deleteResource({{pID}})"
+                    >Delete</button>
                     {{else}}
                     <button
                         class="add-to-cart-button"
@@ -61,9 +69,6 @@
 
             
     </div>
-    {{#if admin}}
-            IF YOU'RE ADMIN YOU'LL BE AVAILABLE TO DO OPERATIONS WITH THE PRODUCTS
-            {{/if}}
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

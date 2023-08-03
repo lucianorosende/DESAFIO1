@@ -38,6 +38,22 @@ class ViewController {
             admin: req.session.user.isAdmin,
         });
     }
+    async renderCreateProduct(req: Request, res: Response) {
+        res.render("createProduct");
+    }
+    async renderUpdateProduct(req: Request, res: Response) {
+        let getProd = await ProductsService.getProductById(req.params);
+        res.render("updateProduct", {
+            title: getProd[0].title,
+            description: getProd[0].description,
+            price: getProd[0].price,
+            thumbnail: getProd[0].thumbnail,
+            code: getProd[0].code,
+            stock: getProd[0].stock,
+            category: getProd[0].category,
+            pID: getProd[0].pID,
+        });
+    }
 }
 
 export const ViewsController = new ViewController();

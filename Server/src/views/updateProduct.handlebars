@@ -1,0 +1,76 @@
+<div class="container">
+    <h2>Update Product</h2>
+    <form action="/api/products/{{pID}}" method="POST">
+        <div class="form-group">
+            <label for="title">title</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                required
+                value="{{title}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="description">description</label>
+            <input
+                type="text"
+                id="description"
+                name="description"
+                required
+                value="{{description}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="price">price</label>
+            <input
+                type="text"
+                id="price"
+                name="price"
+                required
+                value="{{price}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="thumbnails">thumbnails</label>
+            <input
+                type="text"
+                id="thumbnails"
+                name="thumbnails"
+                required
+                value="{{thumbnail}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="code">code</label>
+            <input
+                type="text"
+                id="code"
+                name="code"
+                required
+                value="{{code}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="stock">stock</label>
+            <input
+                type="text"
+                id="stock"
+                name="stock"
+                required
+                value="{{stock}}"
+            />
+        </div>
+        <div class="form-group">
+            <label for="category">category</label>
+            <input
+                type="text"
+                id="category"
+                name="category"
+                required
+                value="{{category}}"
+            />
+        </div>
+        <button type="submit" class="update">Update Product</button>
+    </form>
+</div>

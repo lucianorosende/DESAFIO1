@@ -27,7 +27,8 @@ publicAndHbs();
 
 // Initializing server --------------------------------------------------------------------------------------------------------------
 export const httpServer = app.listen(PORT, () => {
-    console.log(`Example app listening on http://localhost:${PORT}`);
+    console.log(`Example app listening on ${PORT}`);
+    console.log(`login: http://localhost:${PORT}/api/sessions/login`);
 });
 
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------

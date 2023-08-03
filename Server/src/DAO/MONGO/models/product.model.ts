@@ -16,7 +16,7 @@ const productSchema: Schema = new Schema({
         type: Number,
         required: true,
     },
-    thumbnails: {
+    thumbnail: {
         type: [String],
         required: true,
     },

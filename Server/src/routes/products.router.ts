@@ -13,6 +13,13 @@ productRouter.get(
 );
 productRouter.post("/", validateAdmin, asyncHandler(ProductsController.create));
 
+productRouter.post(
+    "/:pid",
+    validateProductID,
+    validateAdmin,
+    asyncHandler(ProductsController.update)
+);
+
 productRouter.put(
     "/:pid",
     validateProductID,

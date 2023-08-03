@@ -20,7 +20,7 @@ class ViewService {
             title: item._id?.title,
             description: item._id?.description,
             price: item._id?.price,
-            thumbnails: item._id?.thumbnails,
+            thumbnails: item._id?.thumbnail,
             code: item._id?.code,
             stock: item._id?.stock,
             status: item._id?.status,

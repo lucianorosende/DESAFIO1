@@ -34,7 +34,7 @@ class ProductService implements IProductFunction {
                 title: doc.title,
                 description: doc.description,
                 price: doc.price,
-                thumbnails: doc.thumbnails,
+                thumbnail: doc.thumbnail,
                 code: doc.code,
                 stock: doc.stock,
                 status: doc.status,
@@ -42,9 +42,11 @@ class ProductService implements IProductFunction {
                 pID: doc.pID,
             };
         });
+        let sortedData = newData.sort((a, b) => a.pID! - b.pID!);
+
         let objPaginated: IProductPages = {
             status: "success",
-            payload: newData,
+            payload: sortedData,
             totalPages: getPagination.totalPages,
             prevPage: getPagination.prevPage,
             nextPage: getPagination.nextPage,
@@ -72,6 +74,7 @@ class ProductService implements IProductFunction {
         return res;
     }
     async addProduct(prod: IProduct) {
+        prod.status = true;
         let readData = await this.getProducts();
         if (readData.length === 0) {
             prod.pID = 1;
