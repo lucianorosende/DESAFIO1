@@ -19,4 +19,4 @@ const ticketSchema: Schema = new Schema({
     },
 });
 
-export const ticketMongooseModel = mongoose.model("carts", ticketSchema);
+export const ticketMongooseModel = mongoose.model("tickets", ticketSchema);

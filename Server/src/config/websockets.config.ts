@@ -1,5 +1,6 @@
 import { httpServer } from "../server";
 import { Server } from "socket.io";
+import { MessagesService } from "../services";
 
 export const webSockets = () => {
     const socketServer = new Server(httpServer, {
@@ -10,34 +11,13 @@ export const webSockets = () => {
     });
 
     socketServer.on("connection", async (socket) => {
+        let getMSG = await MessagesService.getMessages();
+        socketServer.sockets.emit("messages", getMSG);
         console.log("Un cliente se ha conectado: " + socket.id);
-        socket.on("deploy", async (data) => {
-            if (data === "deploy") {
-                // socket.emit("products", await newProduct.getProducts());
-            }
-        });
-        socket.on("newProduct", async (data) => {
-            // await newProduct.addProduct(data);
-            socketServer.sockets.emit(
-                "products"
-                // await newProduct.getProducts()
-            );
-        });
-        socket.on("deleteOneProduct", async (data) => {
-            // await newProduct.deleteProduct(data);
-            socketServer.sockets.emit(
-                "products"
-                // await newProduct.getProducts()
-            );
-        });
-        socket.on("deleteProducts", async (data) => {
-            if (data === "delete") {
-                // await newProduct.deleteAllProducts();
-                socketServer.sockets.emit(
-                    "products"
-                    // await newProduct.getProducts()
-                );
-            }
+        socket.on("newMsg", async (data) => {
+            let saveMsg = await MessagesService.saveMessage(data);
+            let getMSG = await MessagesService.getMessages();
+            socketServer.sockets.emit("messages", getMSG);
         });
     });
 };

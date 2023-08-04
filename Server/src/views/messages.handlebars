@@ -19,7 +19,10 @@
             id="messageInput"
             placeholder="Type your message..."
         />
-        <button class="send-button" onclick="sendMessage()">Send</button>
+        <button
+            class="send-button"
+            onclick="sendMessage(`{{email}}`)"
+        >Send</button>
     </div>
     <a href="/views/products"><button
             type="submit"

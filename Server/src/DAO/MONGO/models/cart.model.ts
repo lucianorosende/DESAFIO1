@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
 import { ICart } from "../../../interfaces";
 
 const cartSchema: Schema = new Schema({
@@ -15,4 +15,7 @@ const cartSchema: Schema = new Schema({
     cID: Number,
 });
 
-export const CartMongooseModel = mongoose.model<ICart>("carts", cartSchema);
+export const CartMongooseModel: Model<ICart> = mongoose.model<ICart>(
+    "carts",
+    cartSchema
+);

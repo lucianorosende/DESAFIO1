@@ -36,6 +36,7 @@ class ViewController {
     async renderMessages(req: Request, res: Response) {
         res.render("messages", {
             admin: req.session.user.isAdmin,
+            email: req.session.user.email,
         });
     }
     async renderCreateProduct(req: Request, res: Response) {
