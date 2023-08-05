@@ -40,6 +40,11 @@ class ProductModel {
         );
         return userUpdate;
     }
+    async updateAllProducts(prod: any) {
+        //???? arreglar esto
+        const result = await ProductMongooseModel.replaceOne({}, { prod });
+        console.log(result);
+    }
     async deleteOne(pid: number) {
         let del = await ProductMongooseModel.deleteOne({ pID: pid });
         return del;

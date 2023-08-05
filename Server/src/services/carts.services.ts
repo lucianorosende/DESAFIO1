@@ -1,6 +1,7 @@
 import { ICartFunction, ICartProduct, ICart, IProduct } from "../interfaces";
 import { TCart } from "../types";
 import { CartsModel, ProductsModel } from "../DAO/MONGO";
+import { ViewsService } from "./views.services";
 
 class CartService implements ICartFunction {
     async getAll() {
@@ -73,6 +74,10 @@ class CartService implements ICartFunction {
         return getCart;
     }
 
+    async saveNewArrayOfProducts(products: any) {
+        const productUpdate = await ProductsModel.updateAllProducts(products);
+    }
+
     async updateProductsFromCart(reqParams: any, body: ICartProduct) {
         const { cid } = reqParams;
         const getCart = await CartsModel.getById(cid);
@@ -105,6 +110,27 @@ class CartService implements ICartFunction {
             getCart
         );
         return getCart;
+    }
+
+    async updateStockFromProducts(reqParams: any) {
+        const { cid } = reqParams;
+        let getCart = await CartsService.getCartByIdAndPopulate(reqParams);
+        let cartData = await ViewsService.cartData(getCart);
+        const newArray = cartData.map((item) => ({
+            title: item.title,
+            description: item.description,
+            price: item.price,
+            thumbnail: item.thumbnails,
+            code: item.code,
+            stock: item.stock! - item.quantity,
+            status: item.status,
+            category: item.category,
+            pID: item.pID,
+            _id: item._id,
+            __v: item.__v,
+        }));
+        const update = await CartsService.saveNewArrayOfProducts(newArray);
+        return update;
     }
 
     async deleteProductFromCart(reqParams: any) {

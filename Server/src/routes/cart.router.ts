@@ -16,6 +16,8 @@ cartRouter.get(
     asyncHandler(CartsController.getAndPopulate)
 );
 
+cartRouter.get("/:cid/purchase", asyncHandler(CartsController.purchase));
+
 cartRouter.post("/", asyncHandler(CartsController.create));
 
 cartRouter.post(

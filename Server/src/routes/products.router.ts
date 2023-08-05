@@ -5,13 +5,18 @@ import { ProductsController } from "../controllers";
 
 export const productRouter = Express.Router();
 
-productRouter.get("/", validateAdmin, asyncHandler(ProductsController.getAll));
+productRouter.get("/", asyncHandler(ProductsController.getAll));
+productRouter.get("/all", asyncHandler(ProductsController.getAllProducts));
 productRouter.get(
     "/:pid",
     validateProductID,
     asyncHandler(ProductsController.getById)
 );
-productRouter.post("/", validateAdmin, asyncHandler(ProductsController.create));
+productRouter.post(
+    "/",
+    // validateAdmin,
+    asyncHandler(ProductsController.create)
+);
 
 productRouter.post(
     "/:pid",

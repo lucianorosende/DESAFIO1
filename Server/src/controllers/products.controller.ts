@@ -4,6 +4,10 @@ import { httpStatus } from "../utils";
 import { Request, Response } from "express";
 
 class ProductController {
+    async getAllProducts(req: Request, res: Response) {
+        const prods = await ProductsService.getProducts();
+        customRequest(res, httpStatus.Ok, "success", "List of products", prods);
+    }
     async getAll(req: Request, res: Response) {
         const readProductsQueries = await ProductsService.getProductsQueries(
             req.query

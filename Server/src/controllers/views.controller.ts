@@ -25,6 +25,7 @@ class ViewController {
         let cartData = await ViewsService.cartData(getCart);
         res.render("cart", {
             cart: cartData,
+            cID: Number(req.params.cid),
         });
     }
     async renderCurrent(req: Request, res: Response) {

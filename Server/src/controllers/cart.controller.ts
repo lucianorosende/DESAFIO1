@@ -70,6 +70,10 @@ class CartController {
             addCart
         );
     }
+
+    async purchase(req: Request, res: Response) {
+        let update = await CartsService.updateStockFromProducts(req.params);
+    }
     async addProductIntoCart(req: Request, res: Response) {
         const addProductInCart = await CartsService.addProductInCart(
             req.params

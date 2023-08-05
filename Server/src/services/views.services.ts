@@ -27,6 +27,8 @@ class ViewService {
             category: item._id?.category,
             quantity: item.quantity,
             pID: item.pID,
+            _id: item._id?._id,
+            __v: item._id?.__v,
         }));
         return formattedData;
     }

@@ -40,3 +40,21 @@ socket.on("messages", async (data) => {
         chatBox.appendChild(messageDiv);
     }
 });
+
+function checkout(cID) {
+    fetch(`http://localhost:8080/api/carts/${cID}/purchase`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("data:", data);
+            // Do something with the response data if needed
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            // Handle the error appropriately
+        });
+}

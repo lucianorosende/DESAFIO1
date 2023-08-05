@@ -1,5 +1,4 @@
 <h1>Shopping Cart</h1>
-
 <div class="cart-container">
     {{#each cart}}
         <div class="product">
@@ -11,7 +10,7 @@
             </div>
         </div>
     {{/each}}
-    <a href="#" class="checkout-btn">Checkout</a>
+    <a href="#" class="checkout-btn" onclick="checkout({{cID}})">Checkout</a>
     <a href="/views/products"><button
             type="submit"
             class="add-to-cart-button"
