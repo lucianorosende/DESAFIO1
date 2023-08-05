@@ -15,9 +15,11 @@ export const webSockets = () => {
         socketServer.sockets.emit("messages", getMSG);
         console.log("Un cliente se ha conectado: " + socket.id);
         socket.on("newMsg", async (data) => {
-            let saveMsg = await MessagesService.saveMessage(data);
-            let getMSG = await MessagesService.getMessages();
-            socketServer.sockets.emit("messages", getMSG);
+            socketServer.sockets.emit("messages", data);
         });
+        socketServer.sockets.emit(
+            "messageHistory",
+            await MessagesService.getMessages()
+        );
     });
 };

@@ -1,5 +1,3 @@
-const socket = io();
-
 function handleClick(pid, cid) {
     fetch(`/api/carts/${cid}/product/${pid}`, {
         method: "POST",
