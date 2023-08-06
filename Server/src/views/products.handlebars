@@ -58,8 +58,9 @@
                     >Delete</button>
                     {{else}}
                     <button
+                        id="product-{{pID}}"
                         class="add-to-cart-button"
-                        onclick="handleClick({{pID}}, {{../cID}})"
+                        onclick="handleClick({{pID}}, {{../cID}}, {{stock}})"
                     >Add to Cart</button>
                     {{/if}}
                 </div>

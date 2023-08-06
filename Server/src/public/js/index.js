@@ -1,24 +1,31 @@
-function handleClick(pid, cid) {
-    fetch(`/api/carts/${cid}/product/${pid}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
+function handleClick(pid, cid, stock) {
+    if (stock < 0) {
+        const addBox = document.getElementById(`product-${pid}`);
+        addBox.innerHTML = "Out of Stock";
+        addBox.classList.remove("add-to-cart-button");
+        addBox.classList.add("delete");
+    } else {
+        fetch(`/api/carts/${cid}/product/${pid}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
         })
-        .then((data) => {
-            // Handle the response data if needed
-            console.log("Response data:", data);
-        })
-        .catch((error) => {
-            // Handle any errors that occurred during the fetch request
-            console.error("Fetch error:", error);
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                // Handle the response data if needed
+                console.log("Response data:", data);
+            })
+            .catch((error) => {
+                // Handle any errors that occurred during the fetch request
+                console.error("Fetch error:", error);
+            });
+    }
 }
 
 function deleteResource(pID) {
