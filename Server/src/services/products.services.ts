@@ -1,3 +1,4 @@
+import { CartsService, ViewsService } from ".";
 import { IProductFunction, IProduct, IProductPages } from "../interfaces";
 import { ProductsModel } from "../DAO/MONGO";
 
@@ -84,6 +85,26 @@ class ProductService implements IProductFunction {
         }
         let res = await ProductsModel.create(prod);
         return res;
+    }
+    async updateStockFromProducts(reqParams: any) {
+        const { cid } = reqParams;
+        let getCart = await CartsService.getCartByIdAndPopulate(reqParams);
+        let cartData = await ViewsService.cartData(getCart);
+        const newArray = cartData.map((item) => ({
+            title: item.title,
+            description: item.description,
+            price: item.price,
+            thumbnail: item.thumbnails,
+            code: item.code,
+            stock: item.stock! - item.quantity,
+            status: item.status,
+            category: item.category,
+            pID: item.pID,
+            _id: item._id,
+            __v: item.__v,
+        }));
+        const update = await ProductsModel.updateAllProducts(newArray);
+        return update;
     }
     async updateProduct(reqParams: any, prod: IProduct) {
         const { pid } = reqParams;

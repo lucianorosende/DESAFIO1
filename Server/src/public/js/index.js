@@ -1,5 +1,5 @@
 function handleClick(pid, cid, stock) {
-    if (stock < 0) {
+    if (stock < 1) {
         const addBox = document.getElementById(`product-${pid}`);
         addBox.innerHTML = "Out of Stock";
         addBox.classList.remove("add-to-cart-button");

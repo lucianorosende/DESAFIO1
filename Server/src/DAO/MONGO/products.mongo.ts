@@ -41,9 +41,13 @@ class ProductModel {
         return userUpdate;
     }
     async updateAllProducts(prod: any) {
-        //???? arreglar esto
-        const result = await ProductMongooseModel.replaceOne({}, { prod });
-        console.log(result);
+        for (let i = 0; i < prod.length; i++) {
+            const userUpdate = await ProductMongooseModel.updateOne(
+                { pID: prod[i].pID },
+                { $set: prod[i] }
+            );
+        }
+        console.log("stock updated");
     }
     async deleteOne(pid: number) {
         let del = await ProductMongooseModel.deleteOne({ pID: pid });

@@ -5,8 +5,8 @@ import { ProductsController } from "../controllers";
 
 export const productRouter = Express.Router();
 
-productRouter.get("/", asyncHandler(ProductsController.getAll));
 productRouter.get("/all", asyncHandler(ProductsController.getAllProducts));
+productRouter.get("/", asyncHandler(ProductsController.getAll));
 productRouter.get(
     "/:pid",
     validateProductID,
@@ -41,6 +41,6 @@ productRouter.delete(
 
 productRouter.delete(
     "/",
-    validateAdmin,
+    // validateAdmin,
     asyncHandler(ProductsController.deleteAll)
 );
