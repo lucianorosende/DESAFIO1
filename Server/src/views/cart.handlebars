@@ -10,7 +10,11 @@
             </div>
         </div>
     {{/each}}
-    <a href="#" class="checkout-btn" onclick="checkout({{cID}})">Checkout</a>
+    <a
+        href="#"
+        class="checkout-btn"
+        onclick="checkout({{cID}}, `{{email}}`)"
+    >Checkout</a>
     <a href="/views/products"><button
             type="submit"
             class="add-to-cart-button"

@@ -41,8 +41,8 @@ socket.on("messages", async (data) => {
     }
 });
 
-function checkout(cID) {
-    fetch(`http://localhost:8080/api/carts/${cID}/purchase`)
+function checkout(cID, email) {
+    fetch(`http://localhost:8080/api/carts/${cID}/purchase/${email}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");

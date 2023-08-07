@@ -16,7 +16,7 @@ cartRouter.get(
     asyncHandler(CartsController.getAndPopulate)
 );
 
-cartRouter.get("/:cid/purchase", asyncHandler(CartsController.purchase));
+cartRouter.get("/:cid/purchase/:email", asyncHandler(CartsController.purchase));
 
 cartRouter.post("/", asyncHandler(CartsController.create));
 
