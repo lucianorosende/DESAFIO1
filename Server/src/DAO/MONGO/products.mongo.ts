@@ -41,13 +41,19 @@ class ProductModel {
         return userUpdate;
     }
     async updateAllProducts(prod: any) {
+        let ids = [];
         for (let i = 0; i < prod.length; i++) {
-            const userUpdate = await ProductMongooseModel.updateOne(
-                { pID: prod[i].pID },
-                { $set: prod[i] }
-            );
+            if (prod[i].stock < 1) {
+                ids.push({ rejectedProd: prod[i]._id, stock: prod[i].stock });
+            } else {
+                const userUpdate = await ProductMongooseModel.updateOne(
+                    { pID: prod[i].pID },
+                    { $set: prod[i] }
+                );
+                console.log("stock updated");
+            }
         }
-        console.log("stock updated");
+        return ids;
     }
     async deleteOne(pid: number) {
         let del = await ProductMongooseModel.deleteOne({ pID: pid });

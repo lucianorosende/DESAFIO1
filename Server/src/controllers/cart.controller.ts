@@ -73,14 +73,22 @@ class CartController {
 
     async purchase(req: Request, res: Response) {
         let update = await CartsService.updateStockFromProducts(req.params);
-        let ticket = await TicketsService.generateTicket(req.params);
-        customRequest(
-            res,
-            httpStatus.Ok,
-            "success",
-            "Ticket generated successfully",
-            ticket
-        );
+        let ticket = await TicketsService.generateTicket(req.params, update);
+        ticket
+            ? customRequest(
+                  res,
+                  httpStatus.Ok,
+                  "success",
+                  "Ticket generated successfully",
+                  ticket
+              )
+            : customRequest(
+                  res,
+                  httpStatus.Ok,
+                  "error",
+                  "No stock of products",
+                  ticket
+              );
     }
     async addProductIntoCart(req: Request, res: Response) {
         const addProductInCart = await CartsService.addProductInCart(

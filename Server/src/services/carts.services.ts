@@ -74,10 +74,6 @@ class CartService implements ICartFunction {
         return getCart;
     }
 
-    async saveNewArrayOfProducts(products: any) {
-        const productUpdate = await ProductsModel.updateAllProducts(products);
-    }
-
     async updateProductsFromCart(reqParams: any, body: ICartProduct) {
         const { cid } = reqParams;
         const getCart = await CartsModel.getById(cid);
@@ -129,7 +125,7 @@ class CartService implements ICartFunction {
             _id: item._id,
             __v: item.__v,
         }));
-        const update = await CartsService.saveNewArrayOfProducts(newArray);
+        const update = await ProductsModel.updateAllProducts(newArray);
         return update;
     }
 

@@ -17,6 +17,9 @@ const ticketSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    rejectedProds: {
+        type: Array,
+    },
 });
 
 export const ticketMongooseModel = mongoose.model("tickets", ticketSchema);
