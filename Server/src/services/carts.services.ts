@@ -129,6 +129,31 @@ class CartService implements ICartFunction {
         return update;
     }
 
+    async replaceCart(reqParams: any) {
+        const { cid, email } = reqParams;
+        let cart: any = await CartsService.getCartByIdAndPopulate(reqParams);
+        let cart2: any = await CartsService.getCartById(reqParams);
+        let newArr = cart[0].products.filter(
+            (product: any) => product._id.stock === 0
+        );
+        let format = newArr.map((product: any) => {
+            return {
+                quantity: product.quantity,
+                pID: product.pID,
+                _id: product._id._id,
+            };
+        });
+        let newCart = [
+            {
+                _id: cart2[0]._id,
+                products: format,
+                cID: cart2[0].cID,
+                __v: cart2[0].__v,
+            },
+        ];
+        let update = await CartsModel.updateProductIntoCart(cid, newCart);
+    }
+
     async deleteProductFromCart(reqParams: any) {
         const { cid, pid } = reqParams;
         const getCart = await CartsModel.getById(cid);

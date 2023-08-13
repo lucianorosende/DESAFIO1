@@ -43,7 +43,7 @@ class ProductModel {
     async updateAllProducts(prod: any) {
         let ids = [];
         for (let i = 0; i < prod.length; i++) {
-            if (prod[i].stock < 1) {
+            if (prod[i].stock < 0) {
                 ids.push({ rejectedProd: prod[i]._id, stock: prod[i].stock });
             } else {
                 const userUpdate = await ProductMongooseModel.updateOne(

@@ -74,6 +74,7 @@ class CartController {
     async purchase(req: Request, res: Response) {
         let update = await CartsService.updateStockFromProducts(req.params);
         let ticket = await TicketsService.generateTicket(req.params, update);
+        let swapper = await CartsService.replaceCart(req.params);
         ticket
             ? customRequest(
                   res,
