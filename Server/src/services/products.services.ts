@@ -1,6 +1,7 @@
 import { CartsService, ViewsService } from ".";
 import { IProductFunction, IProduct, IProductPages } from "../interfaces";
 import { ProductsModel } from "../DAO/MONGO";
+import { faker } from "@faker-js/faker";
 
 class ProductService implements IProductFunction {
     async getProducts() {
@@ -73,6 +74,24 @@ class ProductService implements IProductFunction {
         const { pid } = reqParams;
         let res = await ProductsModel.getById(pid);
         return res;
+    }
+    async getMockedProducts() {
+        let generatedProds: any = [];
+        for (let i = 0; i <= 100; i++) {
+            let obj: any = {
+                title: faker.commerce.product(),
+                description: faker.commerce.productDescription(),
+                price: faker.commerce.price({ min: 100, max: 999, dec: 0 }),
+                thumbnail: faker.commerce.productMaterial(),
+                code: faker.string.uuid(),
+                stock: faker.string.numeric(2),
+                status: faker.datatype.boolean({ probability: 0.1 }),
+                category: faker.commerce.productAdjective(),
+                pID: i,
+            };
+            generatedProds.push(obj);
+        }
+        return generatedProds;
     }
     async addProduct(prod: IProduct) {
         prod.status = true;

@@ -11,6 +11,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@faker-js/faker": "^8.0.2",
         "@types/express": "^4.17.17",
         "@types/mongoose-paginate-v2": "^1.6.5",
         "@types/node": "^18.16.16",

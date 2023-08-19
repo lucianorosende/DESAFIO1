@@ -46,6 +46,17 @@ class ProductController {
                   getProductsID
               );
     }
+
+    async getMockedProducts(req: Request, res: Response) {
+        let getMockedProducts = await ProductsService.getMockedProducts();
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "Your Mocked Products",
+            getMockedProducts
+        );
+    }
     async create(req: Request, res: Response) {
         const addData = await ProductsService.addProduct(req.body);
         customRequest(

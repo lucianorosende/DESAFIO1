@@ -8,6 +8,10 @@ export const productRouter = Express.Router();
 productRouter.get("/all", asyncHandler(ProductsController.getAllProducts));
 productRouter.get("/", asyncHandler(ProductsController.getAll));
 productRouter.get(
+    "/mockingproducts",
+    asyncHandler(ProductsController.getMockedProducts)
+);
+productRouter.get(
     "/:pid",
     validateProductID,
     asyncHandler(ProductsController.getById)
