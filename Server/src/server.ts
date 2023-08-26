@@ -12,6 +12,7 @@ import passport from "passport";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import { logger } from "./utils";
 dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -27,8 +28,8 @@ publicAndHbs();
 
 // Initializing server --------------------------------------------------------------------------------------------------------------
 export const httpServer = app.listen(PORT, () => {
-    console.log(`Example app listening on ${PORT}`);
-    console.log(`login: http://localhost:${PORT}/api/sessions/login`);
+    logger.info(`Example app listening on ${PORT}`);
+    logger.info(`login: http://localhost:${PORT}/api/sessions/login`);
 });
 
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
@@ -47,6 +48,16 @@ routes();
 
 // Connecting Database --------------------------------------------------------------------------------------------------------------
 MongoDB();
+
+// Logging -------------------------------------------------------------------------------------------------------------------------
+app.get("/loggerTest", (req, res) => {
+    logger.debug("test");
+    logger.verbose("test");
+    logger.http("test");
+    logger.info("test");
+    logger.warn("test");
+    logger.error("test");
+});
 
 // Handling Errors ------------------------------------------------------------------------------------------------------------------
 routeErrors();

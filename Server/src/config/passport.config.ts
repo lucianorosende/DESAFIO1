@@ -4,6 +4,7 @@ import { createHash, isValidPassword } from "../utils/bcrypt";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import { SessionData } from "express-session";
 import { UsersService } from "../services";
+import { logger } from "../utils";
 
 const LocalStrategy = local.Strategy;
 
@@ -41,15 +42,15 @@ export function passportConfig() {
                         let userCreated = await UsersService.createUser(
                             newUser
                         );
-                        console.log("User Registration succesful");
+                        logger.info("User Registration succesful");
                         return done(null, userCreated);
                     } else {
-                        console.log("User already exists");
+                        logger.warn("User already exists");
                         return done(null, user);
                     }
                 } catch (e) {
-                    console.log("Error in auth github");
-                    console.log(e);
+                    logger.error("Error in auth github");
+                    logger.error(e);
                     return done(e);
                 }
             }
@@ -64,17 +65,17 @@ export function passportConfig() {
                 try {
                     let user = await UsersService.findUserByEmail(username);
                     if (!user) {
-                        console.log("user not found with email " + username);
+                        logger.warn("user not found with email " + username);
                         return done(null, false);
                     }
 
                     if (!isValidPassword(password, user.password)) {
-                        console.log("invalid password");
+                        logger.warn("invalid password");
                         return done(null, false);
                     }
                     return done(null, user);
                 } catch (e) {
-                    console.log(e);
+                    logger.error(e);
                 }
             }
         )
@@ -87,14 +88,14 @@ export function passportConfig() {
                 try {
                     let user = await UsersService.findUserByEmail(username);
                     if (user) {
-                        console.log("user already registered");
+                        logger.warn("user already registered");
                         return done(null, false);
                     }
                     const newUser = await UsersService.createUser(req.body);
-                    console.log("User created");
+                    logger.info("User created");
                     return done(null, newUser);
                 } catch (e) {
-                    console.log(e);
+                    logger.error(e);
                 }
             }
         )

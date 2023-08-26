@@ -1,5 +1,6 @@
 import { IProduct } from "../../interfaces";
 import { ProductMongooseModel } from "./models";
+import { logger } from "../../utils";
 
 class ProductModel {
     async getAll() {
@@ -50,7 +51,7 @@ class ProductModel {
                     { pID: prod[i].pID },
                     { $set: prod[i] }
                 );
-                console.log("stock updated");
+                logger.info("stock updated");
             }
         }
         return ids;

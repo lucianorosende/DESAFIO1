@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import session, { Session, SessionData } from "express-session";
-import { ProductsService, ViewsService, CartsService } from "../services";
+import { logger } from "../utils";
 
 class SessionController {
     renderLogin(req: Request, res: Response) {
@@ -22,7 +22,7 @@ class SessionController {
     destroySession(req: Request, res: Response) {
         (req.session as Session).destroy((err: Error | null) => {
             if (err) {
-                return console.log(err);
+                return logger.error(err);
             }
             return res.redirect("/api/sessions/login");
         });
