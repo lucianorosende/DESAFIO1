@@ -5,7 +5,6 @@ import { sendMail } from "../utils/sendMail";
 
 class SessionController {
     renderLogin(req: Request, res: Response) {
-        sendMail("hi", "lucianorosende@gmail.com", "hi", "hi");
         return res.render("login", {});
     }
     renderRegister(req: Request, res: Response) {
