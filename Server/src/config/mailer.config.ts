@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -6,7 +8,7 @@ export const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-        user: "zickz4gbusiness@gmail.com",
-        pass: "jrxzoavxrvekefdo",
+        user: process.env.GMAIL_URL,
+        pass: process.env.GMAIL_PASS,
     },
 });

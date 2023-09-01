@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import session, { Session, SessionData } from "express-session";
 import { logger } from "../utils";
+import { sendMail } from "../utils/sendMail";
 
 class SessionController {
     renderLogin(req: Request, res: Response) {
+        sendMail("hi", "lucianorosende@gmail.com", "hi", "hi");
         return res.render("login", {});
     }
     renderRegister(req: Request, res: Response) {
