@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, RequestHandler } from "express";
 import { TAsyncRequestHandler } from "../types";
-import { httpStatus } from ".";
+import { httpStatus, logger } from ".";
 
 export function asyncHandler(fn: TAsyncRequestHandler): RequestHandler {
     return async (
@@ -11,7 +11,7 @@ export function asyncHandler(fn: TAsyncRequestHandler): RequestHandler {
         try {
             await fn(req, res, next);
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.status(httpStatus.ServerError).json({
                 status: "error",
                 msg: "Server internal error",
