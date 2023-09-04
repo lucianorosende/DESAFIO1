@@ -19,6 +19,12 @@ viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent));
 viewsRouter.get("/messages", asyncHandler(ViewsController.renderMessages));
 
 viewsRouter.get(
+    "/recover-pass",
+    asyncHandler(ViewsController.renderRecoverPass)
+);
+viewsRouter.get("/checkEmail", asyncHandler(ViewsController.renderEmail));
+
+viewsRouter.get(
     "/createProduct",
     validateAdmin,
     asyncHandler(ViewsController.renderCreateProduct)

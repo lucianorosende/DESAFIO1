@@ -32,6 +32,8 @@ sessionRouter.get("/failregister", SessionsController.renderFailRegister);
 
 sessionRouter.get("/logout", SessionsController.destroySession);
 
+sessionRouter.post("/recover-pass", SessionsController.recoverPass);
+
 sessionRouter.get(
     "/github",
     passport.authenticate("github", { scope: ["user:email"] })

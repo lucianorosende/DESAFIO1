@@ -41,6 +41,12 @@ class ViewController {
             email: req.session.user.email,
         });
     }
+    async renderRecoverPass(req: Request, res: Response) {
+        res.render("recoverPass");
+    }
+    async renderEmail(req: Request, res: Response) {
+        res.render("checkEmail");
+    }
     async renderCreateProduct(req: Request, res: Response) {
         res.render("createProduct");
     }

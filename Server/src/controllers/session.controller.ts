@@ -42,6 +42,9 @@ class SessionController {
         (req.session as SessionData).user = req.user;
         return res.redirect("/views/products");
     }
+    async recoverPass(req: Request, res: Response) {
+        res.redirect("/views/checkEmail");
+    }
 }
 
 export const SessionsController = new SessionController();
