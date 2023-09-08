@@ -34,6 +34,10 @@ sessionRouter.get("/logout", SessionsController.destroySession);
 
 sessionRouter.post("/recover-pass", SessionsController.recoverPass);
 
+sessionRouter.get("/email-recovery", SessionsController.emailRecovery);
+
+sessionRouter.post("/change-pass", SessionsController.changePass);
+
 sessionRouter.get(
     "/github",
     passport.authenticate("github", { scope: ["user:email"] })
