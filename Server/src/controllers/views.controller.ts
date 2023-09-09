@@ -12,12 +12,17 @@ class ViewController {
     async renderProducts(req: Request, res: Response) {
         let getProds = await ProductsService.getProductsQueries(req.query);
         let paginateData = await ViewsService.productData(getProds);
+        let role;
+        if (req.session.user.role === "premium") {
+            role = "premium";
+        }
         res.render("products", {
             prod: getProds.payload,
             pagination: paginateData,
             user: (req.session as SessionData).user.email,
             cID: req.session.user.cart.cID,
             admin: req.session.user.isAdmin,
+            role: role,
         });
     }
     async renderCart(req: Request, res: Response) {
