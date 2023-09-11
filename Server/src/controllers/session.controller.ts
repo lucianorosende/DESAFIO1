@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import session, { Session, SessionData } from "express-session";
 import { logger } from "../utils";
-import { v4 as uuidv4 } from "uuid";
-import { RecoverCodeMongooseModel } from "../DAO/MONGO/models/recover-code.model";
 import { UserMongooseModel } from "../DAO/MONGO";
 import { sendMail } from "../utils/sendMail";
 import { createHash } from "../utils";
+import { SessionsService } from "../services/session.services";
 
 class SessionController {
     renderLogin(req: Request, res: Response) {
@@ -47,40 +46,19 @@ class SessionController {
         return res.redirect("/views/products");
     }
     async recoverPass(req: Request, res: Response) {
-        const { email } = req.body;
-        const code = uuidv4();
-        const codeCreated = await RecoverCodeMongooseModel.create({
-            email,
-            code,
-            expire: Date.now() + 3600000,
-        });
-        sendMail(
-            "zickz4gbusiness@gmail.com",
-            email,
-            "Reactivation code",
-            `<div>Click <a href="http://localhost:8080/api/sessions/email-recovery?code=${code}&email=${email}">aqui</a> para reactivar tu contraseña</div>`
-        );
+        const recover = await SessionsService.recoverPassword(req);
         res.redirect("/views/checkEmail");
     }
     async emailRecovery(req: Request, res: Response) {
-        const { code, email } = req.query;
-        const findCode = await RecoverCodeMongooseModel.findOne({
-            code,
-            email,
-        });
-        if (findCode && Date.now() < findCode.expire) {
-            res.render("changePass", { email: email });
+        const recover = await SessionsService.emailRecovery(req);
+        if (recover && Date.now() < recover.expire) {
+            res.render("changePass", { email: recover.email });
         } else {
             res.send("error");
         }
     }
     async changePass(req: Request, res: Response) {
-        const { email, password } = req.body;
-        const newPassword = createHash(password);
-        const findUser = await UserMongooseModel.updateOne(
-            { email: email },
-            { password: newPassword }
-        );
+        const pass = await SessionsService.changePass(req);
         res.render("password-success");
     }
 }

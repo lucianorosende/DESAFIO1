@@ -32,6 +32,12 @@ class ViewService {
         }));
         return formattedData;
     }
+    async roleData(role: string) {
+        if (role === "premium") {
+            return role;
+        }
+        return;
+    }
 }
 
 export const ViewsService = new ViewService();
