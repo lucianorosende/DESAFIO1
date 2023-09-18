@@ -6,6 +6,7 @@ import { ProductsController } from "../controllers";
 export const productRouter = Express.Router();
 
 productRouter.get("/all", asyncHandler(ProductsController.getAllProducts));
+
 productRouter.get("/", asyncHandler(ProductsController.getAll));
 productRouter.get(
     "/mockingproducts",
