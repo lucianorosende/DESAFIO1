@@ -13,7 +13,6 @@ class ProductService implements IProductFunction {
         let defaultPages: number = 1;
         let options: unknown;
         const { category, stock, limit, pages, sort } = reqQuery;
-
         category === undefined && stock === undefined ? (options = {}) : null;
         category ? (options = { category: category }) : null;
         stock ? (options = { stock: stock }) : null;
@@ -44,11 +43,10 @@ class ProductService implements IProductFunction {
                 pID: doc.pID,
             };
         });
-        let sortedData = newData.sort((a, b) => a.pID! - b.pID!);
 
         let objPaginated: IProductPages = {
             status: "success",
-            payload: sortedData,
+            payload: newData,
             totalPages: getPagination.totalPages,
             prevPage: getPagination.prevPage,
             nextPage: getPagination.nextPage,

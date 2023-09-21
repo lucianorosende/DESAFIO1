@@ -13,8 +13,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { logger } from "./utils";
-import swaggerjsdoc from "swagger-jsdoc";
-import swaggerUI from "swagger-ui-express";
+import { swagImplementer } from "./utils/swagger";
 dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -46,25 +45,7 @@ app.use(passport.session());
 webSockets();
 
 // API DOCUMENTATION ------------------------------------------------------------------------------------------------
-const options = {
-    definition: {
-        openapi: "3.0.3",
-        info: {
-            title: "My API",
-            version: "1.0.0",
-            description: "This is my API.",
-        },
-        servers: [
-            {
-                url: "http://localhost:8080",
-            },
-        ],
-        paths: {},
-    },
-    apis: [`${__dirname}/docs/**/*.yaml`],
-};
-const swag = swaggerjsdoc(options);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swag));
+swagImplementer();
 
 // Initializing Routes --------------------------------------------------------------------------------------------------------------
 routes();

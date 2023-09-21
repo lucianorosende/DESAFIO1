@@ -30,13 +30,6 @@ productRouter.post(
     asyncHandler(ProductsController.update)
 );
 
-productRouter.put(
-    "/:pid",
-    validateProductID,
-    validateAdmin,
-    asyncHandler(ProductsController.update)
-);
-
 productRouter.delete(
     "/:pid",
     validateProductID,

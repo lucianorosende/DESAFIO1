@@ -1,0 +1,93 @@
+/api/carts:
+    get:
+        summary: Devuelve todos los carritos
+        description: Devuelve un JSON con la data de todos los carritos
+        responses:
+            200:
+                description: Un arreglo de productos
+    post:
+        summary: Crea un carrito
+        description: Crea un carrito vacio para llenar productos
+        responses:
+            200:
+                description: un carrito
+    delete:
+        summary: elimina todos los carritos
+        description: elimina todos los carritos
+        responses:
+            200:
+                description: elimina todos los carritos
+/api/carts/{cid}:
+    get:
+        summary: Devuelve carrito en base a id
+        description: Devuelve un JSON con la data de 1 carrito en base a id
+        parameters:
+            - in: path
+              name: cid
+              schema:
+                  type: integer
+              required: true
+              description: Numeric ID of the user to get
+        responses:
+            200:
+                description: Un arreglo de productos
+    put:
+        summary: Actualiza carrito en base a id
+        description: Actualiza un JSON con la data de 1 carrito en base a id
+        parameters:
+            - in: path
+              name: cid
+              schema:
+                  type: integer
+              required: true
+              description: Numeric ID of the user to get
+        responses:
+            200:
+                description: Un arreglo de productos
+    delete:
+        summary: Elimina todos los productos del carrito
+        description: Elimina todos los productos del carrito
+        responses:
+            200:
+                description: Un arreglo con los productos eliminados
+/api/carts/{cid}/populate:
+    get:
+        summary: Devuelve todos los carritos con los datos
+        description: Devuelve un JSON con la data de todos los carritos
+        parameters:
+            - in: path
+              name: cid
+              schema:
+                  type: integer
+              required: true
+              description: Numeric ID of the user to get
+        responses:
+            200:
+                description: Un arreglo de productos
+/api/carts/{cid}/purchase/{email}:
+    get:
+        summary: Genera un ticket en base a la compra del carrito
+        description: este endpoint no es funcional en la documentacion
+        responses:
+            200:
+                description: un ticket con la compra
+/api/carts/{cid}/product/{pid}:
+    post:
+        summary: Agrega producto al carrito
+        description: agrega un producto al carrito
+        responses:
+            200:
+                description: un carrito con un producto agregado
+/api/carts/{cid}/products/{pid}:
+    put:
+        summary: Actualiza la cantidad de un producto
+        description: Actualiza la cantidad de un producto
+        responses:
+            200:
+                description: un carrito con un producto actualizado
+    delete:
+        summary: Elimina producto del carrito
+        description: Elimina producto del carrito
+        responses:
+            200:
+                description: un carrito con un producto eliminado

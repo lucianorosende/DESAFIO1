@@ -1,0 +1,99 @@
+/api/products/all:
+    get:
+        summary: Devuelve todos los productos
+        description: Devuelve un JSON con la data de todos los productos
+        responses:
+            200:
+                description: Un arreglo de productos
+/api/products:
+    get:
+        summary: Devuelve productos en base a queries (No se puede agregar todos los tipos de queries)
+        description: Devuelve un JSON con la data de todos los productos
+        parameters:
+            - in: query
+              name: stock
+              schema:
+                  type: integer
+              description: devuelve en base al stock que se le proporcione
+            - in: query
+              name: sort
+              schema:
+                  type: string
+              description: asc para ascendiente y desc para descendiente
+            #   - in: query
+            #   name: limit
+            #   schema:
+            #       type: integer
+            #   description: test3
+            #   - in: query
+            #   name: pages
+            #   schema:
+            #       type: integer
+            #   description: 4
+            # - in: query
+            #   name: category
+            #   schema:
+            #       type: string
+            #   description: test1
+        responses:
+            200:
+                description: A list of users.
+    post:
+        summary: Crea un producto(se necesita ser admin)
+        description: Se crea un producto en la db(se necesita ser admin)
+        responses:
+            200:
+                description: Se crea un producto
+    delete:
+        summary: elimina TODOS los productos(se necesita ser admin)
+        description: Se elimina TODOS los productos en la db(se necesita ser admin)
+        responses:
+            200:
+                description: Se eliminan TODOS los productos
+/api/products/mockingproducts:
+    get:
+        summary: Devuelve un test de productos
+        description: Devuelve un JSON con data de productos falsos
+        responses:
+            200:
+                description: Un arreglo de productos
+/api/products/{pid}:
+    get:
+        summary: Devuelve un producto en base a id
+        description: Devuelve un JSON con data de producto en base a id
+        parameters:
+            - in: path
+              name: pid
+              schema:
+                  type: integer
+              required: true
+              description: Numeric ID of the user to get
+        responses:
+            200:
+                description: Un arreglo de un producto
+    post:
+        summary: Actualiza un producto(se necesita ser admin)
+        description: Se actualiza un producto en la db(se necesita ser admin)
+        parameters:
+            - in: path
+              name: pid
+              schema:
+                  type: integer
+              required: true
+              description: Numeric ID of the user to get
+        responses:
+            200:
+                description: Se actualiza un producto
+    delete:
+        summary: elimina un producto(se necesita ser admin)
+        description: Se elimina un producto en la db(se necesita ser admin)
+        parameters:
+            - in: path
+              name: pid
+              schema:
+                  type: integer
+              required: true
+              description: Numeric ID of the user to get
+        responses:
+            200:
+                description: Se elimina un producto
