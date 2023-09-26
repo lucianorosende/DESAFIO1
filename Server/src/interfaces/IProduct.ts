@@ -10,5 +10,6 @@ export interface IProduct extends Document {
     status: boolean;
     category: string;
     quantity?: number;
+    owner?: string;
     pID?: number;
 }

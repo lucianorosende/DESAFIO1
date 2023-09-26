@@ -100,6 +100,9 @@ class ProductService implements IProductFunction {
             let newId: number = readData[readData.length - 1]?.pID ?? 0;
             prod.pID = newId + 1;
         }
+        if (!prod.owner) {
+            prod.owner = "admin";
+        }
         let res = await ProductsModel.create(prod);
         return res;
     }

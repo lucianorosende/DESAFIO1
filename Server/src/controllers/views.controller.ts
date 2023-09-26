@@ -50,7 +50,9 @@ class ViewController {
         res.render("checkEmail");
     }
     async renderCreateProduct(req: Request, res: Response) {
-        res.render("createProduct");
+        res.render("createProduct", {
+            email: req.session.user.email,
+        });
     }
     async renderUpdateProduct(req: Request, res: Response) {
         let getProd = await ProductsService.getProductById(req.params);
