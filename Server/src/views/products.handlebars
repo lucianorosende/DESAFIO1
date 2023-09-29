@@ -62,23 +62,31 @@
                         class="delete"
                         onclick="deleteResource({{pID}})"
                     >Delete</button>
+                    {{else}} {{#if (eq owner "admin")}}
+                    <button
+                        id="product-{{pID}}"
+                        class="add-to-cart-button"
+                        onclick="handleClick({{pID}}, {{../cID}}, {{stock}})"
+                    >Add to Cart</button>
+                     {{else}} {{#if (eq ../role "premium")}}
+                    <button
+                        class="delete"
+                        onclick="deleteResource({{pID}})"
+                    >Delete</button>
+                    <button
+                        id="product-{{pID}}"
+                        class="add-to-cart-button"
+                    >You added this product</button>
                     {{else}}
                     <button
                         id="product-{{pID}}"
                         class="add-to-cart-button"
                         onclick="handleClick({{pID}}, {{../cID}}, {{stock}})"
                     >Add to Cart</button>
-                    {{/if}}
-                    
-                    {{#if (eq owner "admin")}}
-                    {{else}} {{#if (eq ../role "premium")}}
-                    <button
-                        class="delete"
-                        onclick="deleteResource({{pID}})"
-                    >Delete</button>
-                    {{else}} 
+        
 
         
+                {{/if}}
                 {{/if}}
                 {{/if}}
                 </div>
