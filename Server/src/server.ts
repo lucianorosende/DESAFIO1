@@ -14,6 +14,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { logger } from "./utils";
 import { swagImplementer } from "./utils/swagger";
+import Handlebars from "handlebars";
 dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -27,6 +28,9 @@ export const PORT = process.env.PORT || 8080;
 // Initializing public and hbs Engine -----------------------------------------------------------------------------------------------
 publicAndHbs();
 
+Handlebars.registerHelper("eq", function (value1, value2) {
+    return value1 === value2;
+});
 // Initializing server --------------------------------------------------------------------------------------------------------------
 export const httpServer = app.listen(PORT, () => {
     logger.info(`Example app listening on ${PORT}`);

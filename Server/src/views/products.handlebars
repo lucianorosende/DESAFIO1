@@ -69,6 +69,18 @@
                         onclick="handleClick({{pID}}, {{../cID}}, {{stock}})"
                     >Add to Cart</button>
                     {{/if}}
+                    
+                    {{#if (eq owner "admin")}}
+                    {{else}} {{#if (eq ../role "premium")}}
+                    <button
+                        class="delete"
+                        onclick="deleteResource({{pID}})"
+                    >Delete</button>
+                    {{else}} 
+
+        
+                {{/if}}
+                {{/if}}
                 </div>
             {{/each}}
 

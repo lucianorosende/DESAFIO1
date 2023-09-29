@@ -13,6 +13,7 @@ class ProductService implements IProductFunction {
         let defaultPages: number = 1;
         let options: unknown;
         const { category, stock, limit, pages, sort } = reqQuery;
+
         category === undefined && stock === undefined ? (options = {}) : null;
         category ? (options = { category: category }) : null;
         stock ? (options = { stock: stock }) : null;
@@ -30,6 +31,7 @@ class ProductService implements IProductFunction {
             options
         );
         let { docs } = getPagination;
+
         let newData: IProduct[] = docs.map((doc: IProduct) => {
             return {
                 title: doc.title,
@@ -41,6 +43,7 @@ class ProductService implements IProductFunction {
                 status: doc.status,
                 category: doc.category,
                 pID: doc.pID,
+                owner: doc.owner,
             };
         });
 
