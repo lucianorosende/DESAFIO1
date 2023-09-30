@@ -10,6 +10,7 @@
         >Cart</button></a>
 {{/if}}
 <a href="/views/messages"><button class="add-to-cart-button">Messages</button></a>
+<a href="/views/changeRole"><button class="add-to-cart-button">Change role</button></a>
 <hr />
 <body>
     <div class="arrow-container">
@@ -32,7 +33,7 @@
         class="add-to-cart-button"
         >Create Product</button></a></div>
         {{/if}}
-        {{#if role}}
+        {{#if (eq role "premium")}}
         <div>
         <a href="/views/createProduct"><button
         class="add-to-cart-button"

@@ -35,3 +35,9 @@ viewsRouter.get(
     validateAdmin,
     asyncHandler(ViewsController.renderUpdateProduct)
 );
+
+viewsRouter.get(
+    "/changeRole",
+    validateUser,
+    asyncHandler(ViewsController.renderChangeRole)
+);

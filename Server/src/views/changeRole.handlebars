@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Change role</h2>
+    {{#if (eq role "premium")}}
+        <div class="form-group">
+            <button type="submit" class="add-to-cart-button"><a
+                    href="/api/users/premium/{{uid}}"
+                >Change to User</a></button>
+        </div>
+    {{else}}
+        <div class="form-group">
+            <button type="submit" class="add-to-cart-button"><a
+                    href="/api/users/premium/{{uid}}"
+                >Change to Premium</a></button>
+        </div>
+    {{/if}}
+
+</div>

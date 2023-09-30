@@ -12,7 +12,7 @@ class ViewController {
     async renderProducts(req: Request, res: Response) {
         let getProds = await ProductsService.getProductsQueries(req.query);
         let paginateData = await ViewsService.productData(getProds);
-        let role = await ViewsService.roleData(req.session.user.role);
+        let user = await UsersService.findUserById(req.session.user._id);
 
         res.render("products", {
             prod: getProds.payload,
@@ -20,7 +20,7 @@ class ViewController {
             user: (req.session as SessionData).user.email,
             cID: req.session.user.cart.cID,
             admin: req.session.user.isAdmin,
-            role: role,
+            role: user?.role,
         });
     }
     async renderCart(req: Request, res: Response) {
@@ -66,6 +66,13 @@ class ViewController {
             stock: getProd[0].stock,
             category: getProd[0].category,
             pID: getProd[0].pID,
+        });
+    }
+    async renderChangeRole(req: Request, res: Response) {
+        let user = await UsersService.findUserById(req.session.user._id);
+        res.render("changeRole", {
+            role: user?.role,
+            uid: req.session.user._id,
         });
     }
 }

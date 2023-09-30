@@ -47,6 +47,17 @@ class UserService {
         profile.email = emailDetail.email;
         return profile.email;
     }
+    async updateRole(uid: string) {
+        const find = await UsersModel.getById(uid);
+
+        if (find?.role === "premium") {
+            find.role = "user";
+        } else {
+            find!.role = "premium";
+        }
+        const update = await UsersModel.updateRole(find);
+        return update;
+    }
 }
 
 export const UsersService = new UserService();

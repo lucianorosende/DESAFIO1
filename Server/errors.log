@@ -15,3 +15,5 @@ error: undefined {"_message":"Products validation failed","errors":{"category":{
 error: undefined {"code":11000,"index":0,"keyPattern":{"title":1},"keyValue":{"title":"11111111"}}
 error: undefined {"code":11000,"index":0,"keyPattern":{"title":1},"keyValue":{"title":"111111111"}}
 error: undefined {"code":11000,"index":0,"keyPattern":{"title":1},"keyValue":{"title":"111111111"}}
+error: undefined {"kind":"Number","path":"stock","reason":{"actual":false,"code":"ERR_ASSERTION","expected":true,"generatedMessage":true,"operator":"=="},"stringValue":"\"NaN\"","value":null,"valueType":"number"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"{ uid: '64cbd6538b6b704d268554c9' }\"","value":{"uid":"64cbd6538b6b704d268554c9"},"valueType":"Object"}

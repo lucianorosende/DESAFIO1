@@ -4,6 +4,7 @@ import {
     cartRouter,
     viewsRouter,
     sessionRouter,
+    userRouter,
 } from "../routes";
 
 export const routes = (): void => {
@@ -11,4 +12,5 @@ export const routes = (): void => {
     app.use("/views", viewsRouter);
     app.use("/api/products", productRouter);
     app.use("/api/carts", cartRouter);
+    app.use("/api/users", userRouter);
 };

@@ -15,6 +15,13 @@ class UserModel {
         let create = await UserMongooseModel.create(user);
         return create;
     }
+    async updateRole(user: any) {
+        const userUpdate = await UserMongooseModel.updateOne(
+            { _id: user._id },
+            { $set: user }
+        );
+        return userUpdate;
+    }
 }
 
 export const UsersModel = new UserModel();
