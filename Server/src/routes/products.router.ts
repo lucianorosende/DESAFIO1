@@ -33,7 +33,7 @@ productRouter.post(
 productRouter.delete(
     "/:pid",
     validateProductID,
-    validateAdmin,
+    // validateAdmin,
     asyncHandler(ProductsController.deleteOne)
 );
 

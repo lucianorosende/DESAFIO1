@@ -341,3 +341,19 @@ li {
     border-radius: 3px;
     cursor: pointer;
 }
+
+.x-button {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.x-button:hover {
+    background-color: darkred;
+}
