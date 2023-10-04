@@ -40,6 +40,12 @@ const UserSchema: Schema = new Schema({
         type: Object,
         required: true,
     },
+    documents: [
+        {
+            name: String,
+            reference: String,
+        },
+    ],
 });
 UserSchema.plugin(mongoosePaginate);
 export const UserMongooseModel: Model<IUser> = mongoose.model<IUser>(

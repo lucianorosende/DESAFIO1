@@ -19,6 +19,7 @@ class UserService {
             isAdmin: false,
             role: role || "user",
             cart: cart,
+            documents: [],
         };
         let create = await UsersModel.create(newUser);
         return create;

@@ -10,4 +10,5 @@ export interface IUser {
     isAdmin: boolean;
     role: string;
     cart: any;
+    documents: String[];
 }

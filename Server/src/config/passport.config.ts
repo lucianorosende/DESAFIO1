@@ -38,6 +38,7 @@ export function passportConfig() {
                             role: profile._json.type,
                             Age: 0,
                             cart: "test",
+                            documents: [],
                         };
                         let userCreated = await UsersService.createUser(
                             newUser
