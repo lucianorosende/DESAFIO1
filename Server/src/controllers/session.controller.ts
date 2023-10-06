@@ -5,6 +5,8 @@ import { UserMongooseModel } from "../DAO/MONGO";
 import { sendMail } from "../utils/sendMail";
 import { createHash } from "../utils";
 import { SessionsService } from "../services/session.services";
+import { IUser } from "../interfaces";
+import { UsersService } from "../services";
 
 class SessionController {
     renderLogin(req: Request, res: Response) {
@@ -13,7 +15,10 @@ class SessionController {
     renderRegister(req: Request, res: Response) {
         return res.render("register", {});
     }
-    githubCB(req: Request, res: Response) {
+    async githubCB(req: Request, res: Response) {
+        const update = await UsersService.updateConnection(
+            (req.user as IUser).email
+        );
         req.session.user = req.user;
         return res.redirect("/views/products");
     }
@@ -23,7 +28,10 @@ class SessionController {
     renderFailRegister(req: Request, res: Response) {
         return res.json({ error: "failed to register" });
     }
-    destroySession(req: Request, res: Response) {
+    async destroySession(req: Request, res: Response) {
+        const update = await UsersService.updateConnection(
+            (req.user as IUser).email
+        );
         (req.session as Session).destroy((err: Error | null) => {
             if (err) {
                 return logger.error(err);
@@ -39,6 +47,9 @@ class SessionController {
         return res.redirect("/api/sessions/login");
     }
     async login(req: Request, res: Response) {
+        const update = await UsersService.updateConnection(
+            (req.user as IUser).email
+        );
         if (!req.user) {
             res.json({ error: "user not found" });
         }

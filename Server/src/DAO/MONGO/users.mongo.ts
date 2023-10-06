@@ -22,6 +22,13 @@ class UserModel {
         );
         return userUpdate;
     }
+    async updateConnection(user: any) {
+        const userUpdate = await UserMongooseModel.updateOne(
+            { email: user.email },
+            { $set: user }
+        );
+        return userUpdate;
+    }
 }
 
 export const UsersModel = new UserModel();

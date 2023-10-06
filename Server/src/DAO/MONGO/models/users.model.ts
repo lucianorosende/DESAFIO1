@@ -46,6 +46,10 @@ const UserSchema: Schema = new Schema({
             reference: String,
         },
     ],
+    last_connection: {
+        type: Date,
+        required: true,
+    },
 });
 UserSchema.plugin(mongoosePaginate);
 export const UserMongooseModel: Model<IUser> = mongoose.model<IUser>(

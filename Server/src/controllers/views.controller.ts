@@ -13,7 +13,6 @@ class ViewController {
         let getProds = await ProductsService.getProductsQueries(req.query);
         let paginateData = await ViewsService.productData(getProds);
         let user = await UsersService.findUserById(req.session.user._id);
-
         res.render("products", {
             prod: getProds.payload,
             pagination: paginateData,

@@ -11,4 +11,5 @@ export interface IUser {
     role: string;
     cart: any;
     documents: String[];
+    last_connection?: any;
 }

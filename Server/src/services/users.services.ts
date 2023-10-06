@@ -20,6 +20,7 @@ class UserService {
             role: role || "user",
             cart: cart,
             documents: [],
+            last_connection: undefined,
         };
         let create = await UsersModel.create(newUser);
         return create;
@@ -57,6 +58,13 @@ class UserService {
             find!.role = "premium";
         }
         const update = await UsersModel.updateRole(find);
+        return update;
+    }
+    async updateConnection(email: string) {
+        const find = await UsersModel.getByEmail(email);
+        const date = new Date();
+        find!.last_connection = date.toLocaleString("es-AR");
+        const update = await UsersModel.updateConnection(find);
         return update;
     }
 }
