@@ -2,6 +2,9 @@ import { IUser } from "../../interfaces";
 import { UserMongooseModel } from "./models";
 
 class UserModel {
+    async getUsers() {
+        return await UserMongooseModel.find({});
+    }
     async getById(id: any) {
         return await UserMongooseModel.findById(id);
     }

@@ -10,6 +10,10 @@ class UserController {
             res.render("roleChanged");
         }
     }
+    async getUsers(req: Request, res: Response) {
+        let getUsers = await UsersService.getUsers();
+        customRequest(res, httpStatus.Ok, "success", "users Data", getUsers);
+    }
 }
 
 export const UsersController = new UserController();

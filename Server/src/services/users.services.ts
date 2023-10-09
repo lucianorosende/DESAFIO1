@@ -5,8 +5,14 @@ import { createHash } from "../utils";
 import GitHubStrategy from "passport-github2";
 import { UsersModel } from "../DAO/MONGO/users.mongo";
 import { CartsService } from "./carts.services";
+import { dbUserDTO } from "../DAO/DTO/dbUserDTO";
 
 class UserService {
+    async getUsers() {
+        let users = await UsersModel.getUsers();
+        let filter = dbUserDTO(users);
+        return filter;
+    }
     async createUser(user: IUser) {
         const { firstName, lastName, email, Age, password, role } = user;
         const cart = await CartsService.addCart();
