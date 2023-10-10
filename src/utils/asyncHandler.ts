@@ -11,7 +11,7 @@ export function asyncHandler(fn: TAsyncRequestHandler): RequestHandler {
         try {
             await fn(req, res, next);
         } catch (err) {
-            logger.error(err);
+            // logger.error(err);
             res.status(httpStatus.ServerError).json({
                 status: "error",
                 msg: "Server internal error",

@@ -8,8 +8,8 @@ export async function MongoDB() {
         // Connect to MongoDB
         let url: string = process.env.MONGO_URL!;
         await mongoose.connect(url);
-        logger.info("Connected to MongoDB");
+        // logger.info("Connected to MongoDB");
     } catch (error) {
-        logger.error("Error connecting to MongoDB:", error);
+        // logger.error("Error connecting to MongoDB:", error);
     }
 }
