@@ -28,8 +28,8 @@ export const PORT = process.env.PORT || 8080;
 publicAndHbs();
 // Initializing server --------------------------------------------------------------------------------------------------------------
 export const httpServer = app.listen(PORT, () => {
-    // logger.info(`Example app listening on ${PORT}`);
-    // logger.info(`login: http://localhost:${PORT}/api/sessions/login`);
+    logger.info(`Example app listening on ${PORT}`);
+    logger.info(`login: http://localhost:${PORT}/api/sessions/login`);
 });
 
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------

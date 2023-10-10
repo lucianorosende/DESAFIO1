@@ -14,7 +14,7 @@ export const webSockets = () => {
     socketServer.on("connection", async (socket) => {
         let getMSG = await MessagesService.getMessages();
         socketServer.sockets.emit("messages", getMSG);
-        // logger.info("Un cliente se ha conectado: " + socket.id);
+        logger.info("Un cliente se ha conectado: " + socket.id);
         socket.on("newMsg", async (data) => {
             socketServer.sockets.emit("messages", data);
         });

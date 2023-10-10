@@ -43,16 +43,15 @@ export function passportConfig() {
                         let userCreated = await UsersService.createUser(
                             newUser
                         );
-                        // logger.info("User Registration succesful");
-
+                        logger.info("User Registration succesful");
                         return done(null, userCreated);
                     } else {
-                        // logger.warn("User already exists");
+                        logger.warn("User already exists");
                         return done(null, user);
                     }
                 } catch (e) {
-                    // logger.error("Error in auth github");
-                    // logger.error(e);
+                    logger.error("Error in auth github");
+                    logger.error(e);
                     return done(e);
                 }
             }
@@ -67,17 +66,17 @@ export function passportConfig() {
                 try {
                     let user = await UsersService.findUserByEmail(username);
                     if (!user) {
-                        // logger.warn("user not found with email " + username);
+                        logger.warn("user not found with email " + username);
                         return done(null, false);
                     }
 
                     if (!isValidPassword(password, user.password)) {
-                        // logger.warn("invalid password");
+                        logger.warn("invalid password");
                         return done(null, false);
                     }
                     return done(null, user);
                 } catch (e) {
-                    // logger.error(e);
+                    logger.error(e);
                 }
             }
         )
@@ -90,14 +89,14 @@ export function passportConfig() {
                 try {
                     let user = await UsersService.findUserByEmail(username);
                     if (user) {
-                        // logger.warn("user already registered");
+                        logger.warn("user already registered");
                         return done(null, false);
                     }
                     const newUser = await UsersService.createUser(req.body);
-                    // logger.info("User created");
+                    logger.info("User created");
                     return done(null, newUser);
                 } catch (e) {
-                    // logger.error(e);
+                    logger.error(e);
                 }
             }
         )

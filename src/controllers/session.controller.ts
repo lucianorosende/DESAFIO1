@@ -34,7 +34,7 @@ class SessionController {
         );
         (req.session as Session).destroy((err: Error | null) => {
             if (err) {
-                return console.error(err);
+                return logger.error(err);
             }
             return res.redirect("/api/sessions/login");
         });
