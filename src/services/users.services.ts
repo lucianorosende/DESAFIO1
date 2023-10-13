@@ -70,7 +70,7 @@ class UserService {
     async updateConnection(email: string) {
         const find = await UsersModel.getByEmail(email);
         const date = new Date();
-        find!.last_connection = date.toLocaleString("es-AR");
+        find!.last_connection = date;
         const update = await UsersModel.updateConnection(find);
         return update;
     }

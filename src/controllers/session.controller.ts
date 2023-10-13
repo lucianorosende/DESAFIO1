@@ -30,7 +30,7 @@ class SessionController {
     }
     async destroySession(req: Request, res: Response) {
         const update = await UsersService.updateConnection(
-            (req.user as IUser).email
+            req.session.user.email
         );
         (req.session as Session).destroy((err: Error | null) => {
             if (err) {
@@ -47,13 +47,13 @@ class SessionController {
         return res.redirect("/api/sessions/login");
     }
     async login(req: Request, res: Response) {
-        const update = await UsersService.updateConnection(
-            (req.user as IUser).email
-        );
         if (!req.user) {
             res.json({ error: "user not found" });
         }
         (req.session as SessionData).user = req.user;
+        const update = await UsersService.updateConnection(
+            req.session.user.email
+        );
         return res.redirect("/views/products");
     }
     async recoverPass(req: Request, res: Response) {
