@@ -6,6 +6,7 @@ import GitHubStrategy from "passport-github2";
 import { UsersModel } from "../DAO/MONGO/users.mongo";
 import { CartsService } from "./carts.services";
 import { dbUserDTO } from "../DAO/DTO/dbUserDTO";
+import fetch from "node-fetch";
 
 class UserService {
     async getUsers() {
