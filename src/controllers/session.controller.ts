@@ -16,10 +16,10 @@ class SessionController {
         return res.render("register", {});
     }
     async githubCB(req: Request, res: Response) {
-        const update = await UsersService.updateConnection(
-            (req.user as IUser).email
-        );
         req.session.user = req.user;
+        const update = await UsersService.updateConnection(
+            req.session.user.email
+        );
         return res.redirect("/views/products");
     }
     renderFailLogin(req: Request, res: Response) {

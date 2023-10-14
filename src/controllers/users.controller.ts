@@ -14,6 +14,16 @@ class UserController {
         let getUsers = await UsersService.getUsers();
         customRequest(res, httpStatus.Ok, "success", "users Data", getUsers);
     }
+    async deleteExpiredUsers(req: Request, res: Response) {
+        let deleteUsers = await UsersService.deleteExpiredUsers();
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "users expired were Deleted",
+            {}
+        );
+    }
 }
 
 export const UsersController = new UserController();

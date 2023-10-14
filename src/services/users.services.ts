@@ -74,6 +74,21 @@ class UserService {
         const update = await UsersModel.updateConnection(find);
         return update;
     }
+    async deleteExpiredUsers() {
+        let users = await UsersModel.getUsers();
+        users.forEach(async (user: any) => {
+            const date2daysAgo = new Date(
+                user.last_connection - 2 * 24 * 60 * 60 * 1000
+            );
+            if (new Date() < date2daysAgo) {
+                const deleteAccount = await UsersModel.deleteExpiredAccount(
+                    user.email
+                );
+            } else {
+                return;
+            }
+        });
+    }
 }
 
 export const UsersService = new UserService();

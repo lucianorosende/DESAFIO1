@@ -32,6 +32,10 @@ class UserModel {
         );
         return userUpdate;
     }
+    async deleteExpiredAccount(email: any) {
+        const deleteUser = await UserMongooseModel.deleteOne({ email: email });
+        return deleteUser;
+    }
 }
 
 export const UsersModel = new UserModel();
