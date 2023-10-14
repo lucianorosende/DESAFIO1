@@ -84,6 +84,7 @@ class UserService {
                 const deleteAccount = await UsersModel.deleteExpiredAccount(
                     user.email
                 );
+                // add sendEmail notification with real emails in the future
             } else {
                 return;
             }
