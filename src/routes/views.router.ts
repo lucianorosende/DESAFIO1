@@ -41,3 +41,9 @@ viewsRouter.get(
     validateUser,
     asyncHandler(ViewsController.renderChangeRole)
 );
+
+viewsRouter.get(
+    "/accounts",
+    validateUser,
+    asyncHandler(ViewsController.renderAccounts)
+);

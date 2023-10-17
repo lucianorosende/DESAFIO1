@@ -39,6 +39,7 @@ export function passportConfig() {
                             Age: 0,
                             cart: "test",
                             documents: [],
+                            last_connection: new Date(),
                         };
                         let userCreated = await UsersService.createUser(
                             newUser

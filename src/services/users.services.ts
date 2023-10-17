@@ -74,6 +74,10 @@ class UserService {
         const update = await UsersModel.updateConnection(find);
         return update;
     }
+    async deleteUser(uid: string) {
+        let delUser = await UsersModel.deleteUser(uid);
+        return delUser;
+    }
     async deleteExpiredUsers() {
         let users = await UsersModel.getUsers();
         users.forEach(async (user: any) => {

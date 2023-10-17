@@ -48,7 +48,6 @@ const UserSchema: Schema = new Schema({
     ],
     last_connection: {
         type: Date,
-        required: true,
     },
 });
 UserSchema.plugin(mongoosePaginate);

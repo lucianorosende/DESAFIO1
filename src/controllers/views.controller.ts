@@ -74,6 +74,12 @@ class ViewController {
             uid: req.session.user._id,
         });
     }
+    async renderAccounts(req: Request, res: Response) {
+        let getUsers = await UsersService.getUsers();
+        res.render("accounts", {
+            users: getUsers,
+        });
+    }
 }
 
 export const ViewsController = new ViewController();

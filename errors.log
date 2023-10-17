@@ -30,3 +30,13 @@ error: Error in auth github
 error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
 error: Error in auth github
 error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
+error: Error in auth github
+error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
+error: Error in auth github
+error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
+error: Error in auth github
+error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
+error: Error in auth github
+error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
+error: Error in auth github
+error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}

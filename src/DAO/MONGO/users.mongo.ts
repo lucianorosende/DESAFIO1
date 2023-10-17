@@ -32,6 +32,10 @@ class UserModel {
         );
         return userUpdate;
     }
+    async deleteUser(uid: string) {
+        const deleteUser = await UserMongooseModel.deleteOne({ _id: uid });
+        return deleteUser;
+    }
     async deleteExpiredAccount(email: any) {
         const deleteUser = await UserMongooseModel.deleteOne({ email: email });
         return deleteUser;

@@ -5,6 +5,7 @@ export const dbUserDTO = (users: any) => {
             lastName: user.lastName,
             email: user.email,
             role: user.role,
+            uid: user._id,
         };
     });
 

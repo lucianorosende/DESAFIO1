@@ -14,6 +14,11 @@ class UserController {
         let getUsers = await UsersService.getUsers();
         customRequest(res, httpStatus.Ok, "success", "users Data", getUsers);
     }
+    async deleteUsers(req: Request, res: Response) {
+        let { uid } = req.params;
+        let deleteUsers = await UsersService.deleteUser(uid);
+        customRequest(res, httpStatus.Ok, "success", "user deleted", {});
+    }
     async deleteExpiredUsers(req: Request, res: Response) {
         let deleteUsers = await UsersService.deleteExpiredUsers();
         customRequest(
