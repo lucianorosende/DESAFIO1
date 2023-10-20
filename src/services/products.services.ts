@@ -1,7 +1,8 @@
-import { CartsService, ViewsService } from ".";
+import { CartsService, UsersService, ViewsService } from ".";
 import { IProductFunction, IProduct, IProductPages } from "../interfaces";
 import { ProductsModel } from "../DAO/MONGO";
 import { faker } from "@faker-js/faker";
+import { sendMail } from "../utils/sendMail";
 
 class ProductService implements IProductFunction {
     async getProducts() {
@@ -136,6 +137,19 @@ class ProductService implements IProductFunction {
     }
     async deleteProductById(reqParams: any) {
         const { pid } = reqParams;
+        const getProdInfo = await this.getProductById(reqParams);
+        const isUserPremium = await UsersService.findUserByEmail(
+            getProdInfo[0].owner as string
+        );
+        if (isUserPremium?.role === "premium") {
+            sendMail(
+                "unknownemail@gmail.com",
+                getProdInfo[0].owner as string,
+                "Deleted product",
+                "Your product has been deleted"
+            );
+        }
+
         let del = await ProductsModel.deleteOne(pid);
         return del;
     }

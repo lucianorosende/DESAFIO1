@@ -72,7 +72,7 @@
                         class="add-to-cart-button"
                         onclick="handleClick({{pID}}, {{../cID}}, {{stock}})"
                     >Add to Cart</button>
-                     {{else}} {{#if (eq ../role "premium")}}
+                     {{else}} {{#if (eq owner ../user)}}
                     <button
                         class="delete"
                         onclick="deleteResource({{pID}})"

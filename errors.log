@@ -40,3 +40,5 @@ error: Error in auth github
 error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
 error: Error in auth github
 error: undefined {"_message":"users validation failed","errors":{"last_connection":{"kind":"required","message":"Path `last_connection` is required.","name":"ValidatorError","path":"last_connection","properties":{"message":"Path `last_connection` is required.","path":"last_connection","type":"required"}}}}
+error: undefined {"code":11000,"index":0,"keyPattern":{"title":1},"keyValue":{"title":"555"}}
+error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":"555"}}
