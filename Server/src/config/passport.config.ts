@@ -25,6 +25,7 @@ export function passportConfig() {
                         profile
                     );
                     let user = await UsersService.findUserByEmail(ghData);
+                    console.log(user);
                     if (!user) {
                         const newUser = {
                             email: profile.email,
