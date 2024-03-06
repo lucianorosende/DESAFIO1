@@ -1,0 +1,74 @@
+form {
+    display: flex; /* Arrange elements horizontally */
+    flex-direction: column; /* Stack elements vertically */
+    width: 300px; /* Set form width */
+    margin: 50px auto; /* Center the form horizontally and add vertical margin */
+    padding: 20px; /* Add padding inside the form */
+    border: 1px solid #ddd; /* Add a light border */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Add some space between form groups */
+}
+.signupColor {
+    color: #ffffff;
+}
+/* Label styles */
+label {
+    display: block; /* Display labels on their own line */
+    margin-bottom: 5px; /* Add space below labels */
+    font-weight: bold; /* Make labels slightly bolder */
+}
+
+/* Input styles */
+input[type="email"],
+input[type="password"] {
+    width: 90%; /* Make inputs full width */
+    padding: 8px; /* Add padding to inputs */
+    border: 1px solid #ccc; /* Add a light border */
+    border-radius: 3px; /* Add rounded corners */
+}
+
+/* Button styles */
+button {
+    display: inline-block; /* Allow text wrapping around buttons */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.add-to-cart-button {
+    background-color: #4caf50; /* Green color */
+    color: white;
+}
+
+.add-to-cart-button:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+}
+
+.checkout-btn {
+    background-color: #3498db; /* Blue color */
+    color: white;
+}
+
+.checkout-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.delete {
+    background-color: #f03e3e; /* Red color */
+    color: white;
+}
+
+.delete:hover {
+    background-color: #c23636; /* Darker red on hover */
+}
+
+/* Anchor link styles (within buttons) */
+a {
+    color: inherit; /* Inherit button text color */
+    text-decoration: none; /* Remove underline from links */
+}

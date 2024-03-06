@@ -1,0 +1,47 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container styling */
+.container {
+    display: flex; /* Center elements horizontally */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Set minimum height for full viewport */
+    background-color: #463e3e; /* Light gray background */
+}
+
+/* Heading styling */
+h2 {
+    margin: 0 0 20px;
+    font-size: 2em;
+    text-align: center;
+    color: #ffffff; /* Darker gray for the heading */
+}
+
+/* Button styling */
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4caf50; /* Green button color */
+    color: #fff; /* White text for the button */
+    font-size: 16px;
+    text-decoration: none; /* Remove default link underline */
+    transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+button:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+}
+
+/* Anchor tag styling within the button (optional) */
+a {
+    color: inherit; /* Inherit button text color */
+    text-decoration: none;
+}
