@@ -1,12 +1,12 @@
 // import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login } from "..";
+import { Login, Register } from "..";
 
 function App() {
     return (
         <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/contact" />
+            <Route path="/register" element={<Register />} />
         </Routes>
     );
 }

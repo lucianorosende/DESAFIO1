@@ -1,36 +1,13 @@
-import Background from "../Background/Background";
-import { loginParticles } from "../../utils/loginParticles";
-import { TypeAnimation } from "react-type-animation";
+import { Link } from "react-router-dom";
+import { loginParticles, loginSequence } from "../../utils";
+import { Background, TextAnimation } from "../index";
 import "./login.css";
 
 function Login() {
     return (
         <div>
             <div className="container">
-                <TypeAnimation
-                    sequence={[
-                        // Same substring at the start will only be typed out once, initially
-                        "MarketHub, for your favourite food",
-                        1000, // wait 1s before replacing "Mice" with "Hamsters"
-                        "MarketHub, for your favourite clothes",
-                        1500,
-                        "MarketHub, for your favourite tech",
-                        2000,
-                        "MarketHub, for everything!",
-                        3000,
-                    ]}
-                    wrapper="span"
-                    speed={50}
-                    style={{
-                        fontSize: "3em",
-                        display: "inline-block",
-                        color: "white",
-                        fontStyle: "normal",
-                        fontFamily: "monospace",
-                        fontWeight: "bold",
-                    }}
-                    repeat={Infinity}
-                />
+                <TextAnimation sequence={loginSequence} />
                 <form action="/api/sessions/login" method="POST">
                     <div className="form-group">
                         <label htmlFor="Email" className="signupColor">
@@ -60,9 +37,9 @@ function Login() {
                         </button>
                     </div>
                     <div className="form-group">
-                        <button className="checkout-btn">
-                            <a href="/api/sessions/register">Sign up</a>
-                        </button>
+                        <Link to="/register">
+                            <button className="checkout-btn">Sign Up</button>
+                        </Link>
                     </div>
                     <div className="form-group">
                         <button type="submit" className="delete">
