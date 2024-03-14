@@ -1,55 +1,61 @@
 import { Link } from "react-router-dom";
 import { loginParticles, loginSequence } from "../../utils";
 import { Background, TextAnimation } from "../index";
-import "./login.css";
+import {
+    SuccessButton,
+    ErrorButton,
+    InteractButton,
+    Label,
+    FormGroup,
+    Container,
+    Input,
+    Anchor,
+    Form,
+} from "../../styles";
 
 function Login() {
     return (
-        <div>
-            <div className="container">
-                <TextAnimation sequence={loginSequence} />
-                <form action="/api/sessions/login" method="POST">
-                    <div className="form-group">
-                        <label htmlFor="Email" className="signupColor">
-                            Email
-                        </label>
-                        <input type="email" id="email" name="email" required />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password" className="signupColor">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="add-to-cart-button">
-                            Login
-                        </button>
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="add-to-cart-button">
-                            <a href="/api/sessions/github">Login with Github</a>
-                        </button>
-                    </div>
-                    <div className="form-group">
-                        <Link to="/register">
-                            <button className="checkout-btn">Sign Up</button>
-                        </Link>
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="delete">
-                            <a href="/views/recover-pass">Forgot Password?</a>
-                        </button>
-                    </div>
-                </form>
-                <Background options={loginParticles} />
-            </div>
-        </div>
+        <Container>
+            <TextAnimation sequence={loginSequence} />
+            <Form action="/api/sessions/login" method="POST">
+                <FormGroup>
+                    <Label htmlFor="Email">Email</Label>
+                    <Input type="email" id="email" name="email" required />
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <SuccessButton type="submit">Login</SuccessButton>
+                </FormGroup>
+                <FormGroup>
+                    <SuccessButton type="submit">
+                        <Anchor href="/api/sessions/github">
+                            Login with Github
+                        </Anchor>
+                    </SuccessButton>
+                </FormGroup>
+                <FormGroup>
+                    <Link to="/register">
+                        <InteractButton>Sign Up</InteractButton>
+                    </Link>
+                </FormGroup>
+                <FormGroup>
+                    <ErrorButton type="submit">
+                        <Anchor href="/views/recover-pass">
+                            Forgot Password?
+                        </Anchor>
+                    </ErrorButton>
+                </FormGroup>
+            </Form>
+            <Background options={loginParticles} />
+        </Container>
     );
 }
 
