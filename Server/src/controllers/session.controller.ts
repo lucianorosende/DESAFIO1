@@ -7,6 +7,7 @@ import { createHash } from "../utils";
 import { SessionsService } from "../services/session.services";
 import { IUser } from "../interfaces";
 import { UsersService } from "../services";
+import jwt from "jsonwebtoken";
 
 class SessionController {
     renderLogin(req: Request, res: Response) {
@@ -30,7 +31,7 @@ class SessionController {
     }
     async destroySession(req: Request, res: Response) {
         const update = await UsersService.updateConnection(
-            req.session.user.email
+            req.session.passport.user.email
         );
         (req.session as Session).destroy((err: Error | null) => {
             if (err) {
@@ -50,11 +51,14 @@ class SessionController {
         if (!req.user) {
             res.json({ error: "user not found" });
         }
-        (req.session as SessionData).user = req.user;
+        // req.session.user = req.user;
         const update = await UsersService.updateConnection(
-            req.session.user.email
+            (req.session as SessionData).passport.user.email
         );
-        return res.redirect("/views/products");
+        console.log(req.session.id);
+        // res.cookie("session", req.session);
+        // res.send({ test: "test" });
+        res.redirect("/views/products");
     }
     async recoverPass(req: Request, res: Response) {
         const recover = await SessionsService.recoverPassword(req);

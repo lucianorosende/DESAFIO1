@@ -5,14 +5,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const MongoSessions = () => {
+    app.set("trust proxy", 1);
     const sessionOptions = {
         store: MongoStore.create({
             mongoUrl: process.env.MONGO_URL,
-            ttl: 7200,
         }),
         secret: "SECRET-CODE",
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
+        rolling: true,
+        proxy: true,
+        cookie: {
+            httpOnly: false,
+        },
     };
     app.use(session(sessionOptions));
 };

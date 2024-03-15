@@ -17,6 +17,7 @@ declare module "express-session" {
         isAdmin: boolean;
         role: string;
         __v: number;
+        passport: any;
     }
 }
 

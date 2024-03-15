@@ -20,7 +20,13 @@ dotenv.config();
 export const app = Express();
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+    })
+);
 app.use(cookieParser());
 export const PORT = process.env.PORT || 8080;
 
@@ -32,6 +38,14 @@ export const httpServer = app.listen(PORT, () => {
     logger.info(`login: http://localhost:${PORT}/api/sessions/login`);
 });
 
+// Initializing webSockets ----------------------------------------------------------------------------------------------------------
+webSockets();
+
+// API DOCUMENTATION ------------------------------------------------------------------------------------------------
+swagImplementer();
+
+// Connecting Database --------------------------------------------------------------------------------------------------------------
+MongoDB();
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
 MongoSessions();
 
@@ -40,17 +54,8 @@ passportConfig();
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Initializing webSockets ----------------------------------------------------------------------------------------------------------
-webSockets();
-
-// API DOCUMENTATION ------------------------------------------------------------------------------------------------
-swagImplementer();
-
 // Initializing Routes --------------------------------------------------------------------------------------------------------------
 routes();
-
-// Connecting Database --------------------------------------------------------------------------------------------------------------
-MongoDB();
 
 app.get("/", (req, res) => {
     res.render("home");

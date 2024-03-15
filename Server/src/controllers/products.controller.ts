@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 
 class ProductController {
     async getAllProducts(req: Request, res: Response) {
+        console.log(req.session);
         const prods = await ProductsService.getProducts();
         customRequest(res, httpStatus.Ok, "success", "List of products", prods);
     }
