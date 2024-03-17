@@ -9,22 +9,6 @@ import {
 import { UserDTO } from "../DAO/DTO/UserDTO";
 
 class ViewController {
-    async renderProducts(req: Request, res: Response) {
-        console.log("kill nigas", req.session);
-        let getProds = await ProductsService.getProductsQueries(req.query);
-        let paginateData = await ViewsService.productData(getProds);
-        let user = await UsersService.findUserById(
-            req.session.passport.user._id
-        );
-        res.send({
-            prod: getProds.payload,
-            pagination: paginateData,
-            user: (req.session as SessionData).passport.user.email,
-            cID: req.session.passport.user.cart.cID,
-            admin: req.session.passport.user.isAdmin,
-            role: user?.role,
-        });
-    }
     async renderCart(req: Request, res: Response) {
         let getCart = await CartsService.getCartByIdAndPopulate(req.params);
         let cartData = await ViewsService.cartData(getCart);

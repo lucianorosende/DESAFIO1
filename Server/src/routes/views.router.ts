@@ -6,12 +6,6 @@ import { ViewsController } from "../controllers";
 
 export const viewsRouter = Express.Router();
 
-viewsRouter.get(
-    "/products",
-    validateUser,
-    asyncHandler(ViewsController.renderProducts)
-);
-
 viewsRouter.get("/carts/:cid", asyncHandler(ViewsController.renderCart));
 
 viewsRouter.get("/current", asyncHandler(ViewsController.renderCurrent));

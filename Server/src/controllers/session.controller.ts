@@ -4,7 +4,7 @@ import { logger } from "../utils";
 import { UserMongooseModel } from "../DAO/MONGO";
 import { sendMail } from "../utils/sendMail";
 import { createHash } from "../utils";
-import { SessionsService } from "../services/session.services";
+import { ProductsService, ViewsService, SessionsService } from "../services";
 import { IUser } from "../interfaces";
 import { UsersService } from "../services";
 import jwt from "jsonwebtoken";
@@ -55,10 +55,19 @@ class SessionController {
         const update = await UsersService.updateConnection(
             (req.session as SessionData).passport.user.email
         );
-        console.log(req.session.id);
-        // res.cookie("session", req.session);
-        // res.send({ test: "test" });
-        res.redirect("/views/products");
+        let getProds = await ProductsService.getProductsQueries(req.query);
+        let paginateData = await ViewsService.productData(getProds);
+        let user = await UsersService.findUserById(
+            req.session.passport.user._id
+        );
+        res.send({
+            prod: getProds.payload,
+            pagination: paginateData,
+            user: (req.session as SessionData).passport.user.email,
+            cID: req.session.passport.user.cart.cID,
+            admin: req.session.passport.user.isAdmin,
+            role: user?.role,
+        });
     }
     async recoverPass(req: Request, res: Response) {
         const recover = await SessionsService.recoverPassword(req);

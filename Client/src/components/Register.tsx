@@ -1,7 +1,7 @@
-import { Background } from "..";
-import { registerParticles } from "../../utils";
+import { Background } from ".";
+import { registerParticles } from "../utils";
 import { Link } from "react-router-dom";
-import { TextAnimation } from "..";
+import { TextAnimation } from ".";
 import {
     SuccessButton,
     InteractButton,
@@ -10,10 +10,10 @@ import {
     RegisterContainer,
     Input,
     Form,
-} from "../../styles";
-import { registerSequence } from "../../utils";
+} from "../styles";
+import { registerSequence } from "../utils";
 
-function Register() {
+export function Register() {
     return (
         <RegisterContainer>
             <TextAnimation sequence={registerSequence} />
@@ -61,5 +61,3 @@ function Register() {
         </RegisterContainer>
     );
 }
-
-export default Register;

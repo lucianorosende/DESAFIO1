@@ -1,7 +1,7 @@
 import { TypeAnimation, Sequence } from "react-type-animation";
 import GraphemeSplitter from "grapheme-splitter"; // npm i grapheme-splitter
 
-function TextAnimation({ sequence }: { sequence: Sequence }) {
+export function TextAnimation({ sequence }: { sequence: Sequence }) {
     const splitter = new GraphemeSplitter();
     return (
         <TypeAnimation
@@ -22,4 +22,3 @@ function TextAnimation({ sequence }: { sequence: Sequence }) {
         />
     );
 }
-export default TextAnimation;

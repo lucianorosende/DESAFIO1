@@ -4,7 +4,7 @@ import type { Container, Engine } from "tsparticles-engine";
 // import { loadFull } from "tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { ISourceOptions } from "tsparticles-engine";
-function Background({ options }: { options: ISourceOptions }) {
+export function Background({ options }: { options: ISourceOptions }) {
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadSlim(engine);
     }, []);
@@ -23,5 +23,3 @@ function Background({ options }: { options: ISourceOptions }) {
         />
     );
 }
-
-export default Background;

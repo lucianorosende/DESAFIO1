@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { loginParticles, loginSequence } from "../../utils";
-import { Background, TextAnimation } from "../index";
+import { Link, useNavigate } from "react-router-dom";
+import { loginParticles, loginSequence, HandleLogin } from "../utils";
+import { Background, TextAnimation } from ".";
 import { useState } from "react";
 import {
     SuccessButton,
@@ -12,47 +12,15 @@ import {
     Input,
     Anchor,
     Form,
-} from "../../styles";
-
-function Login() {
+} from "../styles";
+export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const account = {
-            email: email,
-            password: password,
-        };
-        try {
-            // Fetch request with POST method
-            const response = await fetch(
-                "http://localhost:8080/api/sessions/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(account),
-                    credentials: "include",
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error(`Error: ${response.statusText}`);
-            }
-
-            // Handle successful response (optional)
-            const responseData = await response.json();
-            console.log("Form submission successful:", responseData);
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            // Handle form submission error (display message, etc.)
-        }
-    };
+    const navigate = useNavigate();
     return (
         <Container>
             <TextAnimation sequence={loginSequence} />
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={(e) => HandleLogin(e, email, password, navigate)}>
                 <FormGroup>
                     <Label htmlFor="Email">Email</Label>
                     <Input
@@ -102,5 +70,3 @@ function Login() {
         </Container>
     );
 }
-
-export default Login;
