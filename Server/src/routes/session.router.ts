@@ -23,10 +23,6 @@ declare module "express-session" {
 
 export const sessionRouter = Express.Router();
 
-sessionRouter.get("/login", SessionsController.renderLogin);
-
-sessionRouter.get("/register", SessionsController.renderRegister);
-
 sessionRouter.get("/faillogin", SessionsController.renderFailLogin);
 
 sessionRouter.get("/failregister", SessionsController.renderFailRegister);

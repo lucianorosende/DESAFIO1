@@ -1,7 +1,6 @@
-import { Background } from ".";
+import { Background, TextAnimation, PopupMaker } from ".";
 import { registerParticles } from "../utils";
 import { Link } from "react-router-dom";
-import { TextAnimation } from ".";
 import {
     SuccessButton,
     InteractButton,
@@ -12,6 +11,7 @@ import {
     Form,
 } from "../styles";
 import { registerSequence } from "../utils";
+import "reactjs-popup/dist/index.css";
 
 export function Register() {
     return (
@@ -54,7 +54,11 @@ export function Register() {
                     </Link>
                 </FormGroup>
                 <FormGroup>
-                    <InteractButton>Sign in</InteractButton>
+                    <PopupMaker
+                        Button={InteractButton}
+                        Text="Sign In"
+                        ModalText="You have Registered Successfully!"
+                    ></PopupMaker>
                 </FormGroup>
             </Form>
             <Background options={registerParticles} />
