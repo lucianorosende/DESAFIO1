@@ -38,8 +38,13 @@ class SessionController {
         if (!req.user) {
             res.json({ error: "something went wrong" });
         }
-        (req.session as SessionData).user = req.user;
-        return res.redirect("/api/sessions/login");
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "user data",
+            req.session.passport.user
+        );
     }
     async login(req: Request, res: Response) {
         if (!req.user) {
