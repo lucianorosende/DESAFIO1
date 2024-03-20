@@ -1,27 +1,13 @@
 import Popup from "reactjs-popup";
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { IStyledComponent } from "styled-components";
-import { Substitute } from "styled-components/dist/types";
-import { Modal, ErrorButton } from "../styles";
-import { marginProps } from "../interfaces";
+import { Modal } from "../styles";
 import { useNavigate } from "react-router-dom";
+import { ButtonMaker, ErrorContainer } from "../styles";
 
 export function PopupMaker({
-    Button,
     Text,
     Message,
     Flag,
 }: {
-    Button: IStyledComponent<
-        "web",
-        Substitute<
-            DetailedHTMLProps<
-                ButtonHTMLAttributes<HTMLButtonElement>,
-                HTMLButtonElement
-            >,
-            marginProps
-        >
-    >;
     Text: string;
     Message: string;
     Flag: boolean | null;
@@ -32,18 +18,46 @@ export function PopupMaker({
     };
     return (
         <>
-            <Button>{Text}</Button>
-            {Flag ? (
+            <ButtonMaker
+                background_color={"#3498db"}
+                background_hover_color={"#2980b9"}
+            >
+                {Text}
+            </ButtonMaker>
+            {Flag === true ? (
                 <Popup open={Flag} closeOnDocumentClick onClose={closeModal}>
                     <Modal>
                         {Message}
-                        <Button onClick={closeModal} margintop={15}>
+                        <ButtonMaker
+                            onClick={closeModal}
+                            margintop={15}
+                            background_color={"#3498db"}
+                            background_hover_color={"#2980b9"}
+                        >
                             Closing Will Redirect to Login
-                        </Button>
+                        </ButtonMaker>
                     </Modal>
                 </Popup>
             ) : Flag === false ? (
-                <ErrorButton margintop={15}>{Message}</ErrorButton>
+                <ErrorContainer>
+                    <ButtonMaker
+                        margintop={15}
+                        background_color={"#ff0000"}
+                        background_hover_color={"#ff3333"}
+                        disabled={true}
+                    >
+                        {Message}
+                    </ButtonMaker>
+                    <ButtonMaker
+                        margintop={15}
+                        marginleft={15}
+                        background_color={"#ff0000"}
+                        background_hover_color={"#ff3333"}
+                        disabled={true}
+                    >
+                        X
+                    </ButtonMaker>
+                </ErrorContainer>
             ) : null}
         </>
     );

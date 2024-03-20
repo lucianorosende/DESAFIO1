@@ -3,15 +3,12 @@ import { loginParticles, loginSequence, HandleLogin } from "../utils";
 import { Background, TextAnimation } from ".";
 import { useState } from "react";
 import {
-    SuccessButton,
-    ErrorButton,
-    InteractButton,
     Label,
     FormGroup,
     Container,
     Input,
-    Anchor,
     Form,
+    ButtonMaker,
 } from "../styles";
 export function Login() {
     const [email, setEmail] = useState("");
@@ -44,26 +41,38 @@ export function Login() {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <SuccessButton type="submit">Login</SuccessButton>
+                    <ButtonMaker
+                        background_color={"#4caf50"}
+                        background_hover_color={"#3e8e41"}
+                    >
+                        Login
+                    </ButtonMaker>
                 </FormGroup>
                 <FormGroup>
-                    <SuccessButton type="submit">
-                        <Anchor href="/api/sessions/github">
-                            Login with Github
-                        </Anchor>
-                    </SuccessButton>
+                    <ButtonMaker
+                        background_color={"#3498db"}
+                        background_hover_color={"#2980b9"}
+                    >
+                        Login with Github
+                    </ButtonMaker>
                 </FormGroup>
                 <FormGroup>
-                    <Link to="/register">
-                        <InteractButton>Sign Up</InteractButton>
+                    <Link to="/register" style={{ textDecoration: "none" }}>
+                        <ButtonMaker
+                            background_color={"#4caf50"}
+                            background_hover_color={"#3e8e41"}
+                        >
+                            Sign Up
+                        </ButtonMaker>
                     </Link>
                 </FormGroup>
                 <FormGroup>
-                    <ErrorButton type="submit">
-                        <Anchor href="/views/recover-pass">
-                            Forgot Password?
-                        </Anchor>
-                    </ErrorButton>
+                    <ButtonMaker
+                        background_color={"#f03e3e"}
+                        background_hover_color={"#c23636"}
+                    >
+                        Forgot Password?
+                    </ButtonMaker>
                 </FormGroup>
             </Form>
             <Background options={loginParticles} />

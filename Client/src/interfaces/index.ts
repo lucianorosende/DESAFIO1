@@ -1,2 +1,2 @@
+export * from "./buttonProps";
 export * from "./IRegister";
-export * from "./marginProps";

@@ -2,13 +2,12 @@ import { Background, TextAnimation, PopupMaker } from ".";
 import { registerParticles } from "../utils";
 import { Link } from "react-router-dom";
 import {
-    SuccessButton,
-    InteractButton,
     Label,
     FormGroup,
     RegisterContainer,
     Input,
     Form,
+    ButtonMaker,
 } from "../styles";
 import { registerSequence } from "../utils";
 import "reactjs-popup/dist/index.css";
@@ -118,13 +117,17 @@ export function Register() {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Link to="/">
-                        <SuccessButton>Go back to Login</SuccessButton>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                        <ButtonMaker
+                            background_color={"#4caf50"}
+                            background_hover_color={"#3e8e41"}
+                        >
+                            Go back to login
+                        </ButtonMaker>
                     </Link>
                 </FormGroup>
                 <FormGroup>
                     <PopupMaker
-                        Button={InteractButton}
                         Text="Sign In"
                         Message={message}
                         Flag={flag}
