@@ -15,7 +15,7 @@ export function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     return (
-        <Container>
+        <Container minheight={100} background_color="#463e3e">
             <TextAnimation sequence={loginSequence} />
             <Form onSubmit={(e) => HandleLogin(e, email, password, navigate)}>
                 <FormGroup>

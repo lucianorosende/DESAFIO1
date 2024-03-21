@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import {
     Label,
     FormGroup,
-    RegisterContainer,
     Input,
     Form,
     ButtonMaker,
+    Container,
 } from "../styles";
 import { registerSequence } from "../utils";
 import "reactjs-popup/dist/index.css";
 import { useState } from "react";
 import { IRegister } from "../interfaces";
+import { useDispatch } from "react-redux";
+import { flagFalse, flagTrue } from "../state/flag/flagSlice";
 
 export function Register() {
     const [email, setEmail] = useState("");
@@ -20,8 +22,8 @@ export function Register() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState("");
-    const [flag, setFlag] = useState<boolean | null>(null);
     const [message, setMessage] = useState("");
+    const dispatch = useDispatch();
     const data = {
         email,
         password,
@@ -53,17 +55,17 @@ export function Register() {
             const responseData = await response.json();
             if (responseData.error) {
                 setMessage(`ERROR: ${responseData.error}`);
-                setFlag(false);
+                dispatch(flagFalse());
             } else {
                 setMessage("You have registered Successfully");
-                setFlag(true);
+                dispatch(flagTrue());
             }
         } catch (error) {
             console.error("Error submitting form:", error);
         }
     };
     return (
-        <RegisterContainer>
+        <Container minheight={100} background_color="#498467">
             <TextAnimation sequence={registerSequence} />
             <Form onSubmit={(e) => HandleRegister(e, data)}>
                 <FormGroup>
@@ -121,20 +123,17 @@ export function Register() {
                         <ButtonMaker
                             background_color={"#4caf50"}
                             background_hover_color={"#3e8e41"}
+                            onClick={() => dispatch(flagTrue())}
                         >
                             Go back to login
                         </ButtonMaker>
                     </Link>
                 </FormGroup>
                 <FormGroup>
-                    <PopupMaker
-                        Text="Sign In"
-                        Message={message}
-                        Flag={flag}
-                    ></PopupMaker>
+                    <PopupMaker Text="Sign In" Message={message}></PopupMaker>
                 </FormGroup>
             </Form>
             <Background options={registerParticles} />
-        </RegisterContainer>
+        </Container>
     );
 }

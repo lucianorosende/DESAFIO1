@@ -1,21 +1,28 @@
 import Popup from "reactjs-popup";
 import { Modal } from "../styles";
 import { useNavigate } from "react-router-dom";
-import { ButtonMaker, ErrorContainer } from "../styles";
+import { ButtonMaker } from "../styles";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../state/store";
+import { resetFlag } from "../state/flag/flagSlice";
 
 export function PopupMaker({
     Text,
     Message,
-    Flag,
 }: {
     Text: string;
     Message: string;
-    Flag: boolean | null;
 }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const closeModal = () => {
         navigate("/");
+        dispatch(resetFlag());
     };
+    const closeModalError = () => {
+        dispatch(resetFlag());
+    };
+    const flag = useSelector((state: RootState) => state.flag.value);
     return (
         <>
             <ButtonMaker
@@ -24,8 +31,8 @@ export function PopupMaker({
             >
                 {Text}
             </ButtonMaker>
-            {Flag === true ? (
-                <Popup open={Flag} closeOnDocumentClick onClose={closeModal}>
+            {flag === true ? (
+                <Popup open={flag} closeOnDocumentClick onClose={closeModal}>
                     <Modal>
                         {Message}
                         <ButtonMaker
@@ -38,26 +45,24 @@ export function PopupMaker({
                         </ButtonMaker>
                     </Modal>
                 </Popup>
-            ) : Flag === false ? (
-                <ErrorContainer>
-                    <ButtonMaker
-                        margintop={15}
-                        background_color={"#ff0000"}
-                        background_hover_color={"#ff3333"}
-                        disabled={true}
-                    >
+            ) : flag === false ? (
+                <Popup
+                    open={true}
+                    closeOnDocumentClick
+                    onClose={closeModalError}
+                >
+                    <Modal>
                         {Message}
-                    </ButtonMaker>
-                    <ButtonMaker
-                        margintop={15}
-                        marginleft={15}
-                        background_color={"#ff0000"}
-                        background_hover_color={"#ff3333"}
-                        disabled={true}
-                    >
-                        X
-                    </ButtonMaker>
-                </ErrorContainer>
+                        <ButtonMaker
+                            onClick={closeModalError}
+                            margintop={15}
+                            background_color={"#ff3333"}
+                            background_hover_color={"#ff0000"}
+                        >
+                            Close
+                        </ButtonMaker>
+                    </Modal>
+                </Popup>
             ) : null}
         </>
     );
