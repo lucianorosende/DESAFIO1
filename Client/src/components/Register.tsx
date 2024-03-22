@@ -24,17 +24,14 @@ export function Register() {
     const [age, setAge] = useState("");
     const [message, setMessage] = useState("");
     const dispatch = useDispatch();
-    const data = {
+    const data: IRegister = {
         email,
         password,
         firstName,
         lastName,
         age,
     };
-    const HandleRegister = async (
-        e: React.FormEvent<HTMLFormElement>,
-        data: IRegister
-    ) => {
+    const HandleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await fetch(
@@ -67,7 +64,7 @@ export function Register() {
     return (
         <Container minheight={100} background_color="#498467">
             <TextAnimation sequence={registerSequence} />
-            <Form onSubmit={(e) => HandleRegister(e, data)}>
+            <Form onSubmit={HandleRegister}>
                 <FormGroup>
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
