@@ -50,6 +50,7 @@ export function Register() {
                 console.log("error");
             }
             const responseData = await response.json();
+
             if (responseData.error) {
                 setMessage(`ERROR: ${responseData.error}`);
                 dispatch(flagFalse());
@@ -120,7 +121,6 @@ export function Register() {
                         <ButtonMaker
                             background_color={"#4caf50"}
                             background_hover_color={"#3e8e41"}
-                            onClick={() => dispatch(flagTrue())}
                         >
                             Go back to login
                         </ButtonMaker>
