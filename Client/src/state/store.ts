@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import flagSlice from "./flag/flagSlice";
+import flagSlice from "./slices/flagSlice";
+import messageSlice from "./slices/messageSlice";
 
 export const store = configureStore({
     reducer: {
         flag: flagSlice,
+        message: messageSlice,
     },
 });
 

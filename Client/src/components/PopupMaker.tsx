@@ -4,60 +4,69 @@ import { useNavigate } from "react-router-dom";
 import { ButtonMaker } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
-import { resetFlag } from "../state/flag/flagSlice";
+import { flag } from "../state/slices";
 
 export function PopupMaker({
-    Text,
-    Message,
+    buttonText,
+    redirectReference,
+    redirect,
 }: {
-    Text: string;
-    Message: string;
+    buttonText: string;
+    redirectReference: string;
+    redirect: string;
 }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const closeModal = () => {
-        navigate("/");
-        dispatch(resetFlag());
+        navigate(redirect);
+        dispatch(flag(null));
     };
     const closeModalError = () => {
-        dispatch(resetFlag());
+        dispatch(flag(null));
     };
-    const flag = useSelector((state: RootState) => state.flag.value);
+    const flagSelector = useSelector((state: RootState) => state.flag.value);
+    const messageSelector = useSelector(
+        (state: RootState) => state.message.value
+    );
     return (
         <>
             <ButtonMaker
-                background_color={"#3498db"}
-                background_hover_color={"#2980b9"}
+                $background_color={"#3498db"}
+                $background_hover_color={"#2980b9"}
             >
-                {Text}
+                {buttonText}
             </ButtonMaker>
-            {flag === true ? (
-                <Popup open={flag} closeOnDocumentClick onClose={closeModal}>
+            {flagSelector === true ? (
+                <Popup
+                    open={flagSelector}
+                    closeOnDocumentClick
+                    onClose={closeModal}
+                >
                     <Modal>
-                        {Message}
+                        {messageSelector}
                         <ButtonMaker
                             onClick={closeModal}
-                            margintop={15}
-                            background_color={"#3498db"}
-                            background_hover_color={"#2980b9"}
+                            $margintop={15}
+                            $background_color={"#3498db"}
+                            $background_hover_color={"#2980b9"}
                         >
-                            Closing Will Redirect to Login
+                            Closing Will Redirect to {redirectReference}
                         </ButtonMaker>
                     </Modal>
                 </Popup>
-            ) : flag === false ? (
+            ) : flagSelector === false ? (
                 <Popup
                     open={true}
                     closeOnDocumentClick
                     onClose={closeModalError}
                 >
                     <Modal>
-                        {Message}
+                        {messageSelector}
                         <ButtonMaker
                             onClick={closeModalError}
-                            margintop={15}
-                            background_color={"#ff3333"}
-                            background_hover_color={"#ff0000"}
+                            $margintop={15}
+                            $background_color={"#ff3333"}
+                            $background_hover_color={"#ff0000"}
                         >
                             Close
                         </ButtonMaker>

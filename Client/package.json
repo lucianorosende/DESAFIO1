@@ -10,6 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
         "@react-navigation/core": "^6.4.15",
         "@reduxjs/toolkit": "^2.2.2",
         "@tsparticles/react": "^3.0.0",

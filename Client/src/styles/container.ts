@@ -4,8 +4,8 @@ import { IContainerProps } from "../interfaces";
 export const Container = styled.div<IContainerProps>`
     display: flex;
     justify-content: center;
-    flex-direction: ${(props) => props.flexdirection || "column"};
+    flex-direction: column;
     align-items: center;
-    min-height: ${(props) => props.minheight || 100}vh;
-    background-color: ${(props) => props.background_color};
+    min-height: ${(props) => props.$minheight || 100}vh;
+    background-color: ${(props) => props.$background_color};
 `;

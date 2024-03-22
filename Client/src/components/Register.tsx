@@ -9,70 +9,43 @@ import {
     ButtonMaker,
     Container,
 } from "../styles";
-import { registerSequence } from "../utils";
+import { registerSequence, HandleRegister } from "../utils";
 import "reactjs-popup/dist/index.css";
-import { useState } from "react";
-import { IRegister } from "../interfaces";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { flagFalse, flagTrue } from "../state/flag/flagSlice";
 
 export function Register() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [age, setAge] = useState("");
-    const [message, setMessage] = useState("");
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const firstNameRef = useRef<HTMLInputElement>(null);
+    const lastNameRef = useRef<HTMLInputElement>(null);
+    const ageRef = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
-    const data: IRegister = {
-        email,
-        password,
-        firstName,
-        lastName,
-        age,
-    };
-    const HandleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            const response = await fetch(
-                "http://localhost:8080/api/sessions/register",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                    credentials: "include",
-                }
-            );
-
-            if (!response.ok) {
-                console.log("error");
-            }
-            const responseData = await response.json();
-
-            if (responseData.error) {
-                setMessage(`ERROR: ${responseData.error}`);
-                dispatch(flagFalse());
-            } else {
-                setMessage("You have registered Successfully");
-                dispatch(flagTrue());
-            }
-        } catch (error) {
-            console.error("Error submitting form:", error);
-        }
-    };
     return (
-        <Container minheight={100} background_color="#498467">
+        <Container $minheight={100} $background_color="#498467">
             <TextAnimation sequence={registerSequence} />
-            <Form onSubmit={HandleRegister}>
+            <Form
+                onSubmit={(e) =>
+                    HandleRegister(
+                        e,
+                        {
+                            email: emailRef.current?.value,
+                            password: passwordRef.current?.value,
+                            firstName: firstNameRef.current?.value,
+                            lastName: lastNameRef.current?.value,
+                            age: ageRef.current?.value,
+                        },
+                        dispatch
+                    )
+                }
+            >
                 <FormGroup>
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
                         type="text"
                         id="firstName"
                         name="firstName"
-                        onChange={(e) => setFirstName(e.target.value)}
+                        ref={firstNameRef}
                         required
                     />
                 </FormGroup>
@@ -82,7 +55,7 @@ export function Register() {
                         type="text"
                         id="lastName"
                         name="lastName"
-                        onChange={(e) => setLastName(e.target.value)}
+                        ref={lastNameRef}
                         required
                     />
                 </FormGroup>
@@ -92,7 +65,7 @@ export function Register() {
                         type="email"
                         id="email"
                         name="email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        ref={emailRef}
                         required
                     />
                 </FormGroup>
@@ -102,7 +75,7 @@ export function Register() {
                         type="text"
                         id="Age"
                         name="Age"
-                        onChange={(e) => setAge(e.target.value)}
+                        ref={ageRef}
                         required
                     />
                 </FormGroup>
@@ -112,22 +85,26 @@ export function Register() {
                         type="password"
                         id="password"
                         name="password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        ref={passwordRef}
                         required
                     />
                 </FormGroup>
                 <FormGroup>
                     <Link to="/" style={{ textDecoration: "none" }}>
                         <ButtonMaker
-                            background_color={"#4caf50"}
-                            background_hover_color={"#3e8e41"}
+                            $background_color={"#4caf50"}
+                            $background_hover_color={"#3e8e41"}
                         >
                             Go back to login
                         </ButtonMaker>
                     </Link>
                 </FormGroup>
                 <FormGroup>
-                    <PopupMaker Text="Sign In" Message={message}></PopupMaker>
+                    <PopupMaker
+                        buttonText="Sign In"
+                        redirectReference="Login"
+                        redirect="/"
+                    ></PopupMaker>
                 </FormGroup>
             </Form>
             <Background options={registerParticles} />

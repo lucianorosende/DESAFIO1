@@ -1,7 +1,6 @@
 export * from "./anchor";
 export * from "./ButtonMaker";
 export * from "./container";
-export * from "./ErrorContainer";
 export * from "./form";
 export * from "./formGroup";
 export * from "./input";

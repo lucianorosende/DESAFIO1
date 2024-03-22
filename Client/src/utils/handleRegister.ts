@@ -1,16 +1,16 @@
-import { ILogin } from "../interfaces";
-import { AppDispatch } from "../state/store";
+import { IRegister } from "../interfaces";
 import { flag, message } from "../state/slices";
+import { AppDispatch } from "../state/store";
 
-export const HandleLogin = async (
+export const HandleRegister = async (
     e: React.FormEvent<HTMLFormElement>,
-    data: ILogin,
-    dispatch: AppDispatch
+    data: IRegister,
+    dispatcher: AppDispatch
 ) => {
     e.preventDefault();
     try {
         const response = await fetch(
-            "http://localhost:8080/api/sessions/login",
+            "http://localhost:8080/api/sessions/register",
             {
                 method: "POST",
                 headers: {
@@ -22,16 +22,17 @@ export const HandleLogin = async (
         );
 
         if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
+            console.log("error");
         }
         const responseData = await response.json();
+
         if (responseData.error) {
-            dispatch(message(`Failed to Login!`));
-            dispatch(flag(false));
-            return;
+            dispatcher(message(`ERROR: ${responseData.error}`));
+            dispatcher(flag(false));
         } else {
-            dispatch(message(`You have logged in!`));
-            dispatch(flag(true));
+            dispatcher(message("You have registered Successfully"));
+
+            dispatcher(flag(true));
         }
     } catch (error) {
         console.error("Error submitting form:", error);

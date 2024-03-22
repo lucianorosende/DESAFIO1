@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { loginParticles, loginSequence, HandleLogin } from "../utils";
-import { Background, TextAnimation } from ".";
-import { useState } from "react";
+import { Background, PopupMaker, TextAnimation } from ".";
+import { useRef } from "react";
 import {
     Label,
     FormGroup,
@@ -10,22 +10,33 @@ import {
     Form,
     ButtonMaker,
 } from "../styles";
+import { useDispatch } from "react-redux";
 export function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const dispatch = useDispatch();
     return (
-        <Container minheight={100} background_color="#463e3e">
+        <Container $minheight={100} $background_color="#463e3e">
             <TextAnimation sequence={loginSequence} />
-            <Form onSubmit={(e) => HandleLogin(e, email, password, navigate)}>
+            <Form
+                onSubmit={(e) =>
+                    HandleLogin(
+                        e,
+                        {
+                            email: emailRef.current!.value,
+                            password: passwordRef.current!.value,
+                        },
+                        dispatch
+                    )
+                }
+            >
                 <FormGroup>
                     <Label htmlFor="Email">Email</Label>
                     <Input
                         type="email"
                         id="email"
                         name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        ref={emailRef}
                         required
                     />
                 </FormGroup>
@@ -35,23 +46,21 @@ export function Login() {
                         type="password"
                         id="password"
                         name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        ref={passwordRef}
                         required
                     />
                 </FormGroup>
                 <FormGroup>
-                    <ButtonMaker
-                        background_color={"#4caf50"}
-                        background_hover_color={"#3e8e41"}
-                    >
-                        Login
-                    </ButtonMaker>
+                    <PopupMaker
+                        buttonText="Log in"
+                        redirectReference="Products"
+                        redirect="/products"
+                    ></PopupMaker>
                 </FormGroup>
                 <FormGroup>
                     <ButtonMaker
-                        background_color={"#3498db"}
-                        background_hover_color={"#2980b9"}
+                        $background_color={"#3498db"}
+                        $background_hover_color={"#2980b9"}
                     >
                         Login with Github
                     </ButtonMaker>
@@ -59,8 +68,8 @@ export function Login() {
                 <FormGroup>
                     <Link to="/register" style={{ textDecoration: "none" }}>
                         <ButtonMaker
-                            background_color={"#4caf50"}
-                            background_hover_color={"#3e8e41"}
+                            $background_color={"#4caf50"}
+                            $background_hover_color={"#3e8e41"}
                         >
                             Sign Up
                         </ButtonMaker>
@@ -68,8 +77,8 @@ export function Login() {
                 </FormGroup>
                 <FormGroup>
                     <ButtonMaker
-                        background_color={"#f03e3e"}
-                        background_hover_color={"#c23636"}
+                        $background_color={"#f03e3e"}
+                        $background_hover_color={"#c23636"}
                     >
                         Forgot Password?
                     </ButtonMaker>
