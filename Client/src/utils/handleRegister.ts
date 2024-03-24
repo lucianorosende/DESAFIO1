@@ -31,7 +31,6 @@ export const HandleRegister = async (
             dispatcher(flag(false));
         } else {
             dispatcher(message("You have registered Successfully"));
-
             dispatcher(flag(true));
         }
     } catch (error) {

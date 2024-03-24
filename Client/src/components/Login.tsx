@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { loginParticles, loginSequence, HandleLogin } from "../utils";
+import {
+    loginParticles,
+    loginSequence,
+    HandleLogin,
+    handleGithubLogin,
+} from "../utils";
 import { Background, PopupMaker, TextAnimation } from ".";
 import { useRef } from "react";
 import {
@@ -61,6 +66,7 @@ export function Login() {
                     <ButtonMaker
                         $background_color={"#3498db"}
                         $background_hover_color={"#2980b9"}
+                        onClick={handleGithubLogin}
                     >
                         Login with Github
                     </ButtonMaker>

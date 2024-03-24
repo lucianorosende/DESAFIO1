@@ -1,3 +1,4 @@
+export * from "./handleGithubLogin";
 export * from "./handleLogin";
 export * from "./handleRegister";
 export * from "./loginParticles";
