@@ -1,10 +1,11 @@
-import Popup from "reactjs-popup";
-import { Modal } from "../styles";
-import { useNavigate } from "react-router-dom";
 import { ButtonMaker } from "../styles";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
 import { flag } from "../state/slices";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Modal from "react-modal";
+import { customStyles } from "../config/modal.config";
 
 export function PopupMaker({
     buttonText,
@@ -15,15 +16,24 @@ export function PopupMaker({
     redirectReference: string;
     redirect: string;
 }) {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const closeModal = () => {
+    const navigate = useNavigate();
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+        dispatch(flag(null));
         navigate(redirect);
+    }
+    function closeModalError() {
+        setIsOpen(false);
         dispatch(flag(null));
-    };
-    const closeModalError = () => {
-        dispatch(flag(null));
-    };
+    }
+
     const flagSelector = useSelector((state: RootState) => state.flag.value);
     const messageSelector = useSelector(
         (state: RootState) => state.message.value
@@ -33,45 +43,44 @@ export function PopupMaker({
             <ButtonMaker
                 $background_color={"#3498db"}
                 $background_hover_color={"#2980b9"}
+                onClick={openModal}
             >
                 {buttonText}
             </ButtonMaker>
+
             {flagSelector === true ? (
-                <Popup
-                    open={flagSelector}
-                    closeOnDocumentClick
-                    onClose={closeModal}
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
                 >
-                    <Modal>
-                        {messageSelector}
-                        <ButtonMaker
-                            onClick={closeModal}
-                            $margintop={15}
-                            $background_color={"#3498db"}
-                            $background_hover_color={"#2980b9"}
-                        >
-                            Closing Will Redirect to {redirectReference}
-                        </ButtonMaker>
-                    </Modal>
-                </Popup>
+                    {messageSelector}
+                    <ButtonMaker
+                        $background_color={"#3498db"}
+                        $background_hover_color={"#2980b9"}
+                        onClick={closeModal}
+                        $margintop={15}
+                    >
+                        You will be redirected to {redirectReference}
+                    </ButtonMaker>
+                </Modal>
             ) : flagSelector === false ? (
-                <Popup
-                    open={true}
-                    closeOnDocumentClick
-                    onClose={closeModalError}
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModalError}
+                    style={customStyles}
+                    contentLabel="Example Modal"
                 >
-                    <Modal>
-                        {messageSelector}
-                        <ButtonMaker
-                            onClick={closeModalError}
-                            $margintop={15}
-                            $background_color={"#ff3333"}
-                            $background_hover_color={"#ff0000"}
-                        >
-                            Close
-                        </ButtonMaker>
-                    </Modal>
-                </Popup>
+                    {messageSelector}
+                    <ButtonMaker
+                        $background_color={"#ff0000"}
+                        onClick={closeModalError}
+                        $margintop={15}
+                    >
+                        Try again
+                    </ButtonMaker>
+                </Modal>
             ) : null}
         </>
     );

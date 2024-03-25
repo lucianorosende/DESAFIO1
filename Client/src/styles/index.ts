@@ -5,4 +5,3 @@ export * from "./form";
 export * from "./formGroup";
 export * from "./input";
 export * from "./label";
-export * from "./modal";

@@ -16,6 +16,7 @@ import {
     ButtonMaker,
 } from "../styles";
 import { useDispatch } from "react-redux";
+
 export function Login() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -28,8 +29,8 @@ export function Login() {
                     HandleLogin(
                         e,
                         {
-                            email: emailRef.current!.value,
-                            password: passwordRef.current!.value,
+                            email: emailRef.current?.value,
+                            password: passwordRef.current?.value,
                         },
                         dispatch
                     )

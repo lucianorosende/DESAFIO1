@@ -10,7 +10,6 @@ import {
     Container,
 } from "../styles";
 import { registerSequence, HandleRegister } from "../utils";
-import "reactjs-popup/dist/index.css";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 

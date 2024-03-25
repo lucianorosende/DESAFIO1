@@ -11,11 +11,11 @@ import jwt from "jsonwebtoken";
 
 class SessionController {
     async githubCB(req: Request, res: Response) {
-        req.session.user = req.user;
-        const update = await UsersService.updateConnection(
-            req.session.user.email
-        );
-        return res.redirect("/views/products");
+        // const update = await UsersService.updateConnection(
+        //     req.session.user.email
+        // );
+        // return res.redirect("/views/products");
+        customRequest(res, httpStatus.Ok, "success", "github login", "");
     }
     renderFailLogin(req: Request, res: Response) {
         return res.json({ error: "failed to login" });
