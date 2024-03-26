@@ -1,6 +1,6 @@
 export * from "./handleFetchResponse";
+export * from "./handleFormData";
 export * from "./handleGithubLogin";
-export * from "./handleLogin";
 export * from "./handleRegister";
 export * from "./loginParticles";
 export * from "./loginTextAnimation";

@@ -1,5 +1,5 @@
 import { Background, TextAnimation, PopupMaker } from ".";
-import { registerParticles } from "../utils";
+import { handleFormData, registerParticles, registerSequence } from "../utils";
 import { Link } from "react-router-dom";
 import {
     Label,
@@ -9,7 +9,6 @@ import {
     ButtonMaker,
     Container,
 } from "../styles";
-import { registerSequence, HandleRegister } from "../utils";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 
@@ -25,8 +24,9 @@ export function Register() {
             <TextAnimation sequence={registerSequence} />
             <Form
                 onSubmit={(e) =>
-                    HandleRegister(
+                    handleFormData(
                         e,
+                        "http://localhost:8080/api/sessions/register",
                         {
                             email: emailRef.current?.value,
                             password: passwordRef.current?.value,

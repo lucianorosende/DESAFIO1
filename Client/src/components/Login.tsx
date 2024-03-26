@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {
     loginParticles,
     loginSequence,
-    HandleLogin,
+    handleFormData,
     handleGithubLogin,
 } from "../utils";
 import { Background, PopupMaker, TextAnimation } from ".";
@@ -26,8 +26,9 @@ export function Login() {
             <TextAnimation sequence={loginSequence} />
             <Form
                 onSubmit={(e) =>
-                    HandleLogin(
+                    handleFormData(
                         e,
+                        "http://localhost:8080/api/sessions/login",
                         {
                             email: emailRef.current?.value,
                             password: passwordRef.current?.value,

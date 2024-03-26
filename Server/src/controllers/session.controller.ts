@@ -40,7 +40,7 @@ class SessionController {
             res,
             httpStatus.Ok,
             "success",
-            "user data",
+            "You have Registered!",
             req.session.passport.user
         );
     }
@@ -64,7 +64,13 @@ class SessionController {
             admin: req.session.passport.user.isAdmin,
             role: user?.role,
         };
-        customRequest(res, httpStatus.Ok, "success", "user data", data);
+        customRequest(
+            res,
+            httpStatus.Ok,
+            "success",
+            "You have logged in!",
+            data
+        );
     }
     async recoverPass(req: Request, res: Response) {
         const recover = await SessionsService.recoverPassword(req);

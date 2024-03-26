@@ -1,5 +1,7 @@
 export * from "./App";
 export * from "./Background";
+export * from "./Error";
+export * from "./Loading";
 export * from "./Login";
 export * from "./main";
 export * from "./PopupMaker";

@@ -1,36 +1,34 @@
-import { ILogin } from "../interfaces";
+import { ILogin, IRegister } from "../interfaces";
 import { AppDispatch } from "../state/store";
 import { flag, message } from "../state/slices";
 
-export const HandleLogin = async (
+export const handleFormData = async (
     e: React.FormEvent<HTMLFormElement>,
-    data: ILogin,
+    url: string,
+    data: ILogin | IRegister,
     dispatch: AppDispatch
 ) => {
     e.preventDefault();
     try {
-        const response = await fetch(
-            "http://localhost:8080/api/sessions/login",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-                credentials: "include",
-            }
-        );
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+            credentials: "include",
+        });
 
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
         }
         const responseData = await response.json();
         if (responseData.error) {
-            dispatch(message(`Failed to Login!`));
+            dispatch(message(`${responseData.error}`));
             dispatch(flag(false));
             return;
         } else {
-            dispatch(message(`You have logged in!`));
+            dispatch(message(`${responseData.msg}`));
             dispatch(flag(true));
         }
     } catch (error) {
