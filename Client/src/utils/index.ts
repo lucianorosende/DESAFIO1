@@ -1,3 +1,4 @@
+export * from "./handleFetchResponse";
 export * from "./handleGithubLogin";
 export * from "./handleLogin";
 export * from "./handleRegister";

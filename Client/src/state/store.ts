@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import flagSlice from "./slices/flagSlice";
 import messageSlice from "./slices/messageSlice";
+import isLoggedSlice from "./slices/isLoggedSlice";
 
 export const store = configureStore({
     reducer: {
         flag: flagSlice,
         message: messageSlice,
+        login: isLoggedSlice,
     },
 });
 

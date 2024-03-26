@@ -62,3 +62,9 @@ sessionRouter.post(
     validateUser,
     asyncHandler(SessionsController.login)
 );
+
+sessionRouter.get(
+    "/isLogged",
+    validateUser,
+    asyncHandler(SessionsController.isLogged)
+);

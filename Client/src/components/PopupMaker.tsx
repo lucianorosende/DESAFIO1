@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
 import { flag } from "../state/slices";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { customStyles } from "../config/modal.config";
 
@@ -33,6 +33,8 @@ export function PopupMaker({
         setIsOpen(false);
         dispatch(flag(null));
     }
+
+    useEffect(() => {}, []);
 
     const flagSelector = useSelector((state: RootState) => state.flag.value);
     const messageSelector = useSelector(

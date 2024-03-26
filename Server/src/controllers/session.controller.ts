@@ -7,15 +7,13 @@ import { createHash } from "../utils";
 import { ProductsService, ViewsService, SessionsService } from "../services";
 import { IUser } from "../interfaces";
 import { UsersService } from "../services";
-import jwt from "jsonwebtoken";
 
 class SessionController {
     async githubCB(req: Request, res: Response) {
-        // const update = await UsersService.updateConnection(
-        //     req.session.user.email
-        // );
-        // return res.redirect("/views/products");
-        customRequest(res, httpStatus.Ok, "success", "github login", "");
+        const update = await UsersService.updateConnection(
+            req.session.passport.user.email
+        );
+        return res.redirect("http://localhost:5173/products");
     }
     renderFailLogin(req: Request, res: Response) {
         return res.json({ error: "failed to login" });
@@ -83,6 +81,9 @@ class SessionController {
     async changePass(req: Request, res: Response) {
         const pass = await SessionsService.changePass(req);
         res.render("password-success");
+    }
+    async isLogged(req: Request, res: Response) {
+        res.json("is logged");
     }
 }
 
