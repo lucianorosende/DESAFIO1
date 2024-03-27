@@ -3,7 +3,6 @@ export * from "./Background";
 export * from "./Error";
 export * from "./Loading";
 export * from "./Login";
-export * from "./main";
 export * from "./PopupMaker";
 export * from "./Products";
 export * from "./Register";

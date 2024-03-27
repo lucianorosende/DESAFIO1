@@ -11,35 +11,20 @@ export function Products() {
         handleFetchResponse(dispatch);
     }, [dispatch]);
 
-    if (loginState) {
-        return (
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-                nostrum possimus cum earum eum dignissimos deleniti officia,
-                sunt facere animi ducimus minima odio laboriosam repellat sed
-                expedita laudantium tenetur dolorum.
-            </div>
-        );
-    } else if (loginState === false) {
-        return <Error />;
-    } else {
-        return <Loading />;
-    }
-
-    // return (
-    //     <>
-    //         {loginState ? (
-    //             <div>
-    //                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    //                 Modi nostrum possimus cum earum eum dignissimos deleniti
-    //                 officia, sunt facere animi ducimus minima odio laboriosam
-    //                 repellat sed expedita laudantium tenetur dolorum.
-    //             </div>
-    //         ) : loginState === false ? (
-    //             <Error />
-    //         ) : (
-    //             <Loading />
-    //         )}
-    //     </>
-    // );
+    return (
+        <>
+            {loginState ? (
+                <div>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Modi nostrum possimus cum earum eum dignissimos deleniti
+                    officia, sunt facere animi ducimus minima odio laboriosam
+                    repellat sed expedita laudantium tenetur dolorum.
+                </div>
+            ) : loginState === false ? (
+                <Error />
+            ) : (
+                <Loading />
+            )}
+        </>
+    );
 }
