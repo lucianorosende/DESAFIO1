@@ -68,3 +68,8 @@ sessionRouter.get(
     validateUser,
     asyncHandler(SessionsController.isLogged)
 );
+sessionRouter.get(
+    "/loginData",
+    validateUser,
+    asyncHandler(SessionsController.geLoginData)
+);

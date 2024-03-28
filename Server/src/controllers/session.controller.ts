@@ -51,6 +51,28 @@ class SessionController {
         const update = await UsersService.updateConnection(
             (req.session as SessionData).passport.user.email
         );
+        customRequest(res, httpStatus.Ok, "success", "You have logged in!", []);
+    }
+    async recoverPass(req: Request, res: Response) {
+        const recover = await SessionsService.recoverPassword(req);
+        res.redirect("/views/checkEmail");
+    }
+    async emailRecovery(req: Request, res: Response) {
+        const recover = await SessionsService.emailRecovery(req);
+        if (recover && Date.now() < recover.expire) {
+            res.render("changePass", { email: recover.email });
+        } else {
+            res.send("error");
+        }
+    }
+    async changePass(req: Request, res: Response) {
+        const pass = await SessionsService.changePass(req);
+        res.render("password-success");
+    }
+    async isLogged(req: Request, res: Response) {
+        res.json("is logged");
+    }
+    async geLoginData(req: Request, res: Response) {
         let getProds = await ProductsService.getProductsQueries(req.query);
         let paginateData = await ViewsService.productData(getProds);
         let user = await UsersService.findUserById(
@@ -71,25 +93,6 @@ class SessionController {
             "You have logged in!",
             data
         );
-    }
-    async recoverPass(req: Request, res: Response) {
-        const recover = await SessionsService.recoverPassword(req);
-        res.redirect("/views/checkEmail");
-    }
-    async emailRecovery(req: Request, res: Response) {
-        const recover = await SessionsService.emailRecovery(req);
-        if (recover && Date.now() < recover.expire) {
-            res.render("changePass", { email: recover.email });
-        } else {
-            res.send("error");
-        }
-    }
-    async changePass(req: Request, res: Response) {
-        const pass = await SessionsService.changePass(req);
-        res.render("password-success");
-    }
-    async isLogged(req: Request, res: Response) {
-        res.json("is logged");
     }
 }
 

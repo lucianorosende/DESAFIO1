@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
 import { useEffect } from "react";
 import { handleFetchResponse } from "../utils";
-import { Loading, Error } from ".";
+import { Loading, Error, ProductList } from ".";
 
 export function Products() {
     const loginState = useSelector((state: RootState) => state.login.value);
@@ -14,12 +14,7 @@ export function Products() {
     return (
         <>
             {loginState ? (
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi nostrum possimus cum earum eum dignissimos deleniti
-                    officia, sunt facere animi ducimus minima odio laboriosam
-                    repellat sed expedita laudantium tenetur dolorum.
-                </div>
+                <ProductList />
             ) : loginState === false ? (
                 <Error />
             ) : (

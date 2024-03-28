@@ -4,6 +4,7 @@ export * from "./Error";
 export * from "./Loading";
 export * from "./Login";
 export * from "./PopupMaker";
+export * from "./ProductList";
 export * from "./Products";
 export * from "./Register";
 export * from "./TextAnimation";
