@@ -1,0 +1,11 @@
+{
+    "exportall.config.folderListener": [
+        "/Client/src/components",
+        "/Client/src/components/Register",
+        "/Client/src/components/Login",
+        "/Client/src/components/Inputs",
+        "/Client/src/components/Home",
+        "/Client/src/components/Buttons",
+        "/Client/src/components/Animation"
+    ]
+}

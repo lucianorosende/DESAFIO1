@@ -1,6 +1,6 @@
 import Lottie from "react-lottie";
-import { ButtonMaker, Container } from "../styles";
-import loadingAnimation from "../json/loadingAnimation.json";
+import { ButtonMaker, Container } from "../../styles";
+import loadingAnimation from "../../json/loadingAnimation.json";
 
 export function Loading() {
     const defaultOptions = {

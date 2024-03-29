@@ -1,7 +1,7 @@
-import { loginParticles, loginSequence } from "../utils";
-import { Background, LoginForm, TextAnimation } from ".";
+import { loginParticles, loginSequence } from "../../utils";
+import { Background, LoginForm, TextAnimation } from "..";
 
-import { Container } from "../styles";
+import { Container } from "../../styles";
 
 export function Login() {
     return (

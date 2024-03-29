@@ -1,9 +1,9 @@
 import Lottie from "react-lottie";
-import { Container, ButtonMaker } from "../styles";
-import errorAnimation from "../json/errorAnimation.json";
+import { Container, ButtonMaker } from "../../styles";
+import errorAnimation from "../../json/errorAnimation.json";
 import { useNavigate } from "react-router-dom";
-import { TextAnimation } from ".";
-import { errorSequence } from "../utils";
+import { TextAnimation } from "..";
+import { errorSequence } from "../../utils";
 
 export function Error() {
     const navigate = useNavigate();

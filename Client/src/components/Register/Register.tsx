@@ -1,7 +1,7 @@
-import { Background, TextAnimation, RegisterForm } from ".";
-import { registerParticles, registerSequence } from "../utils";
+import { Background, TextAnimation, RegisterForm } from "..";
+import { registerParticles, registerSequence } from "../../utils";
 
-import { Container } from "../styles";
+import { Container } from "../../styles";
 
 export function Register() {
     return (

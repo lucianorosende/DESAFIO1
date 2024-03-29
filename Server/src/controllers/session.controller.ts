@@ -13,7 +13,7 @@ class SessionController {
         const update = await UsersService.updateConnection(
             req.session.passport.user.email
         );
-        return res.redirect("http://localhost:5173/products");
+        return res.redirect("http://localhost:5173/home");
     }
     renderFailLogin(req: Request, res: Response) {
         return res.json({ error: "failed to login" });
