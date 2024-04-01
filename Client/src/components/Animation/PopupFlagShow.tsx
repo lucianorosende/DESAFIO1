@@ -1,6 +1,6 @@
 import Modal from "react-modal";
-import { ButtonMaker } from "../..";
 import { customStyles } from "../../config/modal.config";
+import { ClickButton, ErrorButton } from "..";
 
 export function PopupFlagShow({
     flag,
@@ -27,14 +27,11 @@ export function PopupFlagShow({
                     contentLabel="Example Modal"
                 >
                     {message}
-                    <ButtonMaker
-                        $background_color={"#3498db"}
-                        $background_hover_color={"#2980b9"}
+                    <ClickButton
                         onClick={closeModal}
-                        $margintop={15}
-                    >
-                        You will be redirected to {redirectReference}
-                    </ButtonMaker>
+                        buttonChildren={`You will be redirected to ${redirectReference}`}
+                        marginTop={15}
+                    />
                 </Modal>
             ) : flag === false ? (
                 <Modal
@@ -44,13 +41,11 @@ export function PopupFlagShow({
                     contentLabel="Example Modal"
                 >
                     {message}
-                    <ButtonMaker
-                        $background_color={"#ff0000"}
+                    <ErrorButton
                         onClick={closeModalError}
-                        $margintop={15}
-                    >
-                        Try again
-                    </ButtonMaker>
+                        buttonChildren="Try again"
+                        marginTop={15}
+                    />
                 </Modal>
             ) : null}
         </>

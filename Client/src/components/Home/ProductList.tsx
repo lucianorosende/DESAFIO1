@@ -8,9 +8,15 @@ import { Container } from "../../styles";
 import { useEffect, useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { IProduct } from "../../interfaces";
+import { ErrorButton } from "..";
+import { handleLogout } from "../..";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export function ProductList() {
     const [productList, setProductList] = useState<IProduct[]>([]);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(
@@ -73,6 +79,10 @@ export function ProductList() {
                         </Box>
                     );
                 })}
+                <ErrorButton
+                    buttonChildren="Logout"
+                    onClick={() => handleLogout(dispatch, navigate)}
+                />
             </Container>
         </>
     );

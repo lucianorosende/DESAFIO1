@@ -1,4 +1,4 @@
-import { ButtonMaker } from "../../styles";
+import { Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../state/store";
 import { flag } from "../../state/slices";
@@ -41,13 +41,9 @@ export function PopupMaker({
     );
     return (
         <>
-            <ButtonMaker
-                $background_color={"#3498db"}
-                $background_hover_color={"#2980b9"}
-                onClick={openModal}
-            >
+            <Button variant="contained" onClick={openModal} type="submit">
                 {buttonText}
-            </ButtonMaker>
+            </Button>
             <PopupFlagShow
                 flag={flagSelector}
                 modalIsOpen={modalIsOpen}

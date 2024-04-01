@@ -6,7 +6,7 @@ import {
     FormInput,
     PopupButton,
     LinkedButton,
-    NormalButton,
+    ErrorButton,
 } from "..";
 
 import { handleFormData, handleGithubLogin } from "../../utils";
@@ -47,22 +47,11 @@ export function LoginForm() {
                 navigateTo="/home"
             />
             <ClickButton
-                buttonBGcolor="#3498db"
-                buttonHoverColor="#2980b9"
                 buttonChildren="Login with Github"
                 onClick={handleGithubLogin}
             />
-            <LinkedButton
-                navigateTo="/register"
-                buttonBGcolor="#4caf50"
-                buttonHoverColor="#3e8e41"
-                buttonChildren="Sign Up"
-            />
-            <NormalButton
-                buttonBGcolor="#f03e3e"
-                buttonHoverColor="#c23636"
-                buttonChildren="Forgot Password?"
-            />
+            <LinkedButton navigateTo="/register" buttonChildren="Sign Up" />
+            <ErrorButton buttonChildren="Forgot Password?" onClick={() => {}} />
         </Form>
     );
 }

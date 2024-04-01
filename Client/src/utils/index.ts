@@ -2,6 +2,7 @@ export * from "./errorTextAnimation";
 export * from "./handleFetchResponse";
 export * from "./handleFormData";
 export * from "./handleGithubLogin";
+export * from "./handleLogout";
 export * from "./handleRegister";
 export * from "./loginParticles";
 export * from "./loginTextAnimation";

@@ -1,8 +1,10 @@
 import Lottie from "react-lottie";
-import { ButtonMaker, Container } from "../../styles";
+import { Container } from "../../styles";
 import loadingAnimation from "../../json/loadingAnimation.json";
-
+import { ClickButton } from "..";
+import { useNavigate } from "react-router-dom";
 export function Loading() {
+    const navigate = useNavigate();
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -15,7 +17,11 @@ export function Loading() {
     return (
         <Container>
             <Lottie options={defaultOptions} height={400} width={400} />
-            <ButtonMaker $background_color="#0066ffff">Loading...</ButtonMaker>
+            <ClickButton buttonChildren="Loading..." />
+            <ClickButton
+                buttonChildren="Go back to login?"
+                onClick={() => navigate("/")}
+            />
         </Container>
     );
 }

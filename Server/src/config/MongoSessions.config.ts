@@ -15,9 +15,7 @@ export const MongoSessions = () => {
         saveUninitialized: false,
         rolling: true,
         proxy: true,
-        cookie: {
-            httpOnly: false,
-        },
+        cookie: { httpOnly: false },
     };
     app.use(session(sessionOptions));
 };

@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import session, { Session, SessionData } from "express-session";
 import { customRequest, httpStatus, logger } from "../utils";
-import { UserMongooseModel } from "../DAO/MONGO";
-import { sendMail } from "../utils/sendMail";
-import { createHash } from "../utils";
 import { ProductsService, ViewsService, SessionsService } from "../services";
-import { IUser } from "../interfaces";
 import { UsersService } from "../services";
 
 class SessionController {
@@ -25,11 +21,18 @@ class SessionController {
         const update = await UsersService.updateConnection(
             req.session.passport.user.email
         );
-        (req.session as Session).destroy((err: Error | null) => {
+        res.cookie("connect.sid", "", { maxAge: 0 });
+        req.session.destroy((err: Error | null) => {
             if (err) {
                 return logger.error(err);
             }
-            return res.redirect("/api/sessions/login");
+            customRequest(
+                res,
+                httpStatus.Ok,
+                "success",
+                "You have Logged Out",
+                []
+            );
         });
     }
     async register(req: Request, res: Response) {

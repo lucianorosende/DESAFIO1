@@ -1,20 +1,21 @@
 import { FormGroup } from "../../styles";
 import { Button } from "@mui/material";
 
-export function ClickButton({
+export function ErrorButton({
     buttonChildren,
     onClick,
     marginTop,
 }: {
     buttonChildren: string;
-    onClick?: () => void;
+    onClick: () => void;
     marginTop?: number;
 }) {
     return (
         <FormGroup>
             <Button
-                onClick={onClick}
                 variant="contained"
+                color="error"
+                onClick={onClick}
                 style={{ marginTop: marginTop || 0 }}
             >
                 {buttonChildren}

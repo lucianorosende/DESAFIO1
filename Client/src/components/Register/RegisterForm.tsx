@@ -59,12 +59,7 @@ export function RegisterForm() {
                 reference={passwordRef}
                 labelChildren={"Password"}
             />
-            <LinkedButton
-                navigateTo={"/"}
-                buttonBGcolor="#4caf50"
-                buttonHoverColor="#3e8e41"
-                buttonChildren="Go back to login"
-            />
+            <LinkedButton navigateTo={"/"} buttonChildren="Go back to login" />
             <PopupButton
                 buttonText="Sign In"
                 redirectReference="Login"

@@ -1,5 +1,6 @@
 import { RefObject } from "react";
-import { FormGroup, Label, Input } from "../../styles";
+import { FormGroup } from "../../styles";
+import { TextField } from "@mui/material";
 
 export function FormInput({
     inputType,
@@ -14,12 +15,15 @@ export function FormInput({
 }) {
     return (
         <FormGroup>
-            <Label htmlFor={inputName}>{labelChildren}</Label>
-            <Input
-                type={inputType}
+            <TextField
+                fullWidth
                 id={inputName}
-                name={inputName}
-                ref={reference}
+                label={labelChildren}
+                variant="filled"
+                type={inputType}
+                color="primary"
+                inputRef={reference}
+                sx={{ backgroundColor: "#fff" }}
                 required
             />
         </FormGroup>
