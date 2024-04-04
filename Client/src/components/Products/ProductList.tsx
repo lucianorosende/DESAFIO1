@@ -8,29 +8,20 @@ import { Container } from "../../styles";
 import { useEffect, useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { IProduct } from "../../interfaces";
-import { ErrorButton } from "..";
-import { handleLogout } from "../..";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 export function ProductList() {
     const [productList, setProductList] = useState<IProduct[]>([]);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetch(
-                "http://localhost:8080/api/sessions/loginData",
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                }
-            );
+            const data = await fetch("http://localhost:8080/api/products/all", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
             const responseData = await data.json();
-            setProductList(responseData.data.prod);
+            setProductList(responseData.data);
         };
         fetchData();
     }, []);
@@ -79,10 +70,6 @@ export function ProductList() {
                         </Box>
                     );
                 })}
-                <ErrorButton
-                    buttonChildren="Logout"
-                    onClick={() => handleLogout(dispatch, navigate)}
-                />
             </Container>
         </>
     );

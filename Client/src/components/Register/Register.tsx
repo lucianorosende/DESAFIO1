@@ -5,7 +5,7 @@ import { Container } from "../../styles";
 
 export function Register() {
     return (
-        <Container $minheight={100} $background_color="#498467">
+        <Container $minheight={95} $background_color="#498467">
             <TextAnimation sequence={registerSequence} />
             <RegisterForm />
             <Background options={registerParticles} />

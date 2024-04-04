@@ -4,4 +4,6 @@ export * from "./Buttons";
 export * from "./Home";
 export * from "./Inputs";
 export * from "./Login";
+export * from "./NavBar";
+export * from "./Products";
 export * from "./Register";

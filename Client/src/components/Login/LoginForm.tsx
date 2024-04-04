@@ -44,7 +44,7 @@ export function LoginForm() {
             <PopupButton
                 buttonText="Log in"
                 redirectReference="Home"
-                navigateTo="/home"
+                navigateTo="/"
             />
             <ClickButton
                 buttonChildren="Login with Github"

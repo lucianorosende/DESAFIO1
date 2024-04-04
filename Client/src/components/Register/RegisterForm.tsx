@@ -59,11 +59,14 @@ export function RegisterForm() {
                 reference={passwordRef}
                 labelChildren={"Password"}
             />
-            <LinkedButton navigateTo={"/"} buttonChildren="Go back to login" />
+            <LinkedButton
+                navigateTo={"/login"}
+                buttonChildren="Go back to login"
+            />
             <PopupButton
                 buttonText="Sign In"
                 redirectReference="Login"
-                navigateTo="/"
+                navigateTo="/login"
             />
         </Form>
     );
