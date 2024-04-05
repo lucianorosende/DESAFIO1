@@ -1,21 +1,10 @@
 import { Container } from "../..";
 import { TextAnimation, Background, ClickButton, Footer } from "..";
-import {
-    loginSequence,
-    loginParticles,
-    whyChooseUsSequence,
-    handleFetchResponse,
-} from "../..";
+import { loginSequence, loginParticles, whyChooseUsSequence } from "../..";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 export function Home() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        handleFetchResponse(dispatch);
-    }, [dispatch]);
     return (
         <>
             <Container $minheight={100} $background_color="#463e3e">

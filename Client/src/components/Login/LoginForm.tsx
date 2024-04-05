@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
 import { Form } from "../../styles";
 import {
     ClickButton,
@@ -8,27 +6,13 @@ import {
     LinkedButton,
     ErrorButton,
 } from "..";
-
-import { handleFormData, handleGithubLogin } from "../../utils";
+import { handleGithubLogin } from "../../utils";
+import { useLogin } from "../../hooks";
 
 export function LoginForm() {
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const dispatch = useDispatch();
+    const { emailRef, passwordRef, handleLogin } = useLogin();
     return (
-        <Form
-            onSubmit={(e) =>
-                handleFormData(
-                    e,
-                    "http://localhost:8080/api/sessions/login",
-                    {
-                        email: emailRef.current?.value,
-                        password: passwordRef.current?.value,
-                    },
-                    dispatch
-                )
-            }
-        >
+        <Form onSubmit={handleLogin}>
             <FormInput
                 inputType={"email"}
                 inputName={"email"}

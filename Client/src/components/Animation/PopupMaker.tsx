@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../state/store";
-import { flag } from "../../state/slices";
+import { modalFlag } from "../../state/slices";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PopupFlagShow } from ".";
@@ -25,17 +25,19 @@ export function PopupMaker({
 
     function closeModal() {
         setIsOpen(false);
-        dispatch(flag(null));
+        dispatch(modalFlag(null));
         navigate(redirect);
     }
     function closeModalError() {
         setIsOpen(false);
-        dispatch(flag(null));
+        dispatch(modalFlag(null));
     }
 
     useEffect(() => {}, []);
 
-    const flagSelector = useSelector((state: RootState) => state.flag.value);
+    const flagSelector = useSelector(
+        (state: RootState) => state.modalFlag.value
+    );
     const messageSelector = useSelector(
         (state: RootState) => state.message.value
     );

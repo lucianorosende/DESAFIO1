@@ -9,14 +9,14 @@ const initialState: FlagState = {
 };
 
 const flagSlice = createSlice({
-    name: "flag",
+    name: "ModalFlag",
     initialState,
     reducers: {
-        flag: (state, action: PayloadAction<boolean | null>) => {
+        modalFlag: (state, action: PayloadAction<boolean | null>) => {
             state.value = action.payload;
         },
     },
 });
 
-export const { flag } = flagSlice.actions;
+export const { modalFlag } = flagSlice.actions;
 export default flagSlice.reducer;

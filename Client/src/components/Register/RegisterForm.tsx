@@ -1,34 +1,19 @@
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useRegister } from "../../hooks";
 import { Form } from "../../styles";
 import { FormInput, PopupButton } from "..";
-import { handleFormData } from "../../utils";
 import { LinkedButton } from "../Buttons/LinkedButton";
 
 export function RegisterForm() {
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const firstNameRef = useRef<HTMLInputElement>(null);
-    const lastNameRef = useRef<HTMLInputElement>(null);
-    const ageRef = useRef<HTMLInputElement>(null);
-    const dispatch = useDispatch();
+    const {
+        emailRef,
+        passwordRef,
+        firstNameRef,
+        lastNameRef,
+        ageRef,
+        handleRegister,
+    } = useRegister();
     return (
-        <Form
-            onSubmit={(e) =>
-                handleFormData(
-                    e,
-                    "http://localhost:8080/api/sessions/register",
-                    {
-                        email: emailRef.current?.value,
-                        password: passwordRef.current?.value,
-                        firstName: firstNameRef.current?.value,
-                        lastName: lastNameRef.current?.value,
-                        age: ageRef.current?.value,
-                    },
-                    dispatch
-                )
-            }
-        >
+        <Form onSubmit={handleRegister}>
             <FormInput
                 inputType={"text"}
                 inputName={"firstName"}

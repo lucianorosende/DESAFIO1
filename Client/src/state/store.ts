@@ -5,7 +5,7 @@ import isLoggedSlice from "./slices/isLoggedSlice";
 
 export const store = configureStore({
     reducer: {
-        flag: flagSlice,
+        modalFlag: flagSlice,
         message: messageSlice,
         login: isLoggedSlice,
     },
