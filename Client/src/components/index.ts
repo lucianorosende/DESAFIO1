@@ -6,4 +6,5 @@ export * from "./Inputs";
 export * from "./Login";
 export * from "./NavBar";
 export * from "./Products";
+export * from "./Profile";
 export * from "./Register";

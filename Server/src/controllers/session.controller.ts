@@ -75,7 +75,7 @@ class SessionController {
     async isLogged(req: Request, res: Response) {
         res.json("is logged");
     }
-    async geLoginData(req: Request, res: Response) {
+    async getLoginData(req: Request, res: Response) {
         let getProds = await ProductsService.getProductsQueries(req.query);
         let paginateData = await ViewsService.productData(getProds);
         let user = await UsersService.findUserById(
@@ -84,18 +84,13 @@ class SessionController {
         let data = {
             prod: getProds.payload,
             pagination: paginateData,
-            user: (req.session as SessionData).passport.user.email,
-            cID: req.session.passport.user.cart.cID,
+            firstName: req.session.passport.user.firstName,
+            lastName: req.session.passport.user.lastName,
+            email: req.session.passport.user.email,
             admin: req.session.passport.user.isAdmin,
             role: user?.role,
         };
-        customRequest(
-            res,
-            httpStatus.Ok,
-            "success",
-            "You have logged in!",
-            data
-        );
+        customRequest(res, httpStatus.Ok, "success", "User Data", data);
     }
 }
 

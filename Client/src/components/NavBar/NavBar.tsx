@@ -1,7 +1,9 @@
 import { ListDivider, Box, List } from "@mui/joy";
 import { LoginButton, HomeButton, ProfileButton, ProductsButton } from ".";
+import { useIsLogged } from "../../hooks";
 
 export function NavBar() {
+    useIsLogged();
     return (
         <Box
             component="nav"

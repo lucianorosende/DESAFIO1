@@ -20,7 +20,10 @@ export function Error() {
         <Container $minheight={100} $background_color="#463e3e">
             <Lottie options={defaultOptions} height={400} width={400} />
             <TextAnimation sequence={errorSequence} />
-            <ClickButton buttonChildren="Login" onClick={() => navigate("/")} />
+            <ClickButton
+                buttonChildren="Login"
+                onClick={() => navigate("/login")}
+            />
         </Container>
     );
 }

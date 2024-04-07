@@ -1,6 +1,6 @@
 // import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login, Home, Register, NavBar, ProductList } from ".";
+import { Login, Home, Register, NavBar, ProductList, Profile } from ".";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../state/store";
@@ -15,6 +15,7 @@ export function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/products" element={<ProductList />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </BrowserRouter>
         </Provider>
