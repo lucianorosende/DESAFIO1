@@ -21,8 +21,8 @@ export function Error() {
             <Lottie options={defaultOptions} height={400} width={400} />
             <TextAnimation sequence={errorSequence} />
             <ClickButton
-                buttonChildren="Login"
-                onClick={() => navigate("/login")}
+                buttonChildren="Go back to home"
+                onClick={() => navigate("/")}
             />
         </Container>
     );

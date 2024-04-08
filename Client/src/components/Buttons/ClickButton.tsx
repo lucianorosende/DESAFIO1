@@ -5,10 +5,12 @@ export function ClickButton({
     buttonChildren,
     onClick,
     marginTop,
+    type,
 }: {
     buttonChildren: string;
     onClick?: () => void;
     marginTop?: number;
+    type?: string;
 }) {
     return (
         <FormGroup>
@@ -16,6 +18,7 @@ export function ClickButton({
                 onClick={onClick}
                 variant="contained"
                 style={{ marginTop: marginTop || 0 }}
+                type={"submit" || type}
             >
                 {buttonChildren}
             </Button>

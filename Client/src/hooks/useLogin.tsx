@@ -1,11 +1,14 @@
-import { modalFlag, message, login } from "../state/slices";
+import { login } from "../state/slices";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function useLogin() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data = {
@@ -30,14 +33,21 @@ export function useLogin() {
             }
             const responseData = await response.json();
             if (responseData.error) {
-                dispatch(message(`${responseData.error}`));
-                dispatch(modalFlag(false));
                 dispatch(login(false));
                 return;
             } else {
-                dispatch(message(`${responseData.msg}`));
-                dispatch(modalFlag(true));
                 dispatch(login(true));
+                navigate("/");
+                toast("You have Logged in!", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             }
         } catch (error) {
             console.error("Error submitting form:", error);

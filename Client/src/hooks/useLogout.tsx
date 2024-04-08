@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../state/slices";
+import { toast } from "react-toastify";
 
 export function useLogout() {
     const dispatch = useDispatch();
@@ -21,6 +22,16 @@ export function useLogout() {
             if (data.status === "success") {
                 dispatch(login(false));
                 navigate("/");
+                toast("You have Logged out!", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
         } catch (e) {
             console.log(e);

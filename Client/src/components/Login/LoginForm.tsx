@@ -1,11 +1,5 @@
 import { Form } from "../../styles";
-import {
-    ClickButton,
-    FormInput,
-    PopupButton,
-    LinkedButton,
-    ErrorButton,
-} from "..";
+import { ClickButton, FormInput, LinkedButton, ErrorButton } from "..";
 import { handleGithubLogin } from "../../utils";
 import { useLogin } from "../../hooks";
 
@@ -25,11 +19,7 @@ export function LoginForm() {
                 reference={passwordRef}
                 labelChildren={"Password"}
             />
-            <PopupButton
-                buttonText="Log in"
-                redirectReference="Home"
-                navigateTo="/"
-            />
+            <ClickButton buttonChildren="Log In" type="submit" />
             <ClickButton
                 buttonChildren="Login with Github"
                 onClick={handleGithubLogin}
