@@ -1,5 +1,5 @@
-import { ListDivider, Box, List } from "@mui/joy";
-import { LoginButton, HomeButton, ProfileButton, ProductsButton } from ".";
+import { Box, List } from "@mui/joy";
+import { LeftSideBar, RightSideBar } from ".";
 import { useIsLogged } from "../../hooks";
 
 export function NavBar() {
@@ -11,12 +11,8 @@ export function NavBar() {
             sx={{ flexGrow: 1, padding: 1, backgroundColor: "#fff" }}
         >
             <List role="menubar" orientation="horizontal">
-                <HomeButton />
-                <ListDivider />
-                <ProfileButton />
-                <ListDivider />
-                <ProductsButton />
-                <LoginButton />
+                <LeftSideBar />
+                <RightSideBar />
             </List>
         </Box>
     );
