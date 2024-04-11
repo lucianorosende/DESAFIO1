@@ -38,10 +38,8 @@ class ProductService implements IProductFunction {
                 title: doc.title,
                 description: doc.description,
                 price: doc.price,
-                thumbnail: doc.thumbnail,
-                code: doc.code,
+                image: doc.image,
                 stock: doc.stock,
-                status: doc.status,
                 category: doc.category,
                 pID: doc.pID,
                 owner: doc.owner,
@@ -96,7 +94,6 @@ class ProductService implements IProductFunction {
         return generatedProds;
     }
     async addProduct(prod: IProduct) {
-        prod.status = true;
         let readData = await this.getProducts();
         if (readData.length === 0) {
             prod.pID = 1;
@@ -118,10 +115,8 @@ class ProductService implements IProductFunction {
             title: item.title,
             description: item.description,
             price: item.price,
-            thumbnail: item.thumbnails,
-            code: item.code,
+            image: item.image,
             stock: item.stock! - item.quantity,
-            status: item.status,
             category: item.category,
             pID: item.pID,
             _id: item._id,

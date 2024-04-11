@@ -6,7 +6,6 @@ const productSchema: Schema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true,
     },
     description: {
         type: String,
@@ -16,21 +15,13 @@ const productSchema: Schema = new Schema({
         type: Number,
         required: true,
     },
-    thumbnail: {
-        type: [String],
-        required: true,
-    },
-    code: {
+    image: {
         type: String,
         required: true,
-        unique: true,
     },
     stock: {
         type: Number,
         required: true,
-    },
-    status: {
-        type: Boolean,
     },
     category: {
         type: String,
@@ -41,6 +32,10 @@ const productSchema: Schema = new Schema({
         required: true,
     },
     pID: {
+        type: Number,
+        required: true,
+    },
+    code: {
         type: Number,
         required: true,
     },

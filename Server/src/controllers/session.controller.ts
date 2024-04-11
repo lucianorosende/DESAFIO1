@@ -89,6 +89,7 @@ class SessionController {
             email: req.session.passport.user.email,
             admin: req.session.passport.user.isAdmin,
             role: user?.role,
+            cart: req.session.passport.user.cart,
         };
         customRequest(res, httpStatus.Ok, "success", "User Data", data);
     }

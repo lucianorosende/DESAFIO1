@@ -27,6 +27,7 @@ export function ProductCard() {
                                 <Typography variant="h5" component="div">
                                     {product.title}
                                 </Typography>
+                                <img src={product.image}></img>
                                 <Typography
                                     sx={{ mb: 1.5 }}
                                     color="text.secondary"

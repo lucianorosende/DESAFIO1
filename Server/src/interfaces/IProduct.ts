@@ -4,11 +4,10 @@ export interface IProduct extends Document {
     title: string;
     description: string;
     price: number;
-    thumbnail: string[];
-    code: string;
+    image: string;
     stock: number;
-    status: boolean;
     category: string;
+    code: number;
     quantity?: number;
     owner?: string;
     pID?: number;

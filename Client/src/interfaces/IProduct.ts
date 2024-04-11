@@ -7,6 +7,7 @@ export interface IProduct {
     stock: number;
     status: boolean;
     category: string;
+    image: string;
     quantity?: number;
     owner?: string;
     pID?: number;
