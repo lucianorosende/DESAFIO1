@@ -6,7 +6,7 @@ import { loginParticles } from "../..";
 export function ProductList() {
     return (
         <>
-            <Container $flexDirection="row" $minheight={75}>
+            <Container $flexDirection="row" $minheight={75} $alignItems="auto">
                 <ProductCard />
                 <Background options={loginParticles} />
             </Container>
