@@ -4,14 +4,12 @@ import { CardContent } from "@mui/material";
 import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useFetch } from "../../hooks";
-import { IProduct } from "../..";
+import { Container, IProduct } from "../..";
 
-export function ProductCard() {
-    const { productList } = useFetch();
+export function ProductCard({ list }: { list: IProduct[] }) {
     return (
-        <>
-            {productList.map((product: IProduct) => {
+        <Container $flexDirection="row" $minheight={75} $alignItems="auto">
+            {list.map((product: IProduct) => {
                 return (
                     <Card
                         variant="outlined"
@@ -23,15 +21,18 @@ export function ProductCard() {
                             flexGrow: 1,
                             margin: 2,
                         }}
+                        key={product.pID}
                     >
-                        <CardMedia
-                            component="img"
-                            sx={{
-                                minWidth: 100,
-                                minHeight: 100,
-                            }}
-                            image={product.image}
-                        />
+                        <Container $minheight={32}>
+                            <CardMedia
+                                component="img"
+                                sx={{
+                                    maxWidth: "70%",
+                                    maxHeight: "70%",
+                                }}
+                                image={product.image}
+                            />
+                        </Container>
                         <CardContent>
                             <Typography
                                 sx={{ fontSize: 14 }}
@@ -70,6 +71,6 @@ export function ProductCard() {
                     </Card>
                 );
             })}
-        </>
+        </Container>
     );
 }

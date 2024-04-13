@@ -10,7 +10,7 @@ class ProductService implements IProductFunction {
         return res;
     }
     async getProductsQueries(reqQuery: any) {
-        let defaultLimit: number = 10;
+        let defaultLimit: number = 3;
         let defaultPages: number = 1;
         let options: unknown;
         const { category, stock, limit, pages, sort } = reqQuery;

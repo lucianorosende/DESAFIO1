@@ -1,15 +1,16 @@
-import { Container } from "../../styles";
 import { ProductCard } from ".";
 import { Background } from "..";
 import { loginParticles } from "../..";
+import { useFetchProducts } from "../../hooks";
+import { ProductPagination } from "./ProductPagination";
 
 export function ProductList() {
+    const { productList, pages, setRenderPage } = useFetchProducts();
     return (
         <>
-            <Container $flexDirection="row" $minheight={75} $alignItems="auto">
-                <ProductCard />
-                <Background options={loginParticles} />
-            </Container>
+            <ProductCard list={productList} />
+            <ProductPagination pages={pages} setActualPage={setRenderPage} />
+            <Background options={loginParticles} />
         </>
     );
 }
