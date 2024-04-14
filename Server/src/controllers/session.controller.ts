@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import session, { Session, SessionData } from "express-session";
 import { customRequest, httpStatus, logger } from "../utils";
-import { ProductsService, ViewsService, SessionsService } from "../services";
+import {
+    ProductsService,
+    ViewsService,
+    SessionsService,
+    CartsService,
+} from "../services";
 import { UsersService } from "../services";
 
 class SessionController {
@@ -76,20 +81,13 @@ class SessionController {
         res.json("is logged");
     }
     async getLoginData(req: Request, res: Response) {
-        let getProds = await ProductsService.getProductsQueries(req.query);
-        let paginateData = await ViewsService.productData(getProds);
-        let user = await UsersService.findUserById(
-            req.session.passport.user._id
-        );
         let data = {
-            prod: getProds.payload,
-            pagination: paginateData,
             firstName: req.session.passport.user.firstName,
             lastName: req.session.passport.user.lastName,
             email: req.session.passport.user.email,
             admin: req.session.passport.user.isAdmin,
-            role: user?.role,
-            cart: req.session.passport.user.cart,
+            role: req.session.passport.user.role,
+            cartID: req.session.passport.user.cartID,
         };
         customRequest(res, httpStatus.Ok, "success", "User Data", data);
     }

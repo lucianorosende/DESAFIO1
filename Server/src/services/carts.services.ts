@@ -13,6 +13,10 @@ class CartService implements ICartFunction {
         let res = await CartsModel.getById(cid);
         return res;
     }
+    async getCartByIdNotParams(cid: number) {
+        let res = await CartsModel.getById(cid);
+        return res;
+    }
     async getCartByIdAndPopulate(reqParams: any) {
         const { cid } = reqParams;
         let res = await CartsModel.getAndPopulate(cid);
@@ -28,7 +32,7 @@ class CartService implements ICartFunction {
             cart.cID = newId + 1;
         }
         let add = await CartsModel.create(cart);
-        return add;
+        return add.cID;
     }
     async addProductInCart(reqParams: any) {
         const { cid, pid } = reqParams;
@@ -69,7 +73,10 @@ class CartService implements ICartFunction {
             }
         } else {
             getCart[0]?.products.push(newProd);
-            const productCreate = await CartsModel.create(getCart);
+            const productCreate = await CartsModel.updateProductIntoCart(
+                cid,
+                getCart
+            );
         }
         return getCart;
     }

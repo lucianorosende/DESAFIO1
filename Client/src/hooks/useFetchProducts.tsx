@@ -17,7 +17,6 @@ export function useFetchProducts() {
                 }
             );
             const responseData = await data.json();
-            console.log(responseData);
             setProductList(responseData.data.payload);
             setPages(responseData.data.totalPages);
         };

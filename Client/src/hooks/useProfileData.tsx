@@ -5,6 +5,7 @@ export function useProfileData() {
     const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
     const [admin, setAdmin] = useState("");
+    const [cID, setcID] = useState();
     useEffect(() => {
         const handleProfileData = async () => {
             try {
@@ -23,6 +24,7 @@ export function useProfileData() {
                     setFirstName(data.data.firstName);
                     setlastName(data.data.lastName);
                     setEmail(data.data.email);
+                    setcID(data.data.cartID);
                     const admin = data.data.admin.toString();
                     setAdmin(admin);
                 }
@@ -33,5 +35,5 @@ export function useProfileData() {
         handleProfileData();
     }, []);
 
-    return { firstName, lastName, email, admin };
+    return { firstName, lastName, email, admin, cID };
 }

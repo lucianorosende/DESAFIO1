@@ -25,7 +25,7 @@ class UserService {
             password: createHash(password),
             isAdmin: false,
             role: role || "user",
-            cart: cart,
+            cartID: cart,
             documents: [],
             last_connection: undefined,
         };

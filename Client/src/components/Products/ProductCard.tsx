@@ -5,8 +5,12 @@ import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Container, IProduct } from "../..";
+import { ProductModalDetail } from "./ProductModalDetail";
+import { useAddProduct, useProfileData } from "../../hooks";
 
 export function ProductCard({ list }: { list: IProduct[] }) {
+    const { cID } = useProfileData();
+    const { handleAddProductInCart } = useAddProduct();
     return (
         <Container $flexDirection="row" $minheight={75} $alignItems="auto">
             {list.map((product: IProduct) => {
@@ -34,13 +38,6 @@ export function ProductCard({ list }: { list: IProduct[] }) {
                             />
                         </Container>
                         <CardContent>
-                            <Typography
-                                sx={{ fontSize: 14 }}
-                                color="text.secondary"
-                                gutterBottom
-                            >
-                                {product.pID}
-                            </Typography>
                             <Typography variant="h5" component="div">
                                 {product.title}
                             </Typography>
@@ -48,10 +45,6 @@ export function ProductCard({ list }: { list: IProduct[] }) {
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                 ${product.price}
                             </Typography>
-                            {/* <Typography variant="body2">
-                                    {product.description}
-                                    <br />
-                                </Typography> */}
                         </CardContent>
                         <CardActions
                             sx={{
@@ -60,10 +53,17 @@ export function ProductCard({ list }: { list: IProduct[] }) {
                                 flexGrow: 1,
                             }}
                         >
-                            <Button variant="contained">Show Details</Button>
+                            <ProductModalDetail product={product} cID={cID} />
                             <Button
                                 variant="contained"
                                 endIcon={<AddShoppingCartIcon />}
+                                onClick={() =>
+                                    handleAddProductInCart(
+                                        product.pID,
+                                        cID,
+                                        product
+                                    )
+                                }
                             >
                                 Add to Cart
                             </Button>

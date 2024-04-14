@@ -36,8 +36,8 @@ const UserSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    cart: {
-        type: Object,
+    cartID: {
+        type: Number,
         required: true,
     },
     documents: [

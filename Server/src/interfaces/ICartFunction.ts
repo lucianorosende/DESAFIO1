@@ -5,7 +5,7 @@ import { ICartProduct } from ".";
 export interface ICartFunction {
     getAll(): Promise<TCart[]>;
     getCartById(cid: number): Promise<TCart[]>;
-    addCart(): Promise<TCart>;
+    addCart(): Promise<number | undefined>;
     addProductInCart(cID: number, pID: number): Promise<TCart[] | undefined>;
     updateProductsFromCart(cID: number, body: ICartProduct): Promise<TCart[]>;
     UpdateQuantityProduct(reqParams: any, body: ICartProduct): Promise<TCart[]>;

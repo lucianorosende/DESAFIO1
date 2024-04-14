@@ -82,3 +82,5 @@ error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"co
 error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":null}}
 error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":null}}
 error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":null}}
+error: Error in auth github
+error: undefined {"_message":"users validation failed","errors":{"cart":{"kind":"required","message":"Path `cart` is required.","name":"ValidatorError","path":"cart","properties":{"message":"Path `cart` is required.","path":"cart","type":"required"}}}}

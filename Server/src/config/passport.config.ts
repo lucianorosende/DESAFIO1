@@ -3,7 +3,7 @@ import local from "passport-local";
 import { createHash, isValidPassword } from "../utils/bcrypt";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import { SessionData } from "express-session";
-import { UsersService } from "../services";
+import { CartsService, UsersService } from "../services";
 import { logger } from "../utils";
 
 const LocalStrategy = local.Strategy;
@@ -25,7 +25,7 @@ export function passportConfig() {
                         profile
                     );
                     let user = await UsersService.findUserByEmail(ghData);
-                    console.log(user);
+                    let cart = await CartsService.addCart();
                     if (!user) {
                         const newUser = {
                             email: profile.email,
@@ -38,7 +38,7 @@ export function passportConfig() {
                             password: "nopass",
                             role: profile._json.type,
                             Age: 0,
-                            cart: "test",
+                            cartID: cart,
                             documents: [],
                             last_connection: new Date(),
                         };

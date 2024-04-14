@@ -1,3 +1,4 @@
+export * from "./useAddProduct";
 export * from "./useFetchProducts";
 export * from "./useIsLogged";
 export * from "./useLogin";
