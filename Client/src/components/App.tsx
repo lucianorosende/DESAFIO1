@@ -1,6 +1,14 @@
 // import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login, Home, Register, NavBar, ProductList, Profile, Cart } from ".";
+import {
+    Login,
+    Home,
+    Register,
+    NavBar,
+    ProductListQuery,
+    Profile,
+    Cart,
+} from ".";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../state/store";
@@ -16,7 +24,10 @@ export function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/products" element={<ProductList />} />
+                    <Route
+                        path="/search/:query"
+                        element={<ProductListQuery />}
+                    />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/cart" element={<Cart />} />
                 </Routes>

@@ -17,7 +17,7 @@ export function Error() {
     };
 
     return (
-        <Container $minheight={100} $background_color="#463e3e">
+        <Container $minheight={95} $background_color="#463e3e">
             <Lottie options={defaultOptions} height={400} width={400} />
             <TextAnimation sequence={errorSequence} />
             <ClickButton

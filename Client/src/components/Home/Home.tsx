@@ -1,5 +1,11 @@
 import { Container } from "../..";
-import { TextAnimation, Background, ClickButton, Footer } from "..";
+import {
+    TextAnimation,
+    Background,
+    ClickButton,
+    Footer,
+    ProductList,
+} from "..";
 import { loginSequence, loginParticles, whyChooseUsSequence } from "../..";
 import { useNavigate } from "react-router-dom";
 
@@ -9,16 +15,14 @@ export function Home() {
         <>
             <Container $minheight={100} $background_color="#463e3e">
                 <TextAnimation sequence={loginSequence} />
+                <ProductList />
             </Container>
-            <Container $minheight={100} $background_color="#000">
+            <Container $minheight={100} $background_color="#498467">
                 <TextAnimation sequence={whyChooseUsSequence} />
                 <ClickButton
                     buttonChildren="Login Here!"
                     onClick={() => navigate("/login")}
                 />
-            </Container>
-            <Container $minheight={100} $background_color="#ff0000">
-                Product list show here
             </Container>
             <Footer />
             <Background options={loginParticles} />

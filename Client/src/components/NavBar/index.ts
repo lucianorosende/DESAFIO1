@@ -6,3 +6,4 @@ export * from "./NavBar";
 export * from "./ProductsButton";
 export * from "./ProfileButton";
 export * from "./RightSideBar";
+export * from "./SearchField";
