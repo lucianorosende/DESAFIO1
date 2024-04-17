@@ -8,7 +8,7 @@ class UserModel {
     async getById(id: any) {
         return await UserMongooseModel.findById(id);
     }
-    async getByEmail(email: string) {
+    async getByEmail(email: string | undefined) {
         let find = await UserMongooseModel.findOne({
             email: email,
         });

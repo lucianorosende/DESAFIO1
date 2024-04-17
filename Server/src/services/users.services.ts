@@ -67,7 +67,7 @@ class UserService {
         const update = await UsersModel.updateRole(find);
         return update;
     }
-    async updateConnection(email: string) {
+    async updateConnection(email: string | undefined) {
         const find = await UsersModel.getByEmail(email);
         const date = new Date();
         find!.last_connection = date;

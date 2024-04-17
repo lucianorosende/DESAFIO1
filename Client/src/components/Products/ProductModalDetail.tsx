@@ -11,6 +11,9 @@ import { Card, CardMedia, CardActions } from "@mui/material";
 import { CardContent } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useAddProduct } from "../../hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { useNavigate } from "react-router-dom";
 
 export function ProductModalDetail({
     product,
@@ -23,7 +26,8 @@ export function ProductModalDetail({
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const { handleAddProductInCart } = useAddProduct();
-
+    const navigate = useNavigate();
+    const loginSelector = useSelector((state: RootState) => state.login.value);
     const style = {
         position: "absolute",
         top: "50%",
@@ -120,19 +124,29 @@ export function ProductModalDetail({
                                 >
                                     Close
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    endIcon={<AddShoppingCartIcon />}
-                                    onClick={() =>
-                                        handleAddProductInCart(
-                                            product.pID,
-                                            cID,
-                                            product
-                                        )
-                                    }
-                                >
-                                    Add to Cart
-                                </Button>
+                                {loginSelector === true ? (
+                                    <Button
+                                        variant="contained"
+                                        endIcon={<AddShoppingCartIcon />}
+                                        onClick={() =>
+                                            handleAddProductInCart(
+                                                product.pID,
+                                                cID,
+                                                product
+                                            )
+                                        }
+                                    >
+                                        Add to Cart
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        color="error"
+                                        variant="contained"
+                                        onClick={() => navigate("/login")}
+                                    >
+                                        Login To Purchase
+                                    </Button>
+                                )}
                             </CardActions>
                         </Card>
                     </Box>

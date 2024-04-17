@@ -11,9 +11,9 @@ import { UsersService } from "../services";
 
 class SessionController {
     async githubCB(req: Request, res: Response) {
-        const update = await UsersService.updateConnection(
-            req.session.passport.user.email
-        );
+        const find = await UsersService.findUserById(req.session.passport.user);
+        const update = await UsersService.updateConnection(find?.email);
+        req.session.passport.user = find;
         res.redirect("http://localhost:5173");
     }
     renderFailLogin(req: Request, res: Response) {
@@ -23,9 +23,8 @@ class SessionController {
         return res.json({ error: "failed to register" });
     }
     async destroySession(req: Request, res: Response) {
-        const update = await UsersService.updateConnection(
-            req.session.passport.user.email
-        );
+        const find = await UsersService.findUserById(req.session.passport.user);
+        const update = await UsersService.updateConnection(find?.email);
         res.cookie("connect.sid", "", { maxAge: 0 });
         req.session.destroy((err: Error | null) => {
             if (err) {
@@ -56,9 +55,9 @@ class SessionController {
         if (!req.user) {
             res.json({ error: "user not found" });
         }
-        const update = await UsersService.updateConnection(
-            (req.session as SessionData).passport.user.email
-        );
+        const find = await UsersService.findUserById(req.session.passport.user);
+        const update = await UsersService.updateConnection(find?.email);
+        req.session.passport.user = find;
         customRequest(res, httpStatus.Ok, "success", "You have logged in!", []);
     }
     async recoverPass(req: Request, res: Response) {
@@ -81,13 +80,14 @@ class SessionController {
         res.json("is logged");
     }
     async getLoginData(req: Request, res: Response) {
+        const find = await UsersService.findUserById(req.session.passport.user);
         let data = {
-            firstName: req.session.passport.user.firstName,
-            lastName: req.session.passport.user.lastName,
-            email: req.session.passport.user.email,
-            admin: req.session.passport.user.isAdmin,
-            role: req.session.passport.user.role,
-            cartID: req.session.passport.user.cartID,
+            firstName: find?.firstName,
+            lastName: find?.lastName,
+            email: find?.email,
+            admin: find?.isAdmin,
+            role: find?.role,
+            cartID: find?.cartID,
         };
         customRequest(res, httpStatus.Ok, "success", "User Data", data);
     }

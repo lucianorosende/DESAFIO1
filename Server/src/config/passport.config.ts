@@ -93,10 +93,11 @@ export function passportConfig() {
                     if (user) {
                         logger.warn("user already registered");
                         return done(null, false);
+                    } else {
+                        const newUser = await UsersService.createUser(req.body);
+                        logger.info("User created");
+                        return done(null, newUser);
                     }
-                    const newUser = await UsersService.createUser(req.body);
-                    logger.info("User created");
-                    return done(null, newUser);
                 } catch (e) {
                     logger.error(e);
                 }
@@ -104,8 +105,8 @@ export function passportConfig() {
         )
     );
 
-    passport.serializeUser((user, done) => {
-        done(null, user);
+    passport.serializeUser((user: any, done) => {
+        done(null, user._id);
     });
 
     passport.deserializeUser(async (id, done) => {

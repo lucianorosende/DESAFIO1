@@ -59,7 +59,6 @@ sessionRouter.post(
     passport.authenticate("login", {
         failureRedirect: "/api/sessions/faillogin",
     }),
-    validateUser,
     asyncHandler(SessionsController.login)
 );
 

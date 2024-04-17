@@ -8,7 +8,14 @@ export function NavBar() {
         <Box
             component="nav"
             aria-label="My site"
-            sx={{ flexGrow: 1, padding: 1, backgroundColor: "#fff" }}
+            sx={{
+                flexGrow: 1,
+                padding: 1,
+                backgroundColor: "#fff",
+                position: "sticky",
+                top: 0,
+                zIndex: 1,
+            }}
         >
             <List role="menubar" orientation="horizontal">
                 <LeftSideBar />

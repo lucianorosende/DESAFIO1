@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
 import { useRef } from "react";
-import { modalFlag, message } from "../state/slices";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function useRegister() {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -8,7 +8,7 @@ export function useRegister() {
     const firstNameRef = useRef<HTMLInputElement>(null);
     const lastNameRef = useRef<HTMLInputElement>(null);
     const ageRef = useRef<HTMLInputElement>(null);
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -37,12 +37,29 @@ export function useRegister() {
             }
             const responseData = await response.json();
             if (responseData.error) {
-                dispatch(message(`${responseData.error}`));
-                dispatch(modalFlag(false));
+                toast("You have Failed to Register!", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
                 return;
             } else {
-                dispatch(message(`${responseData.msg}`));
-                dispatch(modalFlag(true));
+                toast("You have Registered successfully!", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                navigate("/login");
             }
         } catch (error) {
             console.error("Error submitting form:", error);

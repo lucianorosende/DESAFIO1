@@ -7,10 +7,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Container, IProduct } from "../..";
 import { ProductModalDetail } from "./ProductModalDetail";
 import { useAddProduct, useProfileData } from "../../hooks";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { useNavigate } from "react-router-dom";
 export function ProductCard({ list }: { list: IProduct[] }) {
     const { cID } = useProfileData();
     const { handleAddProductInCart } = useAddProduct();
+    const loginSelector = useSelector((state: RootState) => state.login.value);
+    const navigate = useNavigate();
     return (
         <Container $flexDirection="row" $minheight={75} $alignItems="auto">
             {list.map((product: IProduct) => {
@@ -54,19 +58,29 @@ export function ProductCard({ list }: { list: IProduct[] }) {
                             }}
                         >
                             <ProductModalDetail product={product} cID={cID} />
-                            <Button
-                                variant="contained"
-                                endIcon={<AddShoppingCartIcon />}
-                                onClick={() =>
-                                    handleAddProductInCart(
-                                        product.pID,
-                                        cID,
-                                        product
-                                    )
-                                }
-                            >
-                                Add to Cart
-                            </Button>
+                            {loginSelector === true ? (
+                                <Button
+                                    variant="contained"
+                                    endIcon={<AddShoppingCartIcon />}
+                                    onClick={() =>
+                                        handleAddProductInCart(
+                                            product.pID,
+                                            cID,
+                                            product
+                                        )
+                                    }
+                                >
+                                    Add to Cart
+                                </Button>
+                            ) : (
+                                <Button
+                                    color="error"
+                                    variant="contained"
+                                    onClick={() => navigate("/login")}
+                                >
+                                    Login To Purchase
+                                </Button>
+                            )}
                         </CardActions>
                     </Card>
                 );
