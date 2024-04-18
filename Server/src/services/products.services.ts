@@ -9,6 +9,17 @@ class ProductService implements IProductFunction {
         let res = await ProductsModel.getAll();
         return res;
     }
+    async getProductsCategories() {
+        let res = await ProductsModel.getAll();
+        const dataFilter = res.map((item) => item.category);
+        const unique = [...new Set(dataFilter)];
+        return unique;
+    }
+    async getCategoriesAll(reqParams: any) {
+        let res = await ProductsModel.getAll();
+        let data = res.filter((item) => item.category === reqParams.category);
+        return data;
+    }
     async getProductsQueries(reqQuery: any) {
         let defaultLimit: number = 3;
         let defaultPages: number = 1;

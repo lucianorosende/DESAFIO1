@@ -8,6 +8,7 @@ import {
     ProductListQuery,
     Profile,
     Cart,
+    CategoryListSearch,
 } from ".";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -30,6 +31,10 @@ export function App() {
                     />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route
+                        path="/category/:category"
+                        element={<CategoryListSearch />}
+                    />
                 </Routes>
                 <ToastContainer
                     position="bottom-right"

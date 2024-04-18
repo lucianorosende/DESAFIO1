@@ -7,6 +7,6 @@ export const whyChooseUsSequence: Sequence = [
     2000,
     "For both you and me!",
     3000,
-    "Login Here to start!",
+    "Check these products out!",
     3000,
 ];

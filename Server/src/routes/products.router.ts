@@ -6,6 +6,14 @@ import { ProductsController } from "../controllers";
 export const productRouter = Express.Router();
 
 productRouter.get("/all", asyncHandler(ProductsController.getAllProducts));
+productRouter.get(
+    "/categories",
+    asyncHandler(ProductsController.getCategoriesProducts)
+);
+productRouter.get(
+    "/category/:category",
+    asyncHandler(ProductsController.getCategoriesAll)
+);
 
 productRouter.get("/", asyncHandler(ProductsController.getAll));
 productRouter.get(
