@@ -7,6 +7,10 @@ export const productRouter = Express.Router();
 
 productRouter.get("/all", asyncHandler(ProductsController.getAllProducts));
 productRouter.get(
+    "/filter/:filter",
+    asyncHandler(ProductsController.getProductsFiltered)
+);
+productRouter.get(
     "/categories",
     asyncHandler(ProductsController.getCategoriesProducts)
 );

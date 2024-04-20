@@ -43,7 +43,6 @@ class ProductService implements IProductFunction {
             options
         );
         let { docs } = getPagination;
-
         let newData: IProduct[] = docs.map((doc: IProduct) => {
             return {
                 title: doc.title,
@@ -103,6 +102,15 @@ class ProductService implements IProductFunction {
             generatedProds.push(obj);
         }
         return generatedProds;
+    }
+    async getProductByFilter(reqParams: any) {
+        let { filter } = reqParams;
+        let res = await ProductsModel.getAll();
+        const filterProducts = res.filter((product) => {
+            const title = product.title.toLowerCase();
+            return filter && title.includes(filter);
+        });
+        return filterProducts;
     }
     async addProduct(prod: IProduct) {
         let readData = await this.getProducts();

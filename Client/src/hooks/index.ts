@@ -1,4 +1,5 @@
 export * from "./useAddProduct";
+export * from "./useFetchAllProducts";
 export * from "./useFetchCategories";
 export * from "./useFetchCategoryProducts";
 export * from "./useFetchProducts";

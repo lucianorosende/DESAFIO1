@@ -49,6 +49,26 @@ class ProductController {
                   readProductsQueries
               );
     }
+    async getProductsFiltered(req: Request, res: Response) {
+        let getProductsFilter = await ProductsService.getProductByFilter(
+            req.params
+        );
+        req.params === undefined
+            ? customRequest(
+                  res,
+                  httpStatus.NotFound,
+                  "error",
+                  `We didn't find a product for your Filter`,
+                  getProductsFilter
+              )
+            : customRequest(
+                  res,
+                  httpStatus.Ok,
+                  "success",
+                  `This is the product filtered!`,
+                  getProductsFilter
+              );
+    }
     async getById(req: Request, res: Response) {
         let getProductsID = await ProductsService.getProductById(req.params);
         getProductsID.length === 0

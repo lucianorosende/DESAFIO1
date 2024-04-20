@@ -32,7 +32,6 @@ class ProductModel {
     }
     async create(prod: IProduct) {
         let res = await ProductMongooseModel.create(prod);
-        console.log(res);
         return res;
     }
     async update(pid: number, prod: IProduct) {
