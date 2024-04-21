@@ -15,6 +15,7 @@ export function SearchField() {
     };
     function SearchProductParameters(e) {
         navigate(`/search/${e.target.value}`);
+        handleClick(e);
         console.log("enter send");
     }
 
@@ -28,9 +29,10 @@ export function SearchField() {
                     placeholder="Search…"
                     inputProps={{ "aria-label": "search" }}
                     onClick={handleClick}
-                    onChange={(e) =>
-                        setSearchValue(e.target.value.toLowerCase())
-                    }
+                    onChange={(e) => {
+                        setSearchValue(e.target.value.toLowerCase());
+                        setOpen(true);
+                    }}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             SearchProductParameters(e);
@@ -42,6 +44,7 @@ export function SearchField() {
                 open={open}
                 searchValue={searchValue}
                 anchorEl={anchorEl}
+                setOpen={setOpen}
             />
         </div>
     );

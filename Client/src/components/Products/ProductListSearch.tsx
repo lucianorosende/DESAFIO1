@@ -4,15 +4,18 @@ import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import { ListItem, List } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { SetStateAction, Dispatch } from "react";
 
 export function ProductListSearch({
     open,
     searchValue,
     anchorEl,
+    setOpen,
 }: {
     open: boolean;
     searchValue: string;
     anchorEl: null | HTMLElement;
+    setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
     const { productList } = useFetchAllProducts(searchValue);
     const navigate = useNavigate();
@@ -45,9 +48,10 @@ export function ProductListSearch({
                                                     },
                                                     cursor: "pointer",
                                                 }}
-                                                onClick={() =>
-                                                    navigate(product.title)
-                                                }
+                                                onClick={() => {
+                                                    navigate(product.title);
+                                                    setOpen(false);
+                                                }}
                                             >
                                                 {product.title}
                                             </ListItem>
