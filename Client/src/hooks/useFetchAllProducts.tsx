@@ -7,8 +7,9 @@ export function useFetchAllProducts(filter: string) {
     useEffect(() => {
         if (filter.length > 0) {
             const fetchData = async () => {
+                const filterLower = filter.toLowerCase();
                 const data = await fetch(
-                    `http://localhost:8080/api/products/filter/${filter}`,
+                    `http://localhost:8080/api/products/filter/${filterLower}`,
                     {
                         method: "GET",
                         headers: {

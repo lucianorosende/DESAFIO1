@@ -138,3 +138,23 @@ error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"73601463196896461
 error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7360146319689646119"},"signature":{"hash":"ainBG1Y3YTN/Gjx9vyy6ya+LOYU=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":27,"codeName":"IndexNotFound","ok":0,"operationTime":{"$timestamp":"7360146319689646119"}}
 error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7360146319689646131"},"signature":{"hash":"ainBG1Y3YTN/Gjx9vyy6ya+LOYU=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":27,"codeName":"IndexNotFound","ok":0,"operationTime":{"$timestamp":"7360146319689646131"}}
 error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7360146319689646140"},"signature":{"hash":"ainBG1Y3YTN/Gjx9vyy6ya+LOYU=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":27,"codeName":"IndexNotFound","ok":0,"operationTime":{"$timestamp":"7360146319689646140"}}
+error: undefined {"kind":"string","path":"title","reason":null,"stringValue":"\"{ name: { '$wildcard': 'Men' } }\"","value":{"name":{"$wildcard":"Men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"title","reason":null,"stringValue":"\"{ name: { '$wildcard': 'Men' } }\"","value":{"name":{"$wildcard":"Men"}},"valueType":"Object"}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361174818328150023"},"signature":{"hash":"RNLx9C6rBhbU+YNUQwcYhj+TTXs=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":27,"codeName":"IndexNotFound","ok":0,"operationTime":{"$timestamp":"7361174818328150023"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361174818328150025"},"signature":{"hash":"RNLx9C6rBhbU+YNUQwcYhj+TTXs=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":27,"codeName":"IndexNotFound","ok":0,"operationTime":{"$timestamp":"7361174818328150025"}}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180547814522894"},"signature":{"hash":"QaClVNwO43BNZ4bIBIAeX1MgC2c=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180547814522894"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180560699424805"},"signature":{"hash":"MdDX7kfm8wC6occadNRE6MGl90k=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180560699424805"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180560699424805"},"signature":{"hash":"MdDX7kfm8wC6occadNRE6MGl90k=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180560699424805"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180646598770714"},"signature":{"hash":"UbgL2LeC6TWClrAu90DwSMHkL10=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180646598770714"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180646598770716"},"signature":{"hash":"UbgL2LeC6TWClrAu90DwSMHkL10=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180646598770716"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180779742756880"},"signature":{"hash":"rWcpVfFjV4JfepZdEx1VZktKpw4=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180779742756880"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180844167266342"},"signature":{"hash":"8YCcfrWBXt7e5hLkgpDlvVthcmk=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180844167266342"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361180848462233602"},"signature":{"hash":"VVY383wg/AUFMtvyjAEg2ON5Yss=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":14,"codeName":"TypeMismatch","ok":0,"operationTime":{"$timestamp":"7361180848462233602"}}
+error: undefined
+error: undefined
+error: undefined
+error: undefined

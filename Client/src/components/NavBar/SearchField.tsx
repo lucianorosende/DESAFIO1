@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Search, SearchIconWrapper, StyledInputBase } from "../../styles";
 import { ProductListSearch } from "../Products";
+import { toast } from "react-toastify";
 
 export function SearchField() {
     const navigate = useNavigate();
@@ -14,9 +15,12 @@ export function SearchField() {
         setOpen((previousOpen) => !previousOpen);
     };
     function SearchProductParameters(e) {
-        navigate(`/search/${e.target.value}`);
-        handleClick(e);
-        console.log("enter send");
+        if (e.target.value === "") {
+            toast.warning("No info put in search field!");
+        } else {
+            navigate(`/search/${e.target.value}`);
+            handleClick(e);
+        }
     }
 
     return (

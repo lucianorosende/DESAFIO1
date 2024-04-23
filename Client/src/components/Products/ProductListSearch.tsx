@@ -49,7 +49,9 @@ export function ProductListSearch({
                                                     cursor: "pointer",
                                                 }}
                                                 onClick={() => {
-                                                    navigate(product.title);
+                                                    navigate(
+                                                        `/search/${product.title}`
+                                                    );
                                                     setOpen(false);
                                                 }}
                                             >
