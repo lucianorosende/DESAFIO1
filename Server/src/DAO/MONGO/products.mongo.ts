@@ -15,6 +15,11 @@ class ProductModel {
         sort: number,
         options: any
     ) {
+        // const productSearch = {
+        //     ...(title ? { $text: { $search: title } } : {}),
+        // };
+        // console.log(productSearch);
+        // options = productSearch;
         // @ts-ignore
         let resPagination = await ProductMongooseModel.paginate(options, {
             page: pages ?? defaultPages,

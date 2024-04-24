@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IProduct } from "../interfaces";
 
 export function useFetchAllProducts(filter: string) {
-    const [productList, setProductList] = useState<IProduct[]>([]);
+    const [productListAll, setProductListAll] = useState<IProduct[]>([]);
 
     useEffect(() => {
         if (filter.length > 0) {
@@ -19,10 +19,10 @@ export function useFetchAllProducts(filter: string) {
                     }
                 );
                 const responseData = await data.json();
-                setProductList(responseData.data);
+                setProductListAll(responseData.data);
             };
             fetchData();
         }
     }, [filter]);
-    return { productList };
+    return { productListAll };
 }

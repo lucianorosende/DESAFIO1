@@ -24,15 +24,17 @@ class ProductService implements IProductFunction {
         let defaultLimit: number = 3;
         let defaultPages: number = 1;
         let options: unknown;
-        const { category, stock, limit, pages, sort } = reqQuery;
-
+        const { category, stock, limit, pages, sort, title } = reqQuery;
+        const productSearch = {
+            ...(title ? { $text: { $search: title } } : {}),
+        };
         category === undefined && stock === undefined ? (options = {}) : null;
         category ? (options = { category: category }) : null;
         stock ? (options = { stock: stock }) : null;
+        title ? (options = productSearch) : null;
         category && stock
             ? (options = { $or: [{ category: category }, { stock: stock }] })
             : null;
-
         // @ts-ignore
         let getPagination = await ProductsModel.getPaginate(
             pages,

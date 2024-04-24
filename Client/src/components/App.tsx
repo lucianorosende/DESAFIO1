@@ -9,6 +9,7 @@ import {
     Profile,
     Cart,
     CategoryListSearch,
+    ProductSingle,
 } from ".";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -28,6 +29,10 @@ export function App() {
                     <Route
                         path="/search/:query"
                         element={<ProductListQuery />}
+                    />
+                    <Route
+                        path="/product/:product"
+                        element={<ProductSingle />}
                     />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/cart" element={<Cart />} />

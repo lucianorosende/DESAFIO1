@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { IProduct } from "..";
-export function useFetchProducts() {
+export function useFetchProducts(title: string | undefined, limit: number) {
     const [productList, setProductList] = useState<IProduct[]>([]);
     const [pages, setPages] = useState(undefined);
     const [renderPage, setRenderPage] = useState<number>(1);
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(
-                `http://localhost:8080/api/products?pages=${renderPage}`,
+                `http://localhost:8080/api/products?pages=${renderPage}&title=${title}&limit=${limit}`,
                 {
                     method: "GET",
                     headers: {
@@ -21,6 +21,6 @@ export function useFetchProducts() {
             setPages(responseData.data.totalPages);
         };
         fetchData();
-    }, [renderPage]);
+    }, [renderPage, title, limit]);
     return { productList, pages, setRenderPage };
 }

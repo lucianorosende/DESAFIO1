@@ -1,4 +1,4 @@
-import { useFetchAllProducts } from "../../hooks";
+import { useFetchProducts } from "../../hooks";
 import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
@@ -17,7 +17,7 @@ export function ProductListSearch({
     anchorEl: null | HTMLElement;
     setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-    const { productList } = useFetchAllProducts(searchValue);
+    const { productList } = useFetchProducts(searchValue, 100);
     const navigate = useNavigate();
     const canBeOpen = open && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
@@ -50,7 +50,7 @@ export function ProductListSearch({
                                                 }}
                                                 onClick={() => {
                                                     navigate(
-                                                        `/search/${product.title}`
+                                                        `/product/${product.title}`
                                                     );
                                                     setOpen(false);
                                                 }}

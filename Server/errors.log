@@ -158,3 +158,23 @@ error: undefined
 error: undefined
 error: undefined
 error: undefined
+error: undefined
+error: undefined
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361294162584403999"},"signature":{"hash":"Zb1wfN/IZbqAAL/pGWs+44yGHRI=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":2,"codeName":"BadValue","ok":0,"operationTime":{"$timestamp":"7361294162584403999"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361294166879371281"},"signature":{"hash":"mXEG67XRSX2h0zMI8v98l5ADi9Y=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":2,"codeName":"BadValue","ok":0,"operationTime":{"$timestamp":"7361294166879371281"}}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{ '$text': { '$search': 'men' } }\"","value":{"$text":{"$search":"men"}},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{}\"","value":{},"valueType":"Object"}
+error: undefined {"kind":"string","path":"$text.$search","stringValue":"\"{}\"","value":{},"valueType":"Object"}
+error: undefined
+error: undefined
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361297405284712450"},"signature":{"hash":"RVuK4pCpWe0GMI37BWQidu1bgHM=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":4,"codeName":"NoSuchKey","ok":0,"operationTime":{"$timestamp":"7361297405284712450"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361297405284712455"},"signature":{"hash":"RVuK4pCpWe0GMI37BWQidu1bgHM=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":4,"codeName":"NoSuchKey","ok":0,"operationTime":{"$timestamp":"7361297405284712455"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361298302932877329"},"signature":{"hash":"lomCKMd6J0DWGpk9PnVO1cA8Wi0=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":4,"codeName":"NoSuchKey","ok":0,"operationTime":{"$timestamp":"7361298302932877329"}}
+error: undefined {"$clusterTime":{"clusterTime":{"$timestamp":"7361298302932877329"},"signature":{"hash":"lomCKMd6J0DWGpk9PnVO1cA8Wi0=","keyId":{"high":1706022366,"low":3,"unsigned":false}}},"code":4,"codeName":"NoSuchKey","ok":0,"operationTime":{"$timestamp":"7361298302932877329"}}
