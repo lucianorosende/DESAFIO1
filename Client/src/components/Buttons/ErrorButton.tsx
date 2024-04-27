@@ -7,7 +7,7 @@ export function ErrorButton({
     marginTop,
 }: {
     buttonChildren: string;
-    onClick: () => void;
+    onClick?: () => void;
     marginTop?: number;
 }) {
     return (
