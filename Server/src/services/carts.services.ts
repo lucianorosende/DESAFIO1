@@ -19,7 +19,7 @@ class CartService implements ICartFunction {
     }
     async getCartByIdAndPopulate(reqParams: any) {
         const { cid } = reqParams;
-        let res = await CartsModel.getAndPopulate(cid);
+        let res: any = await CartsModel.getAndPopulate(cid);
         return res;
     }
     async addCart() {

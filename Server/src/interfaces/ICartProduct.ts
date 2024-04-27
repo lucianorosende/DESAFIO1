@@ -5,4 +5,5 @@ export interface ICartProduct {
     pID?: number;
     quantity: number;
     _id?: ObjectId & IProduct;
+    subtotal?: number;
 }

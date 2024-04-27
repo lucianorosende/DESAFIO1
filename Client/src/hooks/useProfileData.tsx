@@ -5,7 +5,7 @@ export function useProfileData() {
     const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
     const [admin, setAdmin] = useState("");
-    const [cID, setcID] = useState();
+    const [cID, setcID] = useState<number | undefined>();
     useEffect(() => {
         const handleProfileData = async () => {
             try {
