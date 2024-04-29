@@ -1,27 +1,19 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { Error } from "../Animation";
-import { Container } from "../../styles";
-import { useGetCart, useProfileData } from "../../hooks";
-import { ClickButton, ErrorButton } from "../Buttons";
+import { Container, tableCellStyle } from "../../styles";
 import {
     Table,
     TableHead,
     TableRow,
     TableCell,
-    TableBody,
     TableContainer,
 } from "@mui/material";
+import { CartBody } from ".";
+import CartSubtotal from "./CartSubtotal";
 
 export function Cart() {
     const loginSelector = useSelector((state: RootState) => state.login.value);
-    const { cID } = useProfileData();
-    const { cart } = useGetCart(cID);
-    let subtotal = 0;
-    const tableCellStyle = {
-        fontWeight: "bold",
-        fontSize: "15px",
-    };
     return (
         <>
             {loginSelector === true ? (
@@ -50,71 +42,10 @@ export function Cart() {
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
-                                {cart.map((cartItem: any) => {
-                                    subtotal =
-                                        subtotal +
-                                        Math.round(
-                                            cartItem._id.price *
-                                                cartItem.quantity
-                                        );
-                                    return (
-                                        <>
-                                            <TableRow>
-                                                <TableCell>
-                                                    <img
-                                                        src={cartItem._id.image}
-                                                        style={{
-                                                            maxWidth: "70%",
-                                                        }}
-                                                    />
-                                                </TableCell>
-                                                <TableCell sx={tableCellStyle}>
-                                                    {cartItem._id.title}
-                                                </TableCell>
-                                                <TableCell sx={tableCellStyle}>
-                                                    {cartItem._id.category}
-                                                </TableCell>
-                                                <TableCell sx={tableCellStyle}>
-                                                    {cartItem.quantity}
-                                                </TableCell>
-                                                <TableCell sx={tableCellStyle}>
-                                                    $
-                                                    {Math.round(
-                                                        cartItem._id.price *
-                                                            cartItem.quantity
-                                                    )}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <ErrorButton buttonChildren="Remove" />
-                                                </TableCell>
-                                            </TableRow>
-                                        </>
-                                    );
-                                })}
-                            </TableBody>
+                            <CartBody />
                         </Table>
                     </TableContainer>
-                    <div
-                        style={{
-                            alignSelf: "flex-end",
-                            margin: "2% 10% 2% 0",
-
-                            border: "2px solid white",
-                            padding: "10px",
-                            fontFamily: "monospace",
-                            fontSize: "20px",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Subtotal: ${subtotal}
-                        <br />
-                        Tax: $tax
-                        <br />
-                        Total: $total
-                        <br />
-                        <ClickButton buttonChildren="Checkout" marginTop={10} />
-                    </div>
+                    <CartSubtotal />
                 </Container>
             ) : (
                 <Error />

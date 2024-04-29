@@ -1,4 +1,4 @@
-import { HomeButton, ProfileButton, ProductsButton, SearchField } from ".";
+import { HomeButton, ProfileButton, SearchField } from ".";
 import { ListDivider } from "@mui/joy";
 
 export function LeftSideBar() {

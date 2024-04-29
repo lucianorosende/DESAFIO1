@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { ICartItem } from "../interfaces";
 
 export function useGetCart(cID: number | undefined) {
-    const [cart, setCart] = useState<any>([]);
+    const [cart, setCart] = useState<ICartItem[]>([]);
+    const [subtotal, setSubtotal] = useState<number>(0);
     useEffect(() => {
         if (typeof cID !== "undefined") {
             const handleCartData = async () => {
@@ -19,6 +21,7 @@ export function useGetCart(cID: number | undefined) {
                     const data = await checker.json();
                     if (data.status === "success") {
                         setCart(data.data[0].products);
+                        setSubtotal(data.data[1].subtotal);
                     }
                 } catch (e) {
                     console.log(e);
@@ -27,5 +30,5 @@ export function useGetCart(cID: number | undefined) {
             handleCartData();
         }
     }, [cID]);
-    return { cart };
+    return { cart, subtotal };
 }

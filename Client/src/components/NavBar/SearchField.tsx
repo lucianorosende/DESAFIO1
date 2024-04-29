@@ -10,15 +10,19 @@ export function SearchField() {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (
+        event:
+            | React.MouseEvent<HTMLElement>
+            | React.ChangeEvent<HTMLInputElement>
+    ) => {
         setAnchorEl(event.currentTarget);
         setOpen((previousOpen) => !previousOpen);
     };
-    function SearchProductParameters(e) {
-        if (e.target.value === "") {
+    function SearchProductParameters(e: any) {
+        if (e.currentTarget.value === "") {
             toast.warning("No info put in search field!");
         } else {
-            navigate(`/search/${e.target.value}`);
+            navigate(`/search/${e.currentTarget.value}`);
             handleClick(e);
         }
     }

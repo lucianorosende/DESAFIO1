@@ -20,7 +20,13 @@ class CartService implements ICartFunction {
     async getCartByIdAndPopulate(reqParams: any) {
         const { cid } = reqParams;
         let res: any = await CartsModel.getAndPopulate(cid);
-        return res;
+        let subtotal = 0;
+        res[0].products.map((product: any) => {
+            let price = product.quantity * product._id.price;
+            subtotal = subtotal + price;
+        });
+        let newArr = [...res, { subtotal: Math.round(subtotal) }];
+        return newArr;
     }
     async addCart() {
         let res: TCart[] = await CartsModel.getAll();

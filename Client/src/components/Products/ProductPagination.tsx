@@ -1,5 +1,6 @@
 import { Container } from "../../styles";
 import { Stack, Pagination } from "@mui/material";
+import { ChangeEvent } from "react";
 
 export function ProductPagination({
     pages,
@@ -19,7 +20,9 @@ export function ProductPagination({
                         padding: 2,
                         borderRadius: 5,
                     }}
-                    onChange={(e, page) => setActualPage(page)}
+                    onChange={(event: ChangeEvent<unknown>, page: number) => {
+                        setActualPage(page);
+                    }}
                 />
             </Stack>
         </Container>
