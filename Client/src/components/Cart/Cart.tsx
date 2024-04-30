@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { Error } from "../Animation";
+import { CartEmpty, Error } from "../Animation";
 import { Container, tableCellStyle } from "../../styles";
 import {
     Table,
@@ -11,12 +11,15 @@ import {
 } from "@mui/material";
 import { CartBody } from ".";
 import CartSubtotal from "./CartSubtotal";
+import { useGetCart, useProfileData } from "../../hooks";
 
 export function Cart() {
     const loginSelector = useSelector((state: RootState) => state.login.value);
+    const { cID } = useProfileData();
+    const { cartSelector } = useGetCart(cID);
     return (
         <>
-            {loginSelector === true ? (
+            {loginSelector === true && cartSelector.length > 0 ? (
                 <Container $justifyContent="center" $alignItems="center">
                     <TableContainer sx={{ maxWidth: "80%" }}>
                         <Table aria-label="simple table">
@@ -47,6 +50,8 @@ export function Cart() {
                     </TableContainer>
                     <CartSubtotal />
                 </Container>
+            ) : loginSelector === true && cartSelector?.length === 0 ? (
+                <CartEmpty />
             ) : (
                 <Error />
             )}

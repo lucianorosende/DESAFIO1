@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
-import { ICartItem } from "../interfaces";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { subtotal, cart } from "../state/slices";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 export function useGetCart(cID: number | undefined) {
-    const [cart, setCart] = useState<ICartItem[]>([]);
-    const [subtotal, setSubtotal] = useState<number>(0);
+    const cartSelector = useSelector((state: RootState) => state.cart.value);
+    const subtotalSelector = useSelector(
+        (state: RootState) => state.subtotal.value
+    );
+    const dispatch = useDispatch();
     useEffect(() => {
         if (typeof cID !== "undefined") {
             const handleCartData = async () => {
@@ -20,8 +26,8 @@ export function useGetCart(cID: number | undefined) {
                     );
                     const data = await checker.json();
                     if (data.status === "success") {
-                        setCart(data.data[0].products);
-                        setSubtotal(data.data[1].subtotal);
+                        dispatch(cart(data.data[0].products));
+                        dispatch(subtotal(data.data[1].subtotal));
                     }
                 } catch (e) {
                     console.log(e);
@@ -29,6 +35,6 @@ export function useGetCart(cID: number | undefined) {
             };
             handleCartData();
         }
-    }, [cID]);
-    return { cart, subtotal };
+    }, [cID, dispatch]);
+    return { cartSelector, subtotalSelector };
 }

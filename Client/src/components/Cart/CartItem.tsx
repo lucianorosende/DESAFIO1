@@ -2,8 +2,14 @@ import { TableRow, TableCell } from "@mui/material";
 import { ICartItem } from "../../interfaces";
 import { ErrorButton } from "../Buttons";
 import { tableCellStyle } from "../../styles";
+import { useDeleteProductFromCart, useProfileData } from "../../hooks";
 
 export function CartItem({ cartItem }: { cartItem: ICartItem }) {
+    const { cID } = useProfileData();
+    const { handleDeleteProductFromCart } = useDeleteProductFromCart(
+        cID,
+        cartItem.pID
+    );
     return (
         <TableRow key={cartItem._id._id}>
             <TableCell>
@@ -21,7 +27,10 @@ export function CartItem({ cartItem }: { cartItem: ICartItem }) {
                 ${Math.round(cartItem._id.price * cartItem.quantity)}
             </TableCell>
             <TableCell>
-                <ErrorButton buttonChildren="Remove" />
+                <ErrorButton
+                    buttonChildren="Remove"
+                    onClick={handleDeleteProductFromCart}
+                />
             </TableCell>
         </TableRow>
     );

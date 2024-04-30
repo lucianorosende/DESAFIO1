@@ -3,7 +3,7 @@ import { ClickButton } from "../Buttons";
 
 export default function CartSubtotal() {
     const { cID } = useProfileData();
-    const { subtotal } = useGetCart(cID);
+    const { subtotalSelector } = useGetCart(cID);
     return (
         <div
             style={{
@@ -17,11 +17,11 @@ export default function CartSubtotal() {
                 fontWeight: "bold",
             }}
         >
-            Subtotal: ${subtotal}
+            Subtotal: ${subtotalSelector}
             <br />
-            Tax(21%): ${Math.round(subtotal * 1.21)}
+            Tax(21%): ${Math.round(subtotalSelector * 1.21)}
             <br />
-            Total: ${Math.round(subtotal * 1.21)}
+            Total: ${Math.round(subtotalSelector * 1.21)}
             <br />
             <ClickButton buttonChildren="Checkout" marginTop={10} />
         </div>

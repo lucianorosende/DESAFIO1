@@ -5,11 +5,11 @@ import { useProfileData, useGetCart } from "../../hooks";
 
 export function CartBody() {
     const { cID } = useProfileData();
-    const { cart } = useGetCart(cID);
+    const { cartSelector } = useGetCart(cID);
 
     return (
         <TableBody>
-            {cart.map((cartItem: ICartItem) => {
+            {cartSelector?.map((cartItem: ICartItem) => {
                 return <CartItem cartItem={cartItem} key={cartItem._id._id} />;
             })}
         </TableBody>

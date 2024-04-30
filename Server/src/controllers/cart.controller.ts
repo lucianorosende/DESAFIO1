@@ -142,12 +142,15 @@ class CartController {
         const deleteProducts = await CartsService.deleteProductFromCart(
             req.params
         );
+        const cartPopulate = await CartsService.getCartByIdAndPopulate(
+            req.params
+        );
         customRequest(
             res,
             httpStatus.Ok,
             "success",
-            "products updated successfully",
-            deleteProducts
+            "product deleted successfully",
+            cartPopulate
         );
     }
     async deleteAllProductsFromCart(req: Request, res: Response) {
