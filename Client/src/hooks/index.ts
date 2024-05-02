@@ -11,3 +11,4 @@ export * from "./useLogin";
 export * from "./useLogout";
 export * from "./useProfileData";
 export * from "./useRegister";
+export * from "./useUpdateQuantity";

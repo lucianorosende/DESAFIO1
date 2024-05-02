@@ -125,7 +125,6 @@ class CartController {
         );
     }
     async updateQuantity(req: Request, res: Response) {
-        const { cid, pid } = req.params;
         const updateCart = await CartsService.UpdateQuantityProduct(
             req.params,
             req.body

@@ -108,17 +108,25 @@ class CartService implements ICartFunction {
         const { cid, pid } = reqParams;
         const getCart = await CartsModel.getById(cid);
         const getProduct = await ProductsModel.getById(pid);
+        let cartProduct = getCart[0].products.find(
+            (item) => item.pID === getProduct[0].pID
+        );
         let newBody: ICartProduct = {
             pID: getProduct[0].pID,
             quantity: body.quantity,
             _id: getProduct[0]._id,
         };
-        getCart[0].products = [newBody];
+
+        let newArr: ICartProduct[] = getCart[0].products.map((item) =>
+            item === cartProduct ? newBody : item
+        );
+        getCart[0].products = newArr;
         const productUpdate = await CartsModel.updateProductIntoCart(
             cid,
             getCart
         );
-        return getCart;
+        const populate = await this.getCartByIdAndPopulate(reqParams);
+        return populate;
     }
 
     async updateStockFromProducts(reqParams: any) {
