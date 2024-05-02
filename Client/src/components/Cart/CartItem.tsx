@@ -10,21 +10,26 @@ import {
 import { Input } from "@mui/joy";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useState } from "react";
 
 export function CartItem({ cartItem }: { cartItem: ICartItem }) {
+    const [quantity, setQuantity] = useState(cartItem.quantity);
     const { cID } = useProfileData();
     const { handleDeleteProductFromCart } = useDeleteProductFromCart(
         cID,
         cartItem.pID
     );
     const { handleUpdateQuantity } = useUpdateQuantity();
-    const handleAddQuantity = (quant: number) => {
-        const value = quant + 1;
+    const handleAddQuantity = () => {
+        const value = quantity + 1;
+        setQuantity(value);
+        console.log(value);
         handleUpdateQuantity(cID, cartItem.pID, value);
     };
-    const handleDecrementQuantity = (quant: number) => {
-        if (quant <= 1) return;
-        const value = quant - 1;
+    const handleDecrementQuantity = () => {
+        if (quantity <= 1) return;
+        const value = quantity - 1;
+        setQuantity(value);
         handleUpdateQuantity(cID, cartItem.pID, value);
     };
     return (
@@ -42,7 +47,7 @@ export function CartItem({ cartItem }: { cartItem: ICartItem }) {
             <TableCell sx={tableCellStyle}>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <Input
-                        value={cartItem.quantity}
+                        value={quantity}
                         sx={{ width: "45px" }}
                         variant="solid"
                     />
@@ -50,16 +55,14 @@ export function CartItem({ cartItem }: { cartItem: ICartItem }) {
                         <Button
                             variant="contained"
                             sx={{ padding: 0, minWidth: "30px" }}
-                            onClick={() => handleAddQuantity(cartItem.quantity)}
+                            onClick={handleAddQuantity}
                         >
                             <KeyboardArrowUpIcon />
                         </Button>
                         <Button
                             variant="contained"
                             sx={{ padding: 0, minWidth: "30px" }}
-                            onClick={() =>
-                                handleDecrementQuantity(cartItem.quantity)
-                            }
+                            onClick={handleDecrementQuantity}
                         >
                             <KeyboardArrowDownIcon />
                         </Button>
