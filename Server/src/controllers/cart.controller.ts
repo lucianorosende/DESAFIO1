@@ -23,7 +23,8 @@ class CartController {
               );
     }
     async getById(req: Request, res: Response) {
-        let getProductsID = await CartsService.getCartById(req.params);
+        const { cid } = req.params;
+        let getProductsID = await CartsService.getCartById(cid);
         getProductsID.length === 0
             ? customRequest(
                   res,
@@ -41,9 +42,8 @@ class CartController {
               );
     }
     async getAndPopulate(req: Request, res: Response) {
-        let getProductsID = await CartsService.getCartByIdAndPopulate(
-            req.params
-        );
+        const { cid } = req.params;
+        let getProductsID = await CartsService.getCartByIdAndPopulate(cid);
         getProductsID.length === 0
             ? customRequest(
                   res,
@@ -72,7 +72,8 @@ class CartController {
     }
 
     async purchase(req: Request, res: Response) {
-        let update = await CartsService.updateStockFromProducts(req.params);
+        const { cid, email } = req.params;
+        let update = await CartsService.updateStockFromProducts(cid);
         let ticket = await TicketsService.generateTicket(req.params, update);
         let swapper = await CartsService.replaceCart(req.params);
         ticket
@@ -92,9 +93,8 @@ class CartController {
               );
     }
     async addProductIntoCart(req: Request, res: Response) {
-        const addProductInCart = await CartsService.addProductInCart(
-            req.params
-        );
+        const { cid, pid } = req.params;
+        const addProductInCart = await CartsService.addProductInCart(cid, pid);
         addProductInCart !== undefined
             ? customRequest(
                   res,
@@ -112,8 +112,9 @@ class CartController {
               );
     }
     async updateProductFromCart(req: Request, res: Response) {
+        const { cid } = req.params;
         const updateCart = await CartsService.updateProductsFromCart(
-            req.params,
+            cid,
             req.body
         );
         customRequest(
@@ -125,8 +126,10 @@ class CartController {
         );
     }
     async updateQuantity(req: Request, res: Response) {
+        const { cid, pid } = req.params;
         const updateCart = await CartsService.UpdateQuantityProduct(
-            req.params,
+            cid,
+            pid,
             req.body
         );
         customRequest(
@@ -138,12 +141,12 @@ class CartController {
         );
     }
     async deleteProductFromCart(req: Request, res: Response) {
+        const { cid, pid } = req.params;
         const deleteProducts = await CartsService.deleteProductFromCart(
-            req.params
+            cid,
+            pid
         );
-        const cartPopulate = await CartsService.getCartByIdAndPopulate(
-            req.params
-        );
+        const cartPopulate = await CartsService.getCartByIdAndPopulate(cid);
         customRequest(
             res,
             httpStatus.Ok,
@@ -153,9 +156,8 @@ class CartController {
         );
     }
     async deleteAllProductsFromCart(req: Request, res: Response) {
-        const deleteData = await CartsService.deleteAllProductsFromCart(
-            req.params
-        );
+        const { cid } = req.params;
+        const deleteData = await CartsService.deleteAllProductsFromCart(cid);
         customRequest(
             res,
             httpStatus.Ok,

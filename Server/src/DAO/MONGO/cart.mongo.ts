@@ -7,11 +7,11 @@ class CartModel {
         let res = await CartMongooseModel.find({});
         return res;
     }
-    async getById(cid: number) {
+    async getById(cid: string) {
         let res = await CartMongooseModel.find({ cID: cid });
         return res;
     }
-    async getAndPopulate(cid: number) {
+    async getAndPopulate(cid: string) {
         let res = await CartMongooseModel.find({ cID: cid }).populate(
             "products._id"
         );
@@ -21,7 +21,7 @@ class CartModel {
         let add = await CartMongooseModel.create(cart);
         return add;
     }
-    async updateProductIntoCart(cid: number, getCart: TCart[]) {
+    async updateProductIntoCart(cid: string, getCart: TCart[]) {
         const productUpdate = await CartMongooseModel.updateOne({ cID: cid }, [
             { $set: getCart[0] },
         ]);

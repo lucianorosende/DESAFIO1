@@ -1,24 +1,21 @@
 import { ICartFunction, ICartProduct, ICart, IProduct } from "../interfaces";
 import { TCart } from "../types";
 import { CartsModel, ProductsModel } from "../DAO/MONGO";
-import { ViewsService } from "./views.services";
 
 class CartService implements ICartFunction {
     async getAll() {
         let res = await CartsModel.getAll();
         return res;
     }
-    async getCartById(reqParams: any) {
-        const { cid } = reqParams;
+    async getCartById(cid: string) {
         let res = await CartsModel.getById(cid);
         return res;
     }
-    async getCartByIdNotParams(cid: number) {
+    async getCartByIdNotParams(cid: string) {
         let res = await CartsModel.getById(cid);
         return res;
     }
-    async getCartByIdAndPopulate(reqParams: any) {
-        const { cid } = reqParams;
+    async getCartByIdAndPopulate(cid: string) {
         let res: any = await CartsModel.getAndPopulate(cid);
         let subtotal = 0;
         res[0].products.map((product: any) => {
@@ -40,8 +37,7 @@ class CartService implements ICartFunction {
         let add = await CartsModel.create(cart);
         return add.cID;
     }
-    async addProductInCart(reqParams: any) {
-        const { cid, pid } = reqParams;
+    async addProductInCart(cid: string, pid: string) {
         const getCart: TCart[] = await CartsModel.getById(cid);
         const getProduct = await ProductsModel.getById(pid);
         if (!getProduct || !getCart) {
@@ -87,10 +83,9 @@ class CartService implements ICartFunction {
         return getCart;
     }
 
-    async updateProductsFromCart(reqParams: any, body: ICartProduct) {
-        const { cid } = reqParams;
+    async updateProductsFromCart(cid: string, body: ICartProduct) {
         const getCart = await CartsModel.getById(cid);
-        const getProduct = await ProductsModel.getById(body.pID!);
+        const getProduct = await ProductsModel.getById(body.pID);
         let newBody: ICartProduct = {
             pID: body.pID,
             quantity: body.quantity,
@@ -104,8 +99,7 @@ class CartService implements ICartFunction {
         return getCart;
     }
 
-    async UpdateQuantityProduct(reqParams: any, body: ICartProduct) {
-        const { cid, pid } = reqParams;
+    async UpdateQuantityProduct(cid: string, pid: string, body: ICartProduct) {
         const getCart = await CartsModel.getById(cid);
         const getProduct = await ProductsModel.getById(pid);
         let cartProduct = getCart[0].products.find(
@@ -125,27 +119,27 @@ class CartService implements ICartFunction {
             cid,
             getCart
         );
-        const populate = await this.getCartByIdAndPopulate(reqParams);
+        const populate = await this.getCartByIdAndPopulate(cid);
         return populate;
     }
 
-    async updateStockFromProducts(reqParams: any) {
-        const { cid } = reqParams;
-        let getCart = await CartsService.getCartByIdAndPopulate(reqParams);
-        let cartData = await ViewsService.cartData(getCart);
-        const newArray = cartData.map((item) => ({
-            title: item.title,
-            description: item.description,
-            price: item.price,
-            image: item.image,
-            stock: item.stock! - item.quantity,
-            category: item.category,
-            pID: item.pID,
-            _id: item._id,
-            __v: item.__v,
-        }));
-        const update = await ProductsModel.updateAllProducts(newArray);
-        return update;
+    async updateStockFromProducts(cid: string) {
+        let getCart = await CartsService.getCartByIdAndPopulate(cid);
+        // TODO: FIX THIS
+        // let cartData = await ViewsService.cartData(getCart);
+        // const newArray = cartData.map((item) => ({
+        //     title: item.title,
+        //     description: item.description,
+        //     price: item.price,
+        //     image: item.image,
+        //     stock: item.stock! - item.quantity,
+        //     category: item.category,
+        //     pID: item.pID,
+        //     _id: item._id,
+        //     __v: item.__v,
+        // }));
+        // const update = await ProductsModel.updateAllProducts(newArray);
+        // return update;
     }
 
     async replaceCart(reqParams: any) {
@@ -173,8 +167,7 @@ class CartService implements ICartFunction {
         let update = await CartsModel.updateProductIntoCart(cid, newCart);
     }
 
-    async deleteProductFromCart(reqParams: any) {
-        const { cid, pid } = reqParams;
+    async deleteProductFromCart(cid: string, pid: string) {
         const getCart = await CartsModel.getById(cid);
         const getProduct = await ProductsModel.getById(pid);
         if (!getProduct || !getCart) {
@@ -190,8 +183,7 @@ class CartService implements ICartFunction {
         );
         return getCart;
     }
-    async deleteAllProductsFromCart(reqParams: any) {
-        const { cid } = reqParams;
+    async deleteAllProductsFromCart(cid: string) {
         const getCart = await CartsModel.getById(cid);
         getCart[0].products = [];
         const productUpdate = await CartsModel.updateProductIntoCart(

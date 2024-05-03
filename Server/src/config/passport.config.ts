@@ -69,12 +69,16 @@ export function passportConfig() {
                     let user = await UsersService.findUserByEmail(username);
                     if (!user) {
                         logger.warn("user not found with email " + username);
-                        return done(null, false);
+                        return done(null, false, {
+                            message: "User not found",
+                        });
                     }
 
                     if (!isValidPassword(password, user.password)) {
                         logger.warn("invalid password");
-                        return done(null, false);
+                        return done(null, false, {
+                            message: "invalid password",
+                        });
                     }
                     return done(null, user);
                 } catch (e) {

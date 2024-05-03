@@ -1,12 +1,7 @@
 import { Request, Response } from "express";
 import session, { Session, SessionData } from "express-session";
 import { customRequest, httpStatus, logger } from "../utils";
-import {
-    ProductsService,
-    ViewsService,
-    SessionsService,
-    CartsService,
-} from "../services";
+import { ProductsService, SessionsService, CartsService } from "../services";
 import { UsersService } from "../services";
 
 class SessionController {

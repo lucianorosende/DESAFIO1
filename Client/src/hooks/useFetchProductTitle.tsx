@@ -9,21 +9,26 @@ export function useFetchProductTitle(title: string) {
             setProductList([]);
         }
         if (title !== "") {
-            const fetchData = async () => {
-                const data = await fetch(
-                    `http://localhost:8080/api/products?title=${title}&limit=10000`,
-                    {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        credentials: "include",
-                    }
-                );
-                const responseData = await data.json();
-                setProductList(responseData.data.payload);
-            };
-            fetchData();
+            try {
+                const fetchData = async () => {
+                    const data = await fetch(
+                        `http://localhost:8080/api/products?title=${title}&limit=10000`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            credentials: "include",
+                        }
+                    );
+                    const responseData = await data.json();
+
+                    setProductList(responseData.data.payload);
+                };
+                fetchData();
+            } catch (e) {
+                console.log(e);
+            }
         }
     }, [title]);
 

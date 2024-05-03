@@ -10,11 +10,12 @@ export interface IProductFunction {
         stock: number,
         limit: string,
         pages: string,
-        sort: string
+        sort: string,
+        title: string
     ): Promise<IProductPages>;
-    getProductById(id: number): Promise<TProduct[]>;
+    getProductById(id: string): Promise<TProduct[]>;
     addProduct(prod: IProduct): Promise<IProduct>;
-    updateProduct(id: number, field: IProduct): Promise<UpdateWriteOpResult>;
-    deleteProductById(id: number): Promise<DeleteResult>;
+    updateProduct(id: string, field: IProduct): Promise<UpdateWriteOpResult>;
+    deleteProductById(id: string): Promise<DeleteResult>;
     deleteAllProducts(): Promise<DeleteResult>;
 }

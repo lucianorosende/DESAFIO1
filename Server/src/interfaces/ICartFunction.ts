@@ -4,15 +4,19 @@ import { ICartProduct } from ".";
 
 export interface ICartFunction {
     getAll(): Promise<TCart[]>;
-    getCartById(cid: number): Promise<TCart[]>;
+    getCartById(cid: string): Promise<TCart[]>;
     addCart(): Promise<number | undefined>;
-    addProductInCart(cID: number, pID: number): Promise<TCart[] | undefined>;
-    updateProductsFromCart(cID: number, body: ICartProduct): Promise<TCart[]>;
-    UpdateQuantityProduct(reqParams: any, body: ICartProduct): Promise<TCart[]>;
+    addProductInCart(cID: string, pID: string): Promise<TCart[] | undefined>;
+    updateProductsFromCart(cID: string, body: ICartProduct): Promise<TCart[]>;
+    UpdateQuantityProduct(
+        cid: string,
+        pid: string,
+        body: ICartProduct
+    ): Promise<TCart[]>;
     deleteProductFromCart(
-        cID: number,
-        pID: number
+        cid: string,
+        pid: string
     ): Promise<TCart[] | undefined>;
-    deleteAllProductsFromCart(cID: number): Promise<TCart[]>;
+    deleteAllProductsFromCart(cID: string): Promise<TCart[]>;
     deleteAllCarts(): Promise<DeleteResult>;
 }

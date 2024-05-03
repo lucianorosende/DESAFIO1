@@ -32,15 +32,25 @@ export function useLogin() {
                 throw new Error(`Error: ${response.statusText}`);
             }
             const responseData = await response.json();
+            console.log(responseData);
             if (responseData.error) {
                 dispatch(login(false));
-                return;
+                toast("You have failed to log in!", {
+                    position: "bottom-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             } else {
                 dispatch(login(true));
                 navigate("/");
                 toast("You have Logged in!", {
                     position: "bottom-right",
-                    autoClose: 5000,
+                    autoClose: 1500,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,

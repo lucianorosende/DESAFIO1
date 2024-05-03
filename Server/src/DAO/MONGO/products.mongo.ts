@@ -31,7 +31,7 @@ class ProductModel {
         });
         return resPagination;
     }
-    async getById(pid: number) {
+    async getById(pid: number | undefined | string) {
         let res = await ProductMongooseModel.find({ pID: pid });
         return res;
     }
@@ -39,7 +39,7 @@ class ProductModel {
         let res = await ProductMongooseModel.create(prod);
         return res;
     }
-    async update(pid: number, prod: IProduct) {
+    async update(pid: string, prod: IProduct) {
         const userUpdate = await ProductMongooseModel.updateOne(
             { pID: pid },
             { $set: prod }
@@ -61,7 +61,7 @@ class ProductModel {
         }
         return ids;
     }
-    async deleteOne(pid: number) {
+    async deleteOne(pid: string) {
         let del = await ProductMongooseModel.deleteOne({ pID: pid });
         return del;
     }

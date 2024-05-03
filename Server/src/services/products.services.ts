@@ -1,4 +1,4 @@
-import { CartsService, UsersService, ViewsService } from ".";
+import { CartsService, UsersService } from ".";
 import { IProductFunction, IProduct, IProductPages } from "../interfaces";
 import { ProductsModel } from "../DAO/MONGO";
 import { faker } from "@faker-js/faker";
@@ -15,9 +15,9 @@ class ProductService implements IProductFunction {
         const unique = [...new Set(dataFilter)];
         return unique;
     }
-    async getCategoriesAll(reqParams: any) {
+    async getCategoriesAll(category: string) {
         let res = await ProductsModel.getAll();
-        let data = res.filter((item) => item.category === reqParams.category);
+        let data = res.filter((item) => item.category === category);
         return data;
     }
     async getProductsQueries(reqQuery: any) {
@@ -82,8 +82,7 @@ class ProductService implements IProductFunction {
 
         return objPaginated;
     }
-    async getProductById(reqParams: any) {
-        const { pid } = reqParams;
+    async getProductById(pid: string) {
         let res = await ProductsModel.getById(pid);
         return res;
     }
@@ -105,8 +104,7 @@ class ProductService implements IProductFunction {
         }
         return generatedProds;
     }
-    async getProductByFilter(reqParams: any) {
-        let { filter } = reqParams;
+    async getProductByFilter(filter: string) {
         let res = await ProductsModel.getAll();
         const filterProducts = res.filter((product) => {
             const title = product.title.toLowerCase();
@@ -131,29 +129,28 @@ class ProductService implements IProductFunction {
     async updateStockFromProducts(reqParams: any) {
         const { cid } = reqParams;
         let getCart = await CartsService.getCartByIdAndPopulate(reqParams);
-        let cartData = await ViewsService.cartData(getCart);
-        const newArray = cartData.map((item) => ({
-            title: item.title,
-            description: item.description,
-            price: item.price,
-            image: item.image,
-            stock: item.stock! - item.quantity,
-            category: item.category,
-            pID: item.pID,
-            _id: item._id,
-            __v: item.__v,
-        }));
-        const update = await ProductsModel.updateAllProducts(newArray);
-        return update;
+        // TODO : Fix this
+        // let cartData = await ViewsService.cartData(getCart);
+        // const newArray = cartData.map((item) => ({
+        //     title: item.title,
+        //     description: item.description,
+        //     price: item.price,
+        //     image: item.image,
+        //     stock: item.stock! - item.quantity,
+        //     category: item.category,
+        //     pID: item.pID,
+        //     _id: item._id,
+        //     __v: item.__v,
+        // }));
+        // const update = await ProductsModel.updateAllProducts(newArray);
+        // return update;
     }
-    async updateProduct(reqParams: any, prod: IProduct) {
-        const { pid } = reqParams;
+    async updateProduct(pid: string, prod: IProduct) {
         const userUpdate = await ProductsModel.update(pid, prod);
         return userUpdate;
     }
-    async deleteProductById(reqParams: any) {
-        const { pid } = reqParams;
-        const getProdInfo = await this.getProductById(reqParams);
+    async deleteProductById(pid: string) {
+        const getProdInfo = await this.getProductById(pid);
         const isUserPremium = await UsersService.findUserByEmail(
             getProdInfo[0].owner as string
         );

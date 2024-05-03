@@ -5,7 +5,6 @@ import { Request, Response } from "express";
 
 class ProductController {
     async getAllProducts(req: Request, res: Response) {
-        console.log(req.session);
         const prods = await ProductsService.getProducts();
         customRequest(res, httpStatus.Ok, "success", "List of products", prods);
     }
@@ -20,7 +19,8 @@ class ProductController {
         );
     }
     async getCategoriesAll(req: Request, res: Response) {
-        const prods = await ProductsService.getCategoriesAll(req.params);
+        const { category } = req.params;
+        const prods = await ProductsService.getCategoriesAll(category);
         customRequest(
             res,
             httpStatus.Ok,
@@ -50,8 +50,9 @@ class ProductController {
               );
     }
     async getProductsFiltered(req: Request, res: Response) {
+        let { filter } = req.params;
         let getProductsFilter = await ProductsService.getProductByFilter(
-            req.params
+            filter
         );
         req.params === undefined
             ? customRequest(
@@ -70,7 +71,8 @@ class ProductController {
               );
     }
     async getById(req: Request, res: Response) {
-        let getProductsID = await ProductsService.getProductById(req.params);
+        const { pid } = req.params;
+        let getProductsID = await ProductsService.getProductById(pid);
         getProductsID.length === 0
             ? customRequest(
                   res,
@@ -109,10 +111,8 @@ class ProductController {
         );
     }
     async update(req: Request, res: Response) {
-        const updateData = await ProductsService.updateProduct(
-            req.params,
-            req.body
-        );
+        const { pid } = req.params;
+        const updateData = await ProductsService.updateProduct(pid, req.body);
         updateData.modifiedCount > 0
             ? customRequest(
                   res,
@@ -130,7 +130,8 @@ class ProductController {
               );
     }
     async deleteOne(req: Request, res: Response) {
-        const deleteData = await ProductsService.deleteProductById(req.params);
+        const { pid } = req.params;
+        const deleteData = await ProductsService.deleteProductById(pid);
         deleteData.deletedCount > 0
             ? customRequest(
                   res,
