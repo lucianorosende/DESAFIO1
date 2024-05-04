@@ -9,6 +9,7 @@ export interface IProduct extends Document {
     category: string;
     code: number;
     quantity?: number;
+    rating?: string;
     subtotal?: number;
     owner?: string;
     pID?: number;

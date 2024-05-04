@@ -23,7 +23,7 @@ export function useLogout() {
                 dispatch(login(false));
                 navigate("/");
                 toast("You have Logged out!", {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,

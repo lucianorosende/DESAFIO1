@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { CartEmpty, Error } from "../Animation";
+import { Background, CartEmpty, Error } from "../Animation";
 import { Container, tableCellStyle } from "../../styles";
 import {
     Table,
@@ -12,6 +12,7 @@ import {
 import { CartBody } from ".";
 import CartSubtotal from "./CartSubtotal";
 import { useGetCart, useProfileData } from "../../hooks";
+import { registerParticles } from "../../utils";
 
 export function Cart() {
     const loginSelector = useSelector((state: RootState) => state.login.value);
@@ -49,6 +50,7 @@ export function Cart() {
                         </Table>
                     </TableContainer>
                     <CartSubtotal />
+                    <Background options={registerParticles} />
                 </Container>
             ) : loginSelector === true && cartSelector?.length === 0 ? (
                 <CartEmpty />

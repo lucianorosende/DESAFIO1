@@ -36,7 +36,7 @@ export function useLogin() {
             if (responseData.error) {
                 dispatch(login(false));
                 toast("You have failed to log in!", {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 1500,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -49,7 +49,7 @@ export function useLogin() {
                 dispatch(login(true));
                 navigate("/");
                 toast("You have Logged in!", {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 1500,
                     hideProgressBar: false,
                     closeOnClick: true,

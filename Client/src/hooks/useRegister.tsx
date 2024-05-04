@@ -38,7 +38,7 @@ export function useRegister() {
             const responseData = await response.json();
             if (responseData.error) {
                 toast("You have Failed to Register!", {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -50,7 +50,7 @@ export function useRegister() {
                 return;
             } else {
                 toast("You have Registered successfully!", {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,

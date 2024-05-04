@@ -1,8 +1,12 @@
-import { Card, CardMedia } from "@mui/material";
-import { CardActions } from "@mui/material";
-import { CardContent } from "@mui/material";
-import { Button } from "@mui/material";
-import { Typography } from "@mui/material";
+import {
+    Card,
+    CardMedia,
+    CardActions,
+    CardContent,
+    Button,
+    Typography,
+    Rating,
+} from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Container, IProduct } from "../..";
 import { ProductModalDetail } from "./ProductModalDetail";
@@ -42,7 +46,22 @@ export function ProductCard({ list }: { list: IProduct[] }) {
                             />
                         </Container>
                         <CardContent>
-                            <Typography variant="h5" component="div">
+                            <Rating
+                                name="read only"
+                                value={product.rating}
+                                precision={0.5}
+                                readOnly
+                            />
+                            <Typography
+                                variant="h5"
+                                component="div"
+                                sx={{
+                                    whiteSpace: "nowrap",
+                                    width: "200px",
+                                    textOverflow: "ellipsis",
+                                    overflow: "hidden",
+                                }}
+                            >
                                 {product.title}
                             </Typography>
 

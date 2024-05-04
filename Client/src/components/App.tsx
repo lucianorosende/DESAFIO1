@@ -10,6 +10,7 @@ import {
     Cart,
     CategoryListSearch,
     ProductSingle,
+    Messages,
 } from ".";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -22,6 +23,7 @@ export function App() {
         <Provider store={store}>
             <BrowserRouter>
                 <NavBar />
+                <Messages />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />

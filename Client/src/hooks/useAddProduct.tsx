@@ -26,7 +26,7 @@ export function useAddProduct() {
             const responseData = await response.json();
             if (responseData.status == "success") {
                 toast(`You have Added ${product.title} to the cart!`, {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 2500,
                     hideProgressBar: false,
                     closeOnClick: true,

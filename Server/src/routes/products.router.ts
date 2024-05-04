@@ -38,7 +38,7 @@ productRouter.post(
 productRouter.post(
     "/:pid",
     validateProductID,
-    validateAdmin,
+    // validateAdmin,
     asyncHandler(ProductsController.update)
 );
 

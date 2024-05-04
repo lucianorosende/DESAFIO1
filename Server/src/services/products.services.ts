@@ -54,6 +54,7 @@ class ProductService implements IProductFunction {
                 stock: doc.stock,
                 category: doc.category,
                 pID: doc.pID,
+                rating: Number(doc.rating),
                 owner: doc.owner,
             };
         });

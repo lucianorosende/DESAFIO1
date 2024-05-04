@@ -21,7 +21,7 @@ export function useDeleteProductFromCart(cID: number | undefined, pID: number) {
                 dispatch(cart(data.data[0].products));
                 dispatch(subtotal(data.data[1].subtotal));
                 toast(`You have deleted an item from the cart!`, {
-                    position: "bottom-right",
+                    position: "bottom-left",
                     autoClose: 1500,
                     hideProgressBar: false,
                     closeOnClick: true,

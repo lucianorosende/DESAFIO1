@@ -28,6 +28,10 @@ const productSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    rating: {
+        type: String,
+        required: true,
+    },
     owner: {
         type: String,
         required: true,

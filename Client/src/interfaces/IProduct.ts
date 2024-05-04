@@ -9,6 +9,7 @@ export interface IProduct {
     category: string;
     image: string;
     quantity?: number;
+    rating: number;
     owner?: string;
     pID?: number;
 }
