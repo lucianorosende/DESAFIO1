@@ -24,7 +24,7 @@ export function useAddProduct() {
                 throw new Error(`Error: ${response.statusText}`);
             }
             const responseData = await response.json();
-            if (responseData.status == "success") {
+            if (responseData.msg == "Product added successfully into cart") {
                 toast(`You have Added ${product.title} to the cart!`, {
                     position: "bottom-left",
                     autoClose: 2500,
@@ -34,6 +34,20 @@ export function useAddProduct() {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
+                });
+            } else if (
+                responseData.msg ===
+                "You have exceeded the maximum number of products"
+            ) {
+                toast("You have exceeded the maximum number of products", {
+                    position: "bottom-left",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
                 });
             }
         } catch (error) {

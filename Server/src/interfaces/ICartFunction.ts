@@ -6,7 +6,10 @@ export interface ICartFunction {
     getAll(): Promise<TCart[]>;
     getCartById(cid: string): Promise<TCart[]>;
     addCart(): Promise<number | undefined>;
-    addProductInCart(cID: string, pID: string): Promise<TCart[] | undefined>;
+    addProductInCart(
+        cID: string,
+        pID: string
+    ): Promise<TCart[] | undefined | string>;
     updateProductsFromCart(cID: string, body: ICartProduct): Promise<TCart[]>;
     UpdateQuantityProduct(
         cid: string,

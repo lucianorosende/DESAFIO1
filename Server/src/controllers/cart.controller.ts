@@ -95,7 +95,15 @@ class CartController {
     async addProductIntoCart(req: Request, res: Response) {
         const { cid, pid } = req.params;
         const addProductInCart = await CartsService.addProductInCart(cid, pid);
-        addProductInCart !== undefined
+        addProductInCart === "can't add more products"
+            ? customRequest(
+                  res,
+                  httpStatus.Ok,
+                  "success",
+                  "You have exceeded the maximum number of products",
+                  {}
+              )
+            : addProductInCart !== undefined
             ? customRequest(
                   res,
                   httpStatus.Ok,

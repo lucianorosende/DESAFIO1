@@ -55,6 +55,7 @@ export function App() {
                     pauseOnHover
                     theme="light"
                     transition={Bounce}
+                    limit={3}
                 />
             </BrowserRouter>
         </Provider>

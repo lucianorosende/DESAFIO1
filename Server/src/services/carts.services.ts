@@ -1,6 +1,7 @@
 import { ICartFunction, ICartProduct, ICart, IProduct } from "../interfaces";
 import { TCart } from "../types";
 import { CartsModel, ProductsModel } from "../DAO/MONGO";
+import { ProductsService } from "./products.services";
 
 class CartService implements ICartFunction {
     async getAll() {
@@ -61,7 +62,12 @@ class CartService implements ICartFunction {
                 let value = Number(
                     getCart[0]?.products[indexProduct]?.quantity
                 );
-                value++;
+                if (value < getProduct[0].stock) {
+                    value++;
+                } else {
+                    return "can't add more products";
+                }
+
                 let updateProd: ICartProduct = {
                     _id: getProduct[0]._id,
                     pID: getProduct[0].pID,

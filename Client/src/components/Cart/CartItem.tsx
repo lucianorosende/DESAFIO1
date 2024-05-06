@@ -21,6 +21,7 @@ export function CartItem({ cartItem }: { cartItem: ICartItem }) {
                 <QuantityCell
                     productQuantity={cartItem.quantity}
                     pID={cartItem.pID}
+                    stock={cartItem._id.stock}
                 />
             </TableCell>
             <TableCell sx={tableCellStyle}>
