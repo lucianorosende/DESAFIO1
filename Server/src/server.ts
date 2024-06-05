@@ -35,7 +35,7 @@ export const httpServer = app.listen(PORT, () => {
 });
 
 // Initializing webSockets ----------------------------------------------------------------------------------------------------------
-webSockets();
+// webSockets();
 
 // API DOCUMENTATION ------------------------------------------------------------------------------------------------
 swagImplementer();
