@@ -21,6 +21,7 @@ export function ProductPagination({
                         borderRadius: 5,
                     }}
                     onChange={(event: ChangeEvent<unknown>, page: number) => {
+                        console.log(event);
                         setActualPage(page);
                     }}
                 />
