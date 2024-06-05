@@ -1,6 +1,4 @@
-import { Sequence } from "react-type-animation";
-
-export const registerSequence: Sequence = [
+export const registerSequence = [
     "Welcome!",
     1500,
     "Don't Forget to fill the form!",

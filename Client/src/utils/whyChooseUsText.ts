@@ -1,6 +1,4 @@
-import { Sequence } from "react-type-animation";
-
-export const whyChooseUsSequence: Sequence = [
+export const whyChooseUsSequence = [
     "Why would you like to choose us?",
     1500,
     "We offer the BEST market experience",

@@ -1,7 +1,7 @@
-import { TypeAnimation, Sequence } from "react-type-animation";
+import { TypeAnimation } from "react-type-animation";
 import GraphemeSplitter from "grapheme-splitter"; // npm i grapheme-splitter
 
-export function TextAnimation({ sequence }: { sequence: Sequence }) {
+export function TextAnimation({ sequence }: { sequence: any }) {
     const splitter = new GraphemeSplitter();
     return (
         <TypeAnimation

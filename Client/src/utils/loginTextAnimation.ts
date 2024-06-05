@@ -1,6 +1,4 @@
-import { Sequence } from "react-type-animation";
-
-export const loginSequence: Sequence = [
+export const loginSequence = [
     "MarketHub, for your favourite food 🥐",
     1000,
     "MarketHub, for your favourite clothes 🥻",

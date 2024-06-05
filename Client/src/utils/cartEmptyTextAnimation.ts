@@ -1,6 +1,4 @@
-import { Sequence } from "react-type-animation";
-
-export const cartEmptySequence: Sequence = [
+export const cartEmptySequence = [
     "Your cart is empty!",
     2000,
     "Go back to home and start browsing!",
