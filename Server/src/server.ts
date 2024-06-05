@@ -13,6 +13,12 @@ import { logger } from "./utils";
 import { swagImplementer } from "./utils/swagger";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import { userRouter } from "./routes/users.router";
+import { sessionRouter } from "./routes/session.router";
+import { cartRouter } from "./routes/cart.router";
+import { productRouter } from "./routes/products.router";
+import { Request, Response } from "express";
+import { httpStatus } from "./utils";
 dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -64,11 +70,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Initializing Routes --------------------------------------------------------------------------------------------------------------
-routes();
+// routes();
+app.use("/api/sessions", sessionRouter);
+app.use("/api/products", productRouter);
+app.use("/api/carts", cartRouter);
+app.use("/api/users", userRouter);
 
 app.get("/", (req, res) => {
     res.render("home");
 });
 
 // Handling Errors ------------------------------------------------------------------------------------------------------------------
-routeErrors();
+// routeErrors();
+app.on("error", (err) => logger.error("server error: " + err));
+app.all("*", (req: Request, res: Response) => {
+    res.status(httpStatus.NotFound).json({
+        status: "error",
+        msg: "route not found",
+        data: {},
+    });
+});
