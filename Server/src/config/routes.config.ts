@@ -6,9 +6,9 @@ import {
     userRouter,
 } from "../routes";
 
-export const routes = (): void => {
+export function routes(): void {
     app.use("/api/sessions", sessionRouter);
     app.use("/api/products", productRouter);
     app.use("/api/carts", cartRouter);
     app.use("/api/users", userRouter);
-};
+}

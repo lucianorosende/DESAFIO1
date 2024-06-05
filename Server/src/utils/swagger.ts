@@ -2,7 +2,7 @@ import swaggerUI from "swagger-ui-express";
 import swaggerjsdoc from "swagger-jsdoc";
 import { app } from "../server";
 
-export const swagImplementer = () => {
+export function swagImplementer() {
     const options = {
         definition: {
             openapi: "3.0.3",
@@ -22,4 +22,4 @@ export const swagImplementer = () => {
     };
     const swag = swaggerjsdoc(options);
     app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swag));
-};
+}

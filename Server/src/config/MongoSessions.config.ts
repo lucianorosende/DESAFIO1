@@ -4,7 +4,7 @@ import MongoStore from "connect-mongo";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const MongoSessions = () => {
+export function MongoSessions() {
     app.set("trust proxy", 1);
     const sessionOptions = {
         store: MongoStore.create({
@@ -18,4 +18,4 @@ export const MongoSessions = () => {
         cookie: { httpOnly: false },
     };
     app.use(session(sessionOptions));
-};
+}
