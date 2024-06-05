@@ -1,12 +1,8 @@
 import Express from "express";
-import {
-    MongoDB,
-    MongoSessions,
-    routeErrors,
-    routes,
-    webSockets,
-} from "./config";
+import { MongoDB, MongoSessions, webSockets } from "./config";
 import { passportConfig } from "./config/passport.config";
+import { routes } from "./config/routes.config";
+import { routeErrors } from "./config/routeErrors.config";
 import passport from "passport";
 import cors from "cors";
 import dotenv from "dotenv";
