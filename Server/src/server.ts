@@ -76,10 +76,6 @@ app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/users", userRouter);
 
-app.get("/", (req, res) => {
-    res.render("home");
-});
-
 // Handling Errors ------------------------------------------------------------------------------------------------------------------
 // routeErrors();
 app.on("error", (err) => logger.error("server error: " + err));
