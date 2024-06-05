@@ -1,8 +1,10 @@
 import Express from "express";
-import { MongoDB, MongoSessions, webSockets } from "./config";
 import { passportConfig } from "./config/passport.config";
 import { routes } from "./config/routes.config";
 import { routeErrors } from "./config/routeErrors.config";
+import { webSockets } from "./config/websockets.config";
+import { MongoDB } from "./config/MongoDB.config";
+import { MongoSessions } from "./config/MongoSessions.config";
 import passport from "passport";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -33,7 +35,7 @@ export const httpServer = app.listen(PORT, () => {
 });
 
 // Initializing webSockets ----------------------------------------------------------------------------------------------------------
-// webSockets();
+webSockets();
 
 // API DOCUMENTATION ------------------------------------------------------------------------------------------------
 swagImplementer();
@@ -41,20 +43,7 @@ swagImplementer();
 // Connecting Database --------------------------------------------------------------------------------------------------------------
 MongoDB();
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
-// MongoSessions();
-app.set("trust proxy", 1);
-const sessionOptions = {
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
-    }),
-    secret: "SECRET-CODE",
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    proxy: true,
-    cookie: { httpOnly: false },
-};
-app.use(session(sessionOptions));
+MongoSessions();
 
 // Initializing Passport ------------------------------------------------------------------------------------------------------------
 passportConfig();
