@@ -28,9 +28,6 @@ app.use(
 );
 app.use(cookieParser());
 export const PORT = process.env.PORT || 8080;
-
-// Initializing public and hbs Engine -----------------------------------------------------------------------------------------------
-publicAndHbs();
 // Initializing server --------------------------------------------------------------------------------------------------------------
 export const httpServer = app.listen(PORT, () => {
     logger.info(`Example app listening on ${PORT}`);
