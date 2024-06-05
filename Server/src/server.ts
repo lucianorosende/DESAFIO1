@@ -13,6 +13,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { logger } from "./utils";
 import { swagImplementer } from "./utils/swagger";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 dotenv.config();
 
 // Initializing Express -------------------------------------------------------------------------------------------------------------
@@ -43,7 +45,20 @@ swagImplementer();
 // Connecting Database --------------------------------------------------------------------------------------------------------------
 MongoDB();
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
-MongoSessions();
+// MongoSessions();
+app.set("trust proxy", 1);
+const sessionOptions = {
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URL,
+    }),
+    secret: "SECRET-CODE",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    proxy: true,
+    cookie: { httpOnly: false },
+};
+app.use(session(sessionOptions));
 
 // Initializing Passport ------------------------------------------------------------------------------------------------------------
 passportConfig();
