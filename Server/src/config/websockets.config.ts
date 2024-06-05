@@ -3,7 +3,7 @@ import { Server } from "socket.io";
 import { MessagesService } from "../services";
 import { logger } from "../utils";
 
-export const webSockets = () => {
+export function webSockets() {
     const socketServer = new Server(httpServer, {
         cors: {
             origin: "http://localhost:5173",
@@ -23,4 +23,4 @@ export const webSockets = () => {
             await MessagesService.getMessages()
         );
     });
-};
+}
