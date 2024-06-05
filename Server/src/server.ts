@@ -5,7 +5,6 @@ import {
     passportConfig,
     routeErrors,
     routes,
-    publicAndHbs,
     webSockets,
 } from "./config";
 import passport from "passport";
