@@ -58,9 +58,6 @@ const sessionOptions = {
     secret: "SECRET-CODE",
     resave: false,
     saveUninitialized: false,
-    rolling: true,
-    proxy: true,
-    cookie: { httpOnly: false },
 };
 app.use(session(sessionOptions));
 
