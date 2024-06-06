@@ -60,7 +60,7 @@ const sessionOptions: any = {
     saveUninitialized: false,
     rolling: true,
     proxy: true,
-    cookie: { httpOnly: false },
+    cookie: { httpOnly: true },
 };
 app.use(session(sessionOptions));
 
