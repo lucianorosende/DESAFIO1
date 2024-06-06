@@ -51,7 +51,7 @@ MongoDB();
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
 // MongoSessions();
 app.set("trust proxy", 1);
-const sessionOptions: any = {
+const sessionOptions = {
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_URL,
     }),
@@ -60,7 +60,7 @@ const sessionOptions: any = {
     saveUninitialized: false,
     rolling: true,
     proxy: true,
-    cookie: { httpOnly: true },
+    cookie: { httpOnly: false },
 };
 app.use(session(sessionOptions));
 
