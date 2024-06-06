@@ -4,6 +4,7 @@ export function useFetchProducts(title: string | undefined, limit: number) {
     const [productList, setProductList] = useState<IProduct[]>([]);
     const [pages, setPages] = useState(undefined);
     const [renderPage, setRenderPage] = useState<number>(1);
+    console.log(process.env.REACT_APP_FETCH_URL);
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(
