@@ -7,7 +7,7 @@ export function useFetchProducts(title: string | undefined, limit: number) {
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(
-                `http://localhost:8080/api/products?pages=${renderPage}&title=${title}&limit=${limit}`,
+                `${process.env.FETCH_URL}?pages=${renderPage}&title=${title}&limit=${limit}`,
                 {
                     method: "GET",
                     headers: {
