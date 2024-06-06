@@ -27,10 +27,7 @@ app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use(
     cors({
-        origin: [
-            "http://localhost:5173",
-            "https://market-hub-p328-f8hcvjay1-lucianorosendes-projects.vercel.app",
-        ],
+        origin: ["http://localhost:5173"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     })
@@ -63,7 +60,7 @@ const sessionOptions: any = {
     saveUninitialized: false,
     rolling: true,
     proxy: true,
-    cookie: { httpOnly: false, sameSite: "none" },
+    cookie: { httpOnly: false },
 };
 app.use(session(sessionOptions));
 
