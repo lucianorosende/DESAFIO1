@@ -5,7 +5,7 @@ export function useFetchCategoryProducts(category: string) {
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(
-                `http://localhost:8080/api/products${category}`,
+                `${process.env.REACT_APP_FETCH_URL}/api/products${category}`,
                 {
                     method: "GET",
                     headers: {

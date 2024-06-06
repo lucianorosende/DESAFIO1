@@ -7,7 +7,7 @@ export function useDeleteProductFromCart(cID: number | undefined, pID: number) {
     const handleDeleteProductFromCart = async () => {
         try {
             const checker = await fetch(
-                `http://localhost:8080/api/carts/${cID}/products/${pID}`,
+                `${process.env.REACT_APP_FETCH_URL}/api/carts/${cID}/products/${pID}`,
                 {
                     method: "DELETE",
                     headers: {

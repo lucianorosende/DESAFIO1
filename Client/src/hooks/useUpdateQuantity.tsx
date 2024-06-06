@@ -11,7 +11,7 @@ export function useUpdateQuantity() {
         const quantity = { quantity: actualQuantity };
         try {
             const response = await fetch(
-                `http://localhost:8080/api/carts/${cID}/products/${pID}`,
+                `${process.env.REACT_APP_FETCH_URL}/api/carts/${cID}/products/${pID}`,
                 {
                     method: "PUT",
                     headers: {

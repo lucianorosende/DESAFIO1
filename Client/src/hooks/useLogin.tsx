@@ -17,7 +17,7 @@ export function useLogin() {
         };
         try {
             const response = await fetch(
-                "http://localhost:8080/api/sessions/login",
+                `${process.env.REACT_APP_FETCH_URL}/api/sessions/login`,
                 {
                     method: "POST",
                     headers: {

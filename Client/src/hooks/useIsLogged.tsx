@@ -7,7 +7,7 @@ export function useIsLogged() {
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetch(
-                "http://localhost:8080/api/sessions/isLogged",
+                `${process.env.REACT_APP_FETCH_URL}/api/sessions/isLogged`,
                 {
                     method: "GET",
                     headers: {

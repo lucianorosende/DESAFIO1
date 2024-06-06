@@ -15,7 +15,7 @@ export function useGetCart(cID: number | undefined) {
             const handleCartData = async () => {
                 try {
                     const checker = await fetch(
-                        `http://localhost:8080/api/carts/${cID}/populate`,
+                        `${process.env.REACT_APP_FETCH_URL}/api/carts/${cID}/populate`,
                         {
                             method: "GET",
                             headers: {

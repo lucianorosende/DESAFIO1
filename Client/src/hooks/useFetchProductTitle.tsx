@@ -12,7 +12,7 @@ export function useFetchProductTitle(title: string) {
             try {
                 const fetchData = async () => {
                     const data = await fetch(
-                        `http://localhost:8080/api/products?title=${title}&limit=10000`,
+                        `${process.env.REACT_APP_FETCH_URL}/api/products?title=${title}&limit=10000`,
                         {
                             method: "GET",
                             headers: {

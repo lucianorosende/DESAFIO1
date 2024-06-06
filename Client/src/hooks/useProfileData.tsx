@@ -10,7 +10,7 @@ export function useProfileData() {
         const handleProfileData = async () => {
             try {
                 const checker = await fetch(
-                    "http://localhost:8080/api/sessions/loginData",
+                    `${process.env.REACT_APP_FETCH_URL}/api/sessions/loginData`,
                     {
                         method: "GET",
                         headers: {

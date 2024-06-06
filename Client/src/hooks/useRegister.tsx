@@ -21,7 +21,7 @@ export function useRegister() {
         };
         try {
             const response = await fetch(
-                "http://localhost:8080/api/sessions/register",
+                `${process.env.REACT_APP_FETCH_URL}/api/sessions/register`,
                 {
                     method: "POST",
                     headers: {

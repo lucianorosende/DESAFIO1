@@ -9,7 +9,7 @@ export function useAddProduct() {
     ) => {
         try {
             const response = await fetch(
-                `http://localhost:8080/api/carts/${cID}/product/${pID}`,
+                `${process.env.REACT_APP_FETCH_URL}/api/carts/${cID}/product/${pID}`,
                 {
                     method: "POST",
                     headers: {

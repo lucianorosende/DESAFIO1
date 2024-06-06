@@ -9,7 +9,7 @@ export function useFetchAllProducts(filter: string) {
             const fetchData = async () => {
                 const filterLower = filter.toLowerCase();
                 const data = await fetch(
-                    `http://localhost:8080/api/products/filter/${filterLower}`,
+                    `${process.env.REACT_APP_FETCH_URL}/api/products/filter/${filterLower}`,
                     {
                         method: "GET",
                         headers: {

@@ -9,7 +9,7 @@ export function useLogout() {
     const handleLogout = async () => {
         try {
             const checker = await fetch(
-                "http://localhost:8080/api/sessions/logout",
+                `${process.env.REACT_APP_FETCH_URL}/api/sessions/logout`,
                 {
                     method: "GET",
                     headers: {
