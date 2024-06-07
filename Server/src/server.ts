@@ -51,13 +51,18 @@ MongoDB();
 // Saving Sessions ------------------------------------------------------------------------------------------------------------------
 // MongoSessions();
 app.set("trust proxy", 1);
-const sessionOptions = {
+const sessionOptions: any = {
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_URL,
     }),
     secret: "SECRET-CODE",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
+    cookie: {
+        secure: true,
+        httpOnly: true,
+        sameSite: "none",
+    },
 };
 app.use(session(sessionOptions));
 
