@@ -9,7 +9,7 @@ class SessionController {
         const find = await UsersService.findUserById(req.session.passport.user);
         const update = await UsersService.updateConnection(find?.email);
         req.session.passport.user = find;
-        res.redirect("http://localhost:5173");
+        res.redirect("https://market-hub-front.vercel.app");
     }
     renderFailLogin(req: Request, res: Response) {
         return res.json({ error: "failed to login" });
