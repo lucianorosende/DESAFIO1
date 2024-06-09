@@ -27,7 +27,10 @@ app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use(
     cors({
-        origin: ["http://localhost:5173"],
+        origin: [
+            "http://localhost:5173",
+            "https://market-hub-front.vercel.app",
+        ],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     })
