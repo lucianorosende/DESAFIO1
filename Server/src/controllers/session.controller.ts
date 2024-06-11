@@ -20,7 +20,12 @@ class SessionController {
     async destroySession(req: Request, res: Response) {
         const find = await UsersService.findUserById(req.session.passport.user);
         const update = await UsersService.updateConnection(find?.email);
-        res.cookie("connect.sid", "", { maxAge: 0 });
+        res.cookie("connect.sid", "", {
+            secure: true,
+            httpOnly: true,
+            sameSite: "none",
+            maxAge: 0,
+        });
         req.session.destroy((err: Error | null) => {
             if (err) {
                 return logger.error(err);
